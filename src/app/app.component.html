@@ -1,4 +1,16 @@
-<!-- NG-ZORRO -->
-<a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
-  <img height="300" src="https://img.alicdn.com/tfs/TB1NvvIwTtYBeNjy1XdXXXXyVXa-89-131.svg">
-</a>
+<nz-layout style="height: 100%;">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'">
+    <app-sider></app-sider>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; height: 48px;">
+        <app-header></app-header>
+    </nz-header>
+    <nz-content style="margin:24px 16px 0;height: 100%;">
+      <div style="padding:24px; background: #fff; height: 100%;">
+        Content
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;">艾比得泵业 ©2018 Implemented By leeyard.com</nz-footer>
+  </nz-layout>
+</nz-layout>
