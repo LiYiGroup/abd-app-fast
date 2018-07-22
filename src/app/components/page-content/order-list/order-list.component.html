@@ -52,6 +52,43 @@
             <button nz-button nzType="primary" type="submit">导出</button>
         </div>
     </div>
-
-    <p>{{ orderListSearchModel | json }}</p>
+    <br>
+    <p *ngIf="orderListSearchModel.orderNo">{{ orderListSearchModel | json }}</p>
+    <nz-table
+      #rowSelectionTable
+      [nzData]="orderListTableData"
+      (nzCurrentPageDataChange)="currentPageDataChange($event)"
+      (nzPageIndexChange)="refreshStatus()"
+      (nzPageSizeChange)="refreshStatus()"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzShowCheckbox [(nzChecked)]="orderListTableAllChecked" [nzIndeterminate]="orderListTableIndeterminate" (nzCheckedChange)="checkAll($event)"></th>
+          <th>序号</th>
+          <th>订单编号</th>
+          <th>合同编号</th>
+          <th>项目名称</th>
+          <th>下发日期</th>
+          <th>交货日期</th>
+          <th>订货单位</th>
+          <th>销售员</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data">
+          <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshStatus($event)"></td>
+          <td>{{data.no}}</td>
+          <td>{{data.orderNo}}</td>
+          <td>{{data.contractNo}}</td>
+          <td>{{data.projectNm}}</td>
+          <td>{{data.departureDate}}</td>
+          <td>{{data.deliveryDate}}</td>
+          <td>{{data.orderCompany}}</td>
+          <td>{{data.salesPerson}}</td>
+          <td>{{data.remark}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <p *ngIf="orderListTableCheckedData.length > 0">{{ orderListTableCheckedData | json }}</p>
 </form>
