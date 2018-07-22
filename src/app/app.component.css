@@ -1,0 +1,23 @@
+.abd-header {
+    background: #fff;
+    margin: 16px;
+    height: 32px;
+    line-height: 100%;
+    padding-top: 10px;
+    padding-left: 24px;
+}
+
+.abd-content {
+    margin: 24px 16px 0;
+    height: 100%;
+}
+
+.abd-content-inner {
+    padding: 24px;
+    background: #fff;
+    height: 100%;
+}
+
+.abd-footer {
+    text-align: center;
+}

@@ -1,0 +1,57 @@
+<h1>订单一览</h1>
+<form nz-form (ngSubmit)="onSubmit()" #orderListSearchForm="ngForm">
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="orderNo">订单编号</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.orderNo" name="orderNo" #orderNo="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="contractNo">合同编号</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.contractNo" name="contractNo" #contractNo="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="projectNm">项目名称</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.projectNm" name="projectNm" #projectNm="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="orderCompany">订货单位</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.orderCompany" name="orderCompany" #orderCompany="ngModel">
+        </div>
+    </div>
+
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="departureDateSt">下发日期</label><br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.departureDateSt" name="departureDateSt" #departureDateSt="ngModel"></nz-date-picker>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="departureDateEd"></label><br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.departureDateEd" name="departureDateEd" #departureDateEd="ngModel"></nz-date-picker>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="deliveryDateSt">交货日期</label><br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.deliveryDateSt" name="deliveryDateSt" #deliveryDateSt="ngModel"></nz-date-picker>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="deliveryDateEd"></label><br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.deliveryDateEd" name="deliveryDateEd" #deliveryDateEd="ngModel"></nz-date-picker>
+        </div>
+    </div>
+
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="salesPerson">销售员</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.salesPerson" name="salesPerson" #salesPerson="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6"></div>
+        <div nz-col class="gutter-row" nzSpan="6"></div>
+        <div nz-col class="gutter-row" nzSpan="3">
+            <button nz-button nzType="primary" type="submit">查询</button>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="3">
+            <button nz-button nzType="primary" type="submit">导出</button>
+        </div>
+    </div>
+
+    <p>{{ orderListSearchModel | json }}</p>
+</form>
