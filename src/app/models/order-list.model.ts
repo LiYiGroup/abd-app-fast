@@ -1,17 +1,35 @@
 export class OrderListSearchModel {
 
-    orderNo: string;
-    contractNo: string;
-    projectNm: string;
+    orderNo: String;
+    contractNo: String;
+    projectNm: String;
     departureDateSt: Date;
     departureDateStStr: String;
     departureDateEd: Date;
     departureDateEdStr: String;
-    orderCompany: string;
+    orderCompany: String;
     deliveryDateSt: Date;
     deliveryDateStStr: String;
     deliveryDateEd: Date;
     deliveryDateEdStr: String;
-    salesPerson: string;
+    salesPerson: String;
+}
 
+export interface OrderListTableModel {
+
+    orderNo: String;
+    contractNo: String;
+    projectNm: String;
+    departureDateSt: Date;
+    departureDateStStr: String;
+    departureDateEd: Date;
+    departureDateEdStr: String;
+    orderCompany: String;
+    deliveryDateSt: Date;
+    deliveryDateStStr: String;
+    deliveryDateEd: Date;
+    deliveryDateEdStr: String;
+    salesPerson: String;
+    checked: Boolean;
+    disabled: Boolean;
 }
