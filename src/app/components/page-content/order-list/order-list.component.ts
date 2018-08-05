@@ -13,8 +13,8 @@ export class OrderListComponent implements OnInit {
   constructor(private orderListService: OrderListService) { }
 
   ngOnInit() {
-    this.showOrderList();
-    // this.showOrderDetailList();
+    this.getOrderList();
+    // this.getOrderDetailList();
   }
 
   // ERROR
@@ -93,12 +93,16 @@ export class OrderListComponent implements OnInit {
     console.log(JSON.stringify(this.orderListSearchModel));
   }
 
-  showOrderList() {
+  getOrderList() {
     this.orderListService.getOrderList().subscribe((data) => (this.orderListTableData = data), error => this.error = error);
   }
 
-  showOrderDetailList(orderItem: any) {
+  getOrderDetailList(orderItem: any) {
     var submitOrderNo = orderItem.ORDER_NO;
     this.orderListService.getOrderDetailList(submitOrderNo).subscribe((data) => (this.orderDetailListTableData = data), error => this.error = error);
+  }
+
+  getOrderListWithCondition(searchCondition: OrderListSearchModel) {
+    this.orderListService.getOrderListWithCondition(searchCondition).subscribe((data) => (this.orderListTableData = data), error => this.error = error);
   }
 }
