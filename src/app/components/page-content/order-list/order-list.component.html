@@ -2,93 +2,165 @@
 <form nz-form (ngSubmit)="onSubmit()" #orderListSearchForm="ngForm">
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="orderNo">订单编号</label>
-            <input nz-input [(ngModel)]="orderListSearchModel.orderNo" name="orderNo" #orderNo="ngModel">
+            <label for="ORDER_NO">订单编号</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="contractNo">合同编号</label>
-            <input nz-input [(ngModel)]="orderListSearchModel.contractNo" name="contractNo" #contractNo="ngModel">
+            <label for="CONTRACT_NO">合同编号</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="projectNm">项目名称</label>
-            <input nz-input [(ngModel)]="orderListSearchModel.projectNm" name="projectNm" #projectNm="ngModel">
+            <label for="PROJECT_NM">项目名称</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="orderCompany">订货单位</label>
-            <input nz-input [(ngModel)]="orderListSearchModel.orderCompany" name="orderCompany" #orderCompany="ngModel">
+            <label for="ORDER_UNIT">订货单位</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
         </div>
     </div>
 
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="departureDateSt">下发日期</label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.departureDateSt" name="departureDateSt" #departureDateSt="ngModel"></nz-date-picker>
+            <label for="DEPARTURE_DATE_ST">下发日期</label><br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DEPARTURE_DATE_ST" name="DEPARTURE_DATE_ST" #DEPARTURE_DATE_ST="ngModel"></nz-date-picker>
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="departureDateEd"></label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.departureDateEd" name="departureDateEd" #departureDateEd="ngModel"></nz-date-picker>
+            <label for="DEPARTURE_DATE_ED"></label><br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DEPARTURE_DATE_ED" name="DEPARTURE_DATE_ED" #DEPARTURE_DATE_ED="ngModel"></nz-date-picker>
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="deliveryDateSt">交货日期</label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.deliveryDateSt" name="deliveryDateSt" #deliveryDateSt="ngModel"></nz-date-picker>
+            <label for="DELIVERY_DATE_ST">交货日期</label><br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DELIVERY_DATE_ST" name="DELIVERY_DATE_ST" #DELIVERY_DATE_ST="ngModel"></nz-date-picker>
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="deliveryDateEd"></label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.deliveryDateEd" name="deliveryDateEd" #deliveryDateEd="ngModel"></nz-date-picker>
+            <label for="DELIVERY_DATE_ED"></label><br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DELIVERY_DATE_ED" name="DELIVERY_DATE_ED" #DELIVERY_DATE_ED="ngModel"></nz-date-picker>
         </div>
     </div>
 
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="salesPerson">销售员</label>
-            <input nz-input [(ngModel)]="orderListSearchModel.salesPerson" name="salesPerson" #salesPerson="ngModel">
+            <label for="SALES_PERSON">销售员</label>
+            <input nz-input [(ngModel)]="orderListSearchModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6"></div>
         <div nz-col class="gutter-row" nzSpan="6"></div>
-        <div nz-col class="gutter-row" nzSpan="3">
-            <button nz-button nzType="primary" type="submit">查询</button>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="3">
+        <div nz-col class="gutter-row" nzSpan="6" class="btn_area">
+            <button nz-button nzType="primary" type="submit">导入</button>
+            <nz-divider nzType="vertical"></nz-divider>
             <button nz-button nzType="primary" type="submit">导出</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzType="primary" type="submit">查询</button>
         </div>
     </div>
     <br>
-    <p *ngIf="orderListSearchModel.orderNo">{{ orderListSearchModel | json }}</p>
-    <nz-table
-      #rowSelectionTable
-      [nzData]="orderListTableData"
-      (nzCurrentPageDataChange)="currentPageDataChange($event)"
-      (nzPageIndexChange)="refreshStatus()"
-      (nzPageSizeChange)="refreshStatus()"
-      nzSize="small">
-      <thead>
-        <tr>
-          <th nzShowCheckbox [(nzChecked)]="orderListTableAllChecked" [nzIndeterminate]="orderListTableIndeterminate" (nzCheckedChange)="checkAll($event)"></th>
-          <th>序号</th>
-          <th>订单编号</th>
-          <th>合同编号</th>
-          <th>项目名称</th>
-          <th>下发日期</th>
-          <th>交货日期</th>
-          <th>订货单位</th>
-          <th>销售员</th>
-          <th>备注</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of rowSelectionTable.data">
-          <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshStatus($event)"></td>
-          <td>{{data.no}}</td>
-          <td>{{data.orderNo}}</td>
-          <td>{{data.contractNo}}</td>
-          <td>{{data.projectNm}}</td>
-          <td>{{data.departureDate}}</td>
-          <td>{{data.deliveryDate}}</td>
-          <td>{{data.orderCompany}}</td>
-          <td>{{data.salesPerson}}</td>
-          <td>{{data.remark}}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-    <p *ngIf="orderListTableCheckedData.length > 0">{{ orderListTableCheckedData | json }}</p>
+    <p *ngIf="orderListSearchModel.ORDER_NO">{{ orderListSearchModel | json }}</p>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <button nz-button nzType="primary" type="submit">新建</button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <button nz-button nzType="primary" type="submit">批量删除</button>
+    <br><br>
+    <div class="grid_area">
+        <nz-table
+        #orderListSelectionTable
+        [nzData]="orderListTableData"
+        [nzPageSize]="5"
+        [nzHideOnSinglePage]="false"
+        (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)"
+        (nzPageIndexChange)="refreshOrderListStatus()"
+        (nzPageSizeChange)="refreshOrderListStatus()"
+        nzSize="small">
+        <thead>
+            <tr>
+            <th nzShowCheckbox [(nzChecked)]="orderListTableAllChecked" [nzIndeterminate]="orderListTableIndeterminate" (nzCheckedChange)="orderListCheckAll($event)"></th>
+            <th>序号</th>
+            <th>订单编号</th>
+            <th>合同编号</th>
+            <th>项目名称</th>
+            <th>下发日期</th>
+            <th>交货日期</th>
+            <th>订货单位</th>
+            <th>销售员</th>
+            <th>备注</th>
+            <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of orderListSelectionTable.data; let i=index" (click)="showOrderDetailList(data)">
+            <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderListStatus($event)"></td>
+            <td>{{i+1}}</td>
+            <td>{{data.ORDER_NO}}</td>
+            <td>{{data.CONTRACT_NO}}</td>
+            <td>{{data.PROJECT_NM}}</td>
+            <td>{{data.DEPARTURE_DATE}}</td>
+            <td>{{data.DELIVERY_DATE}}</td>
+            <td>{{data.ORDER_UNIT}}</td>
+            <td>{{data.SALES_PERSON}}</td>
+            <td>{{data.REMARK}}</td>
+            <td>
+                <a>修改</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a>删除</a>
+            </td>
+            </tr>
+        </tbody>
+        </nz-table>
+    </div>
+    <div *ngIf="orderListTableCheckedData.length > 0">{{ orderListTableCheckedData | json }}</div>
+
+    <nz-divider nzType="horizontal"></nz-divider>
+    <div class="grid_area">
+        <nz-table
+        #orderDetailListSelectionTable
+        [nzData]="orderDetailListTableData"
+        [nzPageSize]="5"
+        [nzHideOnSinglePage]="false"
+        (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)"
+        (nzPageIndexChange)="refreshOrderDetailListStatus()"
+        (nzPageSizeChange)="refreshOrderDetailListStatus()"
+        nzSize="small">
+        <thead>
+            <tr>
+            <th nzShowCheckbox [(nzChecked)]="orderDetailListTableAllChecked" [nzIndeterminate]="orderDetailListTableIndeterminate" (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
+            <th>序号</th>
+            <th>泵名称</th>
+            <th>工位</th>
+            <th>型号</th>
+            <th>数量</th>
+            <th>流量</th>
+            <th>扬程</th>
+            <th>材质</th>
+            <th>机封</th>
+            <th>序列号</th>
+            <th>状态</th>
+            <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of orderDetailListSelectionTable.data; let i=index">
+            <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderDetailListStatus($event)"></td>
+            <td>{{i+1}}</td>
+            <td>{{data.BUMP_NM}}</td>
+            <td>{{data.STATION}}</td>
+            <td>{{data.BUMP_TYPE}}</td>
+            <td>{{data.NUMBER}}</td>
+            <td>{{data.FLOW}}</td>
+            <td>{{data.LIFT}}</td>
+            <td>{{data.MATERIAL}}</td>
+            <td>{{data.SEAL}}</td>
+            <td>{{data.BUMP_ID}}</td>
+            <td>{{data.STATUS}}</td>
+            <td>{{data.REMARK}}</td>
+            </tr>
+        </tbody>
+        </nz-table>
+        <br>
+        <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
+            <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
+                <button nz-button nzType="primary" type="submit" class="btn_area">BOM</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div *ngIf="orderDetailListTableCheckedData.length > 0">{{ orderDetailListTableCheckedData | json }}</div>
 </form>

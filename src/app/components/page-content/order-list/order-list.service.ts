@@ -2,18 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { OrderListTableModel } from '../../../models/order-list.model';
+import { OrderListTableModel, OrderDetailListTableModel } from '../../../models/order-list.model';
 
 @Injectable()
 export class OrderListService {
-  orderList = 'http://localhost:53366/api/values';
+  orderList = 'http://localhost:53366/api/orderList/';
+  orderDetailList = 'http://localhost:53366/api/orderDetailList/';
 
   constructor(private http: HttpClient) { }
 
   getOrderList() {
     return this.http.get<Array<OrderListTableModel>>(this.orderList).pipe( retry(3), catchError(this.handleError) );
+  }
+
+  getOrderDetailList(orderNo:String) {
+    return this.http.get<Array<OrderDetailListTableModel>>(this.orderDetailList + orderNo).pipe( retry(3), catchError(this.handleError) );
   }
 
   private handleError(error: HttpErrorResponse) {

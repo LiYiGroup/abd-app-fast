@@ -9,3 +9,11 @@ nz-date-picker ::ng-deep .ant-calendar-picker {
 nz-date-picker {
     display: inline-block;
 }
+
+.btn_area {
+    text-align: right;
+}
+
+.grid_area {
+    height: 240px;
+}
