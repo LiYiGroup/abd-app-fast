@@ -18,12 +18,12 @@
             <input nz-input [(ngModel)]="orderListSearchModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
         </div>
     </div>
-
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="DEPARTURE_DATE_ST">下发日期</label><br>
             <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DEPARTURE_DATE_ST" name="DEPARTURE_DATE_ST" #DEPARTURE_DATE_ST="ngModel"></nz-date-picker>
         </div>
+
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="DEPARTURE_DATE_ED"></label><br>
             <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DEPARTURE_DATE_ED" name="DEPARTURE_DATE_ED" #DEPARTURE_DATE_ED="ngModel"></nz-date-picker>
@@ -54,11 +54,10 @@
         </div>
     </div>
     <br>
-    <p *ngIf="orderListSearchModel.ORDER_NO">{{ orderListSearchModel | json }}</p>
     <nz-divider nzType="horizontal"></nz-divider>
     <button nz-button nzType="primary" type="submit">新建</button>
     <nz-divider nzType="vertical"></nz-divider>
-    <button nz-button nzType="primary" type="submit">批量删除</button>
+    <button nz-button nzType="primary" type="button" (click)="deleteOrderListItem()">批量删除</button>
     <br><br>
     <div class="grid_area">
         <nz-table
@@ -100,14 +99,12 @@
             <td>
                 <a>修改</a>
                 <nz-divider nzType="vertical"></nz-divider>
-                <a>删除</a>
+                <a (click)="deleteOrderListItem(data)">删除</a>
             </td>
             </tr>
         </tbody>
         </nz-table>
     </div>
-    <div *ngIf="orderListTableCheckedData.length > 0">{{ orderListTableCheckedData | json }}</div>
-
     <nz-divider nzType="horizontal"></nz-divider>
     <div class="grid_area">
         <nz-table
@@ -162,5 +159,4 @@
         </div>
     </div>
     <br>
-    <div *ngIf="orderDetailListTableCheckedData.length > 0">{{ orderDetailListTableCheckedData | json }}</div>
 </form>

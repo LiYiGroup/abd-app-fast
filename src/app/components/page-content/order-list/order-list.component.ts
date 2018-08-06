@@ -26,7 +26,7 @@ export class OrderListComponent implements OnInit {
   orderListTableAllChecked = false;
   orderListTableIndeterminate = false;
   orderListTableDisplayData = [];
-  orderListTableCheckedData = [];
+  orderListTableCheckedData :Array<OrderListTableModel> = [];
   orderListTableData :Array<OrderListTableModel>;
 
   // ORDER DETAIL LIST TABLE
@@ -104,5 +104,22 @@ export class OrderListComponent implements OnInit {
 
   getOrderListWithCondition(searchCondition: OrderListSearchModel) {
     this.orderListService.getOrderListWithCondition(searchCondition).subscribe((data) => (this.orderListTableData = data), error => this.error = error);
+  }
+
+  deleteOrderListItem(orderItem: any) {
+
+    var submitList = [];
+
+    if (orderItem == undefined) {
+      if (this.orderListTableCheckedData.length > 0) {
+        for (var i = 0; i < this.orderListTableCheckedData.length; i++) {
+          submitList.push(this.orderListTableCheckedData[i].ORDER_NO);
+        }
+        this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList() }, error => this.error = error);
+      }
+    } else {
+      submitList.push(orderItem.ORDER_NO);
+      this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList() }, error => this.error = error);
+    }
   }
 }

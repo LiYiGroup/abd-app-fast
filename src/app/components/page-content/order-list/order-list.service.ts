@@ -29,6 +29,10 @@ export class OrderListService {
     return this.http.post<Array<OrderListTableModel>>(this.orderList, JSON.stringify(searchCondition), httpOptions).pipe( retry(3), catchError(this.handleError) );
   }
 
+  delOrderListItem(orderNoList: String[]) {
+    return this.http.delete<any> (this.orderList + orderNoList.toString()).pipe( catchError(this.handleError) );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
