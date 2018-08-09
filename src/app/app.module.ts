@@ -11,7 +11,8 @@ import zh from '@angular/common/locales/zh';
 import { AppSiderComponent } from './components/app-sider/app-sider.component';
 import { HeaderComponent } from './components/header/header.component';
 import { OrderListComponent } from './components/page-content/order-list/order-list.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
+import { OrderListDetailComponent } from './components/page-content/order-list-detail/order-list-detail.component';
 
 registerLocaleData(zh);
 
@@ -20,7 +21,8 @@ registerLocaleData(zh);
     AppComponent,
     AppSiderComponent,
     HeaderComponent,
-    OrderListComponent
+    OrderListComponent,
+    OrderListDetailComponent
   ],
   imports: [
     BrowserModule,

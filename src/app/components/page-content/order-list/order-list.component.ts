@@ -97,9 +97,9 @@ export class OrderListComponent implements OnInit {
     this.orderListService.getOrderList().subscribe((data) => (this.orderListTableData = data), error => this.error = error);
   }
 
-  getOrderDetailList(orderItem: any) {
+  getOrderListDetailTable(orderItem: any) {
     var submitOrderNo = orderItem.ORDER_NO;
-    this.orderListService.getOrderDetailList(submitOrderNo).subscribe((data) => (this.orderDetailListTableData = data), error => this.error = error);
+    this.orderListService.getOrderListDetailTable(submitOrderNo).subscribe((data) => (this.orderDetailListTableData = data), error => this.error = error);
   }
 
   getOrderListWithCondition(searchCondition: OrderListSearchModel) {

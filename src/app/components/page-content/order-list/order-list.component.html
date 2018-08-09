@@ -55,7 +55,7 @@
     </div>
     <br>
     <nz-divider nzType="horizontal"></nz-divider>
-    <button nz-button nzType="primary" type="submit">新建</button>
+    <button nz-button nzType="primary" type="button" routerLink="/order-list/detail/">新建</button>
     <nz-divider nzType="vertical"></nz-divider>
     <button nz-button nzType="primary" type="button" (click)="deleteOrderListItem()">批量删除</button>
     <br><br>
@@ -85,7 +85,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of orderListSelectionTable.data; let i=index" (click)="getOrderDetailList(data)">
+            <tr *ngFor="let data of orderListSelectionTable.data; let i=index" (click)="getOrderListDetailTable(data)">
             <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderListStatus($event)"></td>
             <td>{{i+1}}</td>
             <td>{{data.ORDER_NO}}</td>
@@ -97,7 +97,8 @@
             <td>{{data.SALES_PERSON}}</td>
             <td>{{data.REMARK}}</td>
             <td>
-                <a>修改</a>
+                <!-- 注意此处的路由写法，开头必须要有'/ -->
+                <a routerLink="/order-list/detail/{{data.ORDER_NO}}">修改</a>
                 <nz-divider nzType="vertical"></nz-divider>
                 <a (click)="deleteOrderListItem(data)">删除</a>
             </td>
