@@ -1,106 +1,113 @@
 <h1>订单详情</h1>
-<form nz-form (ngSubmit)="onSubmit()" #orderListSearchForm="ngForm">
-    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="ORDER_NO">订单编号</label>
-            <input nz-input [(ngModel)]="orderListDetailFormModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="CONTRACT_NO">合同编号</label>
-            <input nz-input [(ngModel)]="orderListDetailFormModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="PROJECT_NM">项目名称</label>
-            <input nz-input [(ngModel)]="orderListDetailFormModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
-        </div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="ORDER_NO">订单编号</label>
+        <input nz-input [(ngModel)]="orderListDetailFormModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
     </div>
-    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="ORDER_UNIT">订货单位</label>
-            <input nz-input [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="DEPARTURE_DATE">下发日期</label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DEPARTURE_DATE" name="DEPARTURE_DATE" #DEPARTURE_DATE="ngModel"></nz-date-picker>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="DELIVERY_DATE">交货日期</label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DELIVERY_DATE" name="DELIVERY_DATE" #DELIVERY_DATE="ngModel"></nz-date-picker>
-        </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="CONTRACT_NO">合同编号</label>
+        <input nz-input [(ngModel)]="orderListDetailFormModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
     </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="PROJECT_NM">项目名称</label>
+        <input nz-input [(ngModel)]="orderListDetailFormModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
+    </div>
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="ORDER_UNIT">订货单位</label>
+        <input nz-input [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="DEPARTURE_DATE">下发日期</label><br>
+        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DEPARTURE_DATE" name="DEPARTURE_DATE" #DEPARTURE_DATE="ngModel"></nz-date-picker>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="DELIVERY_DATE">交货日期</label><br>
+        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DELIVERY_DATE" name="DELIVERY_DATE" #DELIVERY_DATE="ngModel"></nz-date-picker>
+    </div>
+</div>
 
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="APPLICATION_ENGINEER">应用工程师</label>
+        <input nz-input [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="SALES_PERSON">销售员</label>
+        <input nz-input [(ngModel)]="orderListDetailFormModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="REMARK">备注</label>
+        <input nz-input [(ngModel)]="orderListDetailFormModel.REMARK" name="REMARK" #REMARK="ngModel">
+    </div>
+</div>
+<br>
+<nz-divider nzType="horizontal"></nz-divider>
+<button nz-button nzType="primary" type="submit">新建</button>
+<nz-divider nzType="vertical"></nz-divider>
+<button nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">批量删除</button>
+<br>
+<br>
+<div class="grid_area">
+    <nz-table
+    #orderDetailListSelectionTable
+    [nzData]="orderListDetailTableData"
+    [nzPageSize]="5"
+    [nzHideOnSinglePage]="false"
+    (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)"
+    (nzPageIndexChange)="refreshOrderDetailListStatus()"
+    (nzPageSizeChange)="refreshOrderDetailListStatus()"
+    nzSize="small">
+    <thead>
+        <tr>
+        <th nzShowCheckbox [(nzChecked)]="orderListDetailTableAllChecked" [nzIndeterminate]="orderListDetailTableIndeterminate" (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
+        <th>序号</th>
+        <th>泵名称</th>
+        <th>工位</th>
+        <th>型号</th>
+        <th>数量</th>
+        <th>流量</th>
+        <th>扬程</th>
+        <th>材质</th>
+        <th>机封</th>
+        <th>序列号</th>
+        <th>状态</th>
+        <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of orderDetailListSelectionTable.data; let i=index" (click)="showModal(data)">
+        <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderDetailListStatus($event)"></td>
+        <td>{{i+1}}</td>
+        <td>{{data.BUMP_NM}}</td>
+        <td>{{data.STATION}}</td>
+        <td>{{data.BUMP_TYPE}}</td>
+        <td>{{data.NUMBER}}</td>
+        <td>{{data.FLOW}}</td>
+        <td>{{data.LIFT}}</td>
+        <td>{{data.MATERIAL}}</td>
+        <td>{{data.SEAL}}</td>
+        <td>{{data.BUMP_ID}}</td>
+        <td>{{data.STATUS}}</td>
+        <td>{{data.REMARK}}</td>
+        </tr>
+    </tbody>
+    </nz-table>
+    <br>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
+            <button nz-button nzType="primary" type="button" (click)="saveOrderListDetailForm(orderListDetailFormModel)">保存</button>
+        </div>
+    </div>
+</div>
+<br>
+<!-- Model-->
+<nz-modal nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="泵信息编辑" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="APPLICATION_ENGINEER">应用工程师</label>
-            <input nz-input [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="SALES_PERSON">销售员</label>
-            <input nz-input [(ngModel)]="orderListDetailFormModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8">
-            <label for="PAGES_FOR_ORDER_LIST">此订单页数</label>
-            <input disabled nz-input [(ngModel)]="orderListDetailFormModel.PAGES_FOR_ORDER_LIST" name="PAGES_FOR_ORDER_LIST" #PAGES_FOR_ORDER_LIST="ngModel">
-        </div>
-    </div>
-    <br>
-    <nz-divider nzType="horizontal"></nz-divider>
-    <button nz-button nzType="primary" type="submit">新建</button>
-    <nz-divider nzType="vertical"></nz-divider>
-    <button nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">批量删除</button>
-    <br>
-    <br>
-    <div class="grid_area">
-        <nz-table
-        #orderDetailListSelectionTable
-        [nzData]="orderListDetailTableData"
-        [nzPageSize]="5"
-        [nzHideOnSinglePage]="false"
-        (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)"
-        (nzPageIndexChange)="refreshOrderDetailListStatus()"
-        (nzPageSizeChange)="refreshOrderDetailListStatus()"
-        nzSize="small">
-        <thead>
-            <tr>
-            <th nzShowCheckbox [(nzChecked)]="orderListDetailTableAllChecked" [nzIndeterminate]="orderListDetailTableIndeterminate" (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
-            <th>序号</th>
-            <th>泵名称</th>
-            <th>工位</th>
-            <th>型号</th>
-            <th>数量</th>
-            <th>流量</th>
-            <th>扬程</th>
-            <th>材质</th>
-            <th>机封</th>
-            <th>序列号</th>
-            <th>状态</th>
-            <th>备注</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let data of orderDetailListSelectionTable.data; let i=index">
-            <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderDetailListStatus($event)"></td>
-            <td>{{i+1}}</td>
-            <td>{{data.BUMP_NM}}</td>
-            <td>{{data.STATION}}</td>
-            <td>{{data.BUMP_TYPE}}</td>
-            <td>{{data.NUMBER}}</td>
-            <td>{{data.FLOW}}</td>
-            <td>{{data.LIFT}}</td>
-            <td>{{data.MATERIAL}}</td>
-            <td>{{data.SEAL}}</td>
-            <td>{{data.BUMP_ID}}</td>
-            <td>{{data.STATUS}}</td>
-            <td>{{data.REMARK}}</td>
-            </tr>
-        </tbody>
-        </nz-table>
-        <br>
-        <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
-            <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
-                <button nz-button nzType="primary" type="button" (click)="getOrderListWithCondition(orderListDetailFormModel)">保存</button>
+            <div nz-col class="gutter-row" nzSpan="8">
+                <label for="ORDER_NO">订单编号</label>
+                <input nz-input [(ngModel)]="currentBumpInfo.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
             </div>
-        </div>
     </div>
-    <br>
-</form>
+</nz-modal>

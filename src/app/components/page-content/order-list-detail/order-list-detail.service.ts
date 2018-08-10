@@ -29,6 +29,19 @@ export class OrderListDetailService {
     return this.http.delete<any> (this.orderListDetailTable + orderNo + "卍" + bumpIdList.toString()).pipe( catchError(this.handleError) );
   }
 
+  saveOrderListDetailForm(orderListDetailFormModel: any) {
+    return this.http.post<any>(this.orderListDetailForm, this.checkInput(JSON.stringify(orderListDetailFormModel)), httpOptions).pipe( retry(3), catchError(this.handleError) );
+  }
+
+  checkInput(orderListDetailFormModel: string) {
+
+    var temporderListDetailFormModel = JSON.parse(orderListDetailFormModel);
+
+    // DO SOMETING HERE
+    
+    return JSON.stringify(temporderListDetailFormModel);
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

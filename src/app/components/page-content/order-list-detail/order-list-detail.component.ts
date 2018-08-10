@@ -18,8 +18,32 @@ export class OrderListDetailComponent implements OnInit {
     this.getOrderListDetailTable();
   }
 
+  // MODEL
+  isVisible = false;
+  isOkLoading = false;
+
+  currentBumpInfo = new OrderListDetailTableModel();
+
+  showModal(currentData: any): void {
+    this.isVisible = true;
+    this.currentBumpInfo = currentData;
+  }
+
+  handleOk(): void {
+    this.isOkLoading = true;
+    window.setTimeout(() => {
+      this.isVisible = false;
+      this.isOkLoading = false;
+    }, 3000);
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
+
   // ERROR
   error: any;
+
   // ORDER LIST FORM
   orderListDetailFormModel = new OrderListDetailFormModel();
   orderListSearchSubmitData = {};
@@ -51,11 +75,6 @@ export class OrderListDetailComponent implements OnInit {
       }
     });
     this.refreshOrderDetailListStatus();
-  }
-
-  onSubmit() {
-    // JSON
-    console.log(JSON.stringify(this.orderListDetailFormModel));
   }
 
   getOrderListDetailForm(): any {
@@ -92,6 +111,9 @@ export class OrderListDetailComponent implements OnInit {
       submitList.push(bumpItem.BUMP_ID);
       this.orderListDetailService.delOrderListDetailTableData(orderNo, submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderListDetailTable() }, error => this.error = error);
     }
+  }
 
+  saveOrderListDetailForm(orderListDetailFormModel: any) {
+    this.orderListDetailService.saveOrderListDetailForm(orderListDetailFormModel).subscribe((data) => (console.log(data)), error => this.error = error);
   }
 }

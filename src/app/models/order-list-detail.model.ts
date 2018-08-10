@@ -8,10 +8,10 @@ export class OrderListDetailFormModel {
     ORDER_UNIT: String;
     SALES_PERSON: String;
     APPLICATION_ENGINEER: String;
-    PAGES_FOR_ORDER_LIST: String;
+    REMARK: String;
 }
 
-export interface OrderListDetailTableModel {
+export class OrderListDetailTableModel {
     // DB
     ORDER_NO: String;
     BUMP_ID: String;
