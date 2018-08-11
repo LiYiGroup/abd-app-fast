@@ -25,19 +25,31 @@ export class OrderListDetailComponent implements OnInit {
   currentBumpInfo = new OrderListDetailTableModel();
 
   showModal(currentData: any): void {
-    this.isVisible = true;
+    if (currentData == null) {
+      currentData = new OrderListDetailTableModel();
+      var orderNo = this.route.snapshot.paramMap.get('orderNo');
+      if (orderNo == null || orderNo == undefined) {
+        // NEW ORDER, GET ORDER FROM FORM
+        currentData.ORDER_NO = this.orderListDetailFormModel.ORDER_NO;
+      } else {
+        currentData.ORDER_NO = orderNo;
+      }
+    }
     this.currentBumpInfo = currentData;
+    this.isVisible = true;
   }
 
   handleOk(): void {
     this.isOkLoading = true;
+    this.saveOrderListDetailTable();
     window.setTimeout(() => {
       this.isVisible = false;
       this.isOkLoading = false;
-    }, 3000);
+    }, 1500);
   }
 
   handleCancel(): void {
+    this.getOrderListDetailTable();
     this.isVisible = false;
   }
 
@@ -114,6 +126,10 @@ export class OrderListDetailComponent implements OnInit {
   }
 
   saveOrderListDetailForm(orderListDetailFormModel: any) {
-    this.orderListDetailService.saveOrderListDetailForm(orderListDetailFormModel).subscribe((data) => (console.log(data)), error => this.error = error);
+    this.orderListDetailService.saveOrderListDetailForm(orderListDetailFormModel).subscribe((data) => (console.log()), error => this.error = error);
+  }
+
+  saveOrderListDetailTable() {
+    this.orderListDetailService.saveOrderListDetailTable(this.currentBumpInfo).subscribe((data) => (this.getOrderListDetailTable()), error => this.error = error);
   }
 }

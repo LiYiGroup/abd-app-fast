@@ -33,6 +33,10 @@ export class OrderListDetailService {
     return this.http.post<any>(this.orderListDetailForm, this.checkInput(JSON.stringify(orderListDetailFormModel)), httpOptions).pipe( retry(3), catchError(this.handleError) );
   }
 
+  saveOrderListDetailTable(currentBumpInfo: any) {
+    return this.http.post<any>(this.orderListDetailTable, this.checkInput(JSON.stringify(currentBumpInfo)), httpOptions).pipe( retry(3), catchError(this.handleError) );
+  }
+
   checkInput(orderListDetailFormModel: string) {
 
     var temporderListDetailFormModel = JSON.parse(orderListDetailFormModel);
