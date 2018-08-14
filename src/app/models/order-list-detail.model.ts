@@ -25,6 +25,7 @@ export class OrderListDetailTableModel {
     SEAL: String;
     STATUS: String;
     REMARK: String;
+    BUMP_SERIAL_NO: String;
     // GRID
     checked: Boolean;
     disabled: Boolean;

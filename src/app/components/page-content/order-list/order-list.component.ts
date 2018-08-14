@@ -115,11 +115,11 @@ export class OrderListComponent implements OnInit {
         for (var i = 0; i < this.orderListTableCheckedData.length; i++) {
           submitList.push(this.orderListTableCheckedData[i].ORDER_NO);
         }
-        this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList() }, error => this.error = error);
+        this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
       }
     } else {
       submitList.push(orderItem.ORDER_NO);
-      this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList() }, error => this.error = error);
+      this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
     }
   }
 }

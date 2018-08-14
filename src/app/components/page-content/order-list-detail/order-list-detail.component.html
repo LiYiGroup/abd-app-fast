@@ -46,7 +46,7 @@
 <nz-divider nzType="horizontal"></nz-divider>
 <button nz-button nzType="primary" (click)="showModal()">新建</button>
 <nz-divider nzType="vertical"></nz-divider>
-<button nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">批量删除</button>
+<button nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">删除</button>
 <br>
 <br>
 <div class="grid_area">
@@ -88,7 +88,7 @@
         <td (click)="showModal(data)">{{data.LIFT}}</td>
         <td (click)="showModal(data)">{{data.MATERIAL}}</td>
         <td (click)="showModal(data)">{{data.SEAL}}</td>
-        <td (click)="showModal(data)">{{data.BUMP_ID}}</td>
+        <td (click)="showModal(data)">{{data.BUMP_SERIAL_NO}}</td>
         <td (click)="showModal(data)">{{data.STATUS}}</td>
         <td (click)="showModal(data)">{{data.REMARK}}</td>
         </tr>
@@ -142,8 +142,8 @@
     </div>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="BUMP_ID">序列号</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.BUMP_ID" name="BUMP_ID" #BUMP_ID="ngModel">
+            <label for="BUMP_SERIAL_NO">序列号</label>
+            <input nz-input [(ngModel)]="currentBumpInfo.BUMP_SERIAL_NO" name="BUMP_SERIAL_NO" #BUMP_SERIAL_NO="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="STATUS">状态</label>
