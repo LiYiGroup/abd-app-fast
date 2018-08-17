@@ -1,0 +1,115 @@
+<h1>BOM</h1>
+<form nz-form (ngSubmit)="onSubmit()" #orderListSearchForm="ngForm">
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="INNER_ORDER_NO">内部订单号</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <input nz-input [(ngModel)]="basicAndSealModel.INNER_ORDER_NO" name="INNER_ORDER_NO" #INNER_ORDER_NO="ngModel">
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4"><h2>泵基本参数</h2></div>
+        <div nz-col class="gutter-row" nzSpan="20"></div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="BUMP_TYPE">泵型号</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.BUMP_TYPE" name="BUMP_TYPE" #BUMP_TYPE="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="BUMP_SERIAL_NO">泵序列号</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.BUMP_SERIAL_NO" name="BUMP_SERIAL_NO" #BUMP_SERIAL_NO="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="NUMBER">数量</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.NUMBER" name="NUMBER" #NUMBER="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="WORKING_PRESSURE">工作压力</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.WORKING_PRESSURE" name="WORKING_PRESSURE" #WORKING_PRESSURE="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="TEST_PRESSURE">装配完毕泵头测试压力</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.TEST_PRESSURE" name="TEST_PRESSURE" #TEST_PRESSURE="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="SUPPRESS_PRESSURE">泵体打压压力</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.SUPPRESS_PRESSURE" name="SUPPRESS_PRESSURE" #SUPPRESS_PRESSURE="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="FLANGE_STANDARD">法兰标准</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.FLANGE_STANDARD" name="FLANGE_STANDARD" #FLANGE_STANDARD="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="FLOW">流量</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.FLOW" name="FLOW" #FLOW="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="LIFT">扬程</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.LIFT" name="LIFT" #LIFT="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="NPSH">装置汽蚀余量</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.NPSH" name="NPSH" #NPSH="ngModel">
+        </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="4">
+          <label for="BUMP_SPEED">泵实际转速</label>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input [(ngModel)]="basicAndSealModel.BUMP_SPEED" name="BUMP_SPEED" #BUMP_SPEED="ngModel">
+        </div>
+    </div>
+</form>

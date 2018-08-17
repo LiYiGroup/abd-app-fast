@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { OrderListComponent } from './components/page-content/order-list/order-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OrderListDetailComponent } from './components/page-content/order-list-detail/order-list-detail.component';
+import { InnerOrderComponent } from './components/page-content/inner-order/inner-order.component';
 
 registerLocaleData(zh);
 
@@ -22,7 +23,8 @@ registerLocaleData(zh);
     AppSiderComponent,
     HeaderComponent,
     OrderListComponent,
-    OrderListDetailComponent
+    OrderListDetailComponent,
+    InnerOrderComponent
   ],
   imports: [
     BrowserModule,

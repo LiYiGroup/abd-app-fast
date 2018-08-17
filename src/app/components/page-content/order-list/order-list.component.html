@@ -46,11 +46,15 @@
         <div nz-col class="gutter-row" nzSpan="6"></div>
         <div nz-col class="gutter-row" nzSpan="6"></div>
         <div nz-col class="gutter-row" nzSpan="6" class="btn_area">
-            <button nz-button nzType="primary" type="submit">导入</button>
-            <nz-divider nzType="vertical"></nz-divider>
             <button nz-button nzType="primary" type="submit">导出</button>
             <nz-divider nzType="vertical"></nz-divider>
             <button nz-button nzType="primary" type="button" (click)="getOrderListWithCondition(orderListSearchModel)">查询</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <nz-upload
+                [nzShowUploadList]="false"
+                nzAction="http://localhost:53366/api/orderListUpload/">
+                <button nz-button type="button" nzType="primary">导入</button>
+            </nz-upload>
         </div>
     </div>
     <br>
@@ -155,7 +159,7 @@
         <br>
         <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
             <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
-                <button nz-button nzType="primary" type="submit" class="btn_area">BOM</button>
+                <button nz-button nzType="primary" type="button" routerLink="/order-list/bom/">BOM</button>
             </div>
         </div>
     </div>
