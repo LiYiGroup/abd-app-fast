@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderListSearchModel, OrderListTableModel, OrderDetailListTableModel } from '../../../models/order-list.model';
 import { OrderListService } from './order-list.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-list',
@@ -10,7 +11,7 @@ import { OrderListService } from './order-list.service';
 })
 export class OrderListComponent implements OnInit {  
 
-  constructor(private orderListService: OrderListService) { }
+  constructor(private orderListService: OrderListService,public router: Router) { }
 
   ngOnInit() {
     this.getOrderList();
@@ -33,7 +34,7 @@ export class OrderListComponent implements OnInit {
   orderDetailListTableAllChecked = false;
   orderDetailListTableIndeterminate = false;
   orderDetailListTableDisplayData = [];
-  orderDetailListTableCheckedData = [];
+  orderDetailListTableCheckedData :Array<OrderDetailListTableModel> = [];
   orderDetailListTableData :Array<OrderDetailListTableModel>;
 
   orderListCurrentPageDataChange($event: Array<any>): void {
@@ -121,5 +122,14 @@ export class OrderListComponent implements OnInit {
       submitList.push(orderItem.ORDER_NO);
       this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
     }
+  }
+
+  jumpToBOM() {
+    this.router.navigate(['/order-list/bom'], {
+      queryParams: {
+        orderNo: this.orderDetailListTableCheckedData[0].ORDER_NO,
+        bumpId: this.orderDetailListTableCheckedData[0].BUMP_ID
+      }
+  });
   }
 }

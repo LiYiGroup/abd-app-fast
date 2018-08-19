@@ -1,5 +1,6 @@
-export class basicAndSealModel {
+export class BasicAndSealModel {
 
+    ORDER_NO: String;
     INNER_ORDER_NO: String;
     BUMP_ID: String;
     BUMP_SERIAL_NO: String;
@@ -21,7 +22,12 @@ export class basicAndSealModel {
     SEAL_TYPE: String;
     SEAL_MODEL: String;
     SEAL_MATERIAL: String;
-    SEAL_PROVIDER: String;
+    OTHER_SEAL_PROVIDER: String;
     NEED_SEAL_COOLER_FLG: String;
+
+}
+
+export class OtherSealModel {
+
 
 }

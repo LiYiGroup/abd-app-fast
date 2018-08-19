@@ -1,5 +1,5 @@
 <h1>订单一览</h1>
-<form nz-form (ngSubmit)="onSubmit()" #orderListSearchForm="ngForm">
+<form nz-form (ngSubmit)="onSubmit()">
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="ORDER_NO">订单编号</label>
@@ -159,7 +159,7 @@
         <br>
         <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
             <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
-                <button nz-button nzType="primary" type="button" routerLink="/order-list/bom/">BOM</button>
+                <button nz-button nzType="primary" type="button" (click)="jumpToBOM()">BOM</button>
             </div>
         </div>
     </div>
