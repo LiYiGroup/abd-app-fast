@@ -52,14 +52,14 @@
             <nz-divider nzType="vertical"></nz-divider>
             <nz-upload
                 [nzShowUploadList]="false"
-                nzAction="http://localhost:53366/api/orderListUpload/">
+                nzAction="http://192.168.0.163:53366/api/orderListUpload/">
                 <button nz-button type="button" nzType="primary">导入</button>
             </nz-upload>
         </div>
     </div>
     <br>
     <nz-divider nzType="horizontal"></nz-divider>
-    <button nz-button nzType="primary" type="button" routerLink="/order-list/detail/">新建</button>
+    <button nz-button nzType="primary" type="button" routerLink="/order-list/detail">新建</button>
     <!--<nz-divider nzType="vertical"></nz-divider>-->
     <button hidden nz-button nzType="primary" type="button" (click)="deleteOrderListItem()">删除</button>
     <br><br>

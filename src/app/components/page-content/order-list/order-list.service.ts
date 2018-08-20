@@ -12,8 +12,8 @@ const httpOptions = {
 
 @Injectable()
 export class OrderListService {
-  orderList = 'http://localhost:53366/api/orderList/';
-  orderListDetailTable = 'http://localhost:53366/api/orderListDetailTable/';
+  orderList = 'http://192.168.0.163:53366/api/orderList/';
+  orderListDetailTable = 'http://192.168.0.163:53366/api/orderListDetailTable/';
 
   constructor(private http: HttpClient) { }
 

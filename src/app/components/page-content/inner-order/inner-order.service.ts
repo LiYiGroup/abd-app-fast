@@ -9,7 +9,7 @@ import { OrderListDetailTableModel } from '../../../models/order-list-detail.mod
 
 @Injectable()
 export class InnerOrderService {
-  existBumpInfo = 'http://localhost:53366/api/innerOrder/existBumpInfo/';
+  existBumpInfo = 'http://192.168.0.163:53366/api/innerOrder/existBumpInfo/';
 
   constructor(private http: HttpClient) { }
 
