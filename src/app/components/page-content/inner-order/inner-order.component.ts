@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasicAndSealModel } from '../../../models/inner-order.model';
+import { BasicAndSealModel, BasicPartListTableModel, ComponentListTableModel, OtherComponentModel } from '../../../models/inner-order.model';
 import { OrderListDetailTableModel } from '../../../models/order-list-detail.model';
 import { ActivatedRoute } from '@angular/router';
 import { InnerOrderService } from './inner-order.service';
@@ -23,7 +23,10 @@ export class InnerOrderComponent implements OnInit {
 
   // ORDER LIST FORM
   basicAndSealModel = new BasicAndSealModel();
+  otherComponentModel = new OtherComponentModel();
 
+  componentListTableData: Array<ComponentListTableModel>;
+  basicPartListTableData: Array<BasicPartListTableModel>;
   // LOAD ITEM BELOW WHEN INIT
   orderListDetailTableModel = new OrderListDetailTableModel();
 

@@ -3,12 +3,22 @@
 <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
   <li nz-submenu>
     <span title>
-      <i class="anticon anticon-user"></i>
+      <i class="anticon anticon-bars"></i>
       <span class="nav-text">订单管理</span>
     </span>
     <ul>
       <li nz-menu-item routerLink="/order-list">
-        <i class="anticon anticon-appstore"></i>订单一览</li>
+        <i class="anticon anticon-copy"></i>订单一览</li>
+    </ul>
+  </li>
+    <li nz-submenu>
+    <span title>
+      <i class="anticon anticon-bars"></i>
+      <span class="nav-text">数据维护</span>
+    </span>
+    <ul>
+      <li nz-menu-item routerLink="/order-list">
+        <i class="anticon anticon-link"></i>附件型号库</li>
     </ul>
   </li>
 </ul>
