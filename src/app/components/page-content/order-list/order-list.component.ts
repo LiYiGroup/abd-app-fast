@@ -125,11 +125,15 @@ export class OrderListComponent implements OnInit {
   }
 
   jumpToBOM() {
-    this.router.navigate(['/order-list/bom'], {
-      queryParams: {
-        orderNo: this.orderDetailListTableCheckedData[0].ORDER_NO,
-        bumpId: this.orderDetailListTableCheckedData[0].BUMP_ID
-      }
-  });
+    if (this.orderDetailListTableCheckedData[0] == undefined) {
+      return false;
+    } else {
+      this.router.navigate(['/order-list/bom'], {
+        queryParams: {
+          orderNo: this.orderDetailListTableCheckedData[0].ORDER_NO,
+          bumpId: this.orderDetailListTableCheckedData[0].BUMP_ID
+        }
+      });
+    }
   }
 }

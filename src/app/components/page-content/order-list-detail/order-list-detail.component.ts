@@ -26,15 +26,22 @@ export class OrderListDetailComponent implements OnInit {
 
   showModal(currentData: any): void {
     if (currentData == null) {
+      // INSERT
       currentData = new OrderListDetailTableModel();
       var orderNo = this.route.snapshot.paramMap.get('orderNo');
       if (orderNo == null || orderNo == undefined) {
         // NEW ORDER, GET ORDER FROM FORM
-        currentData.ORDER_NO = this.orderListDetailFormModel.ORDER_NO;
+        if (this.orderListDetailFormModel.ORDER_NO == null || this.orderListDetailFormModel.ORDER_NO == undefined) {
+          // ERROR MSG HERE TODO..
+          return;
+        } else {
+          currentData.ORDER_NO = this.orderListDetailFormModel.ORDER_NO;
+        }
       } else {
         currentData.ORDER_NO = orderNo;
       }
     }
+    // EDIT
     this.currentBumpInfo = currentData;
     this.isVisible = true;
   }
