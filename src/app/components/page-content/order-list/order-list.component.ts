@@ -84,16 +84,6 @@ export class OrderListComponent implements OnInit {
     this.refreshOrderDetailListStatus();
   }
 
-  onSubmit() {
-    // DATE CONVERT
-    this.orderListSearchModel.DELIVERY_DATE_ST_STR = this.orderListSearchModel.DELIVERY_DATE_ST.toLocaleDateString();
-    this.orderListSearchModel.DELIVERY_DATE_ED_STR = this.orderListSearchModel.DELIVERY_DATE_ED.toLocaleDateString();
-    this.orderListSearchModel.DEPARTURE_DATE_ST_STR = this.orderListSearchModel.DELIVERY_DATE_ST.toLocaleDateString();
-    this.orderListSearchModel.DEPARTURE_DATE_ED_STR = this.orderListSearchModel.DELIVERY_DATE_ED.toLocaleDateString();
-    // JSON
-    console.log(JSON.stringify(this.orderListSearchModel));
-  }
-
   getOrderList() {
     this.orderListService.getOrderList().subscribe((data) => (this.orderListTableData = data), error => this.error = error);
   }
@@ -134,6 +124,13 @@ export class OrderListComponent implements OnInit {
           bumpId: this.orderDetailListTableCheckedData[0].BUMP_ID
         }
       });
+    }
+  }
+
+  handleUpload(obj) {
+    if (obj.type == "success") {
+      // REFRESH HERE
+      this.getOrderList();
     }
   }
 }

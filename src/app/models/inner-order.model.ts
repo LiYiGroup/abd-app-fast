@@ -21,8 +21,14 @@ export class BasicAndSealModel {
     SEAL_TYPE: String;
     SEAL_MODEL: String;
     SEAL_MATERIAL: String;
+    ABD_SEAL_INFO: String;
     OTHER_SEAL_PROVIDER: String;
+    OTHER_SEAL_INFO: String;
     NEED_SEAL_COOLER_FLG: String;
+    // 轴承品牌
+    BEARING_BRAND: String;
+    // 轴承其他信息
+    BEARING_OTHER_INFO: String;
 
 }
 
@@ -55,9 +61,11 @@ export class OtherComponentModel {
     // 底座
     BASE_TYPE: String;
     BASE_SPEC: String;
+    SPECIAL_BASE_DETAIL: String;
     // 联轴器罩
     COUPLING_HOOD_TYPE: String;
     COUPLING_HOOD_SPEC: String;
+    SPECIAL_HOOD_TYPE_DETAIL: String;
     // 地脚螺栓
     ANCHOR_BOLT_TYPE: String;
     ANCHOR_BOLT_SPEC: String;
@@ -74,6 +82,7 @@ export class OtherComponentModel {
     COUPLING_PROVIDER: String;
     COUPLING_SPEC: String;
     COUPLING_NUM: String;
+    SPECIAL_COUPLING_TYPE_DETAIL: String;
     // 电机
     ELECTRIC_MOTER_TYPE: String;
     ELECTRIC_MOTER_PROVIDER: String;
@@ -83,12 +92,14 @@ export class OtherComponentModel {
     ELECTRIC_MOTER_EXTRA_INFO: String;
     // 油漆及外表颜色
     COLOR_TYPE: String;
+    SPECIAL_COLOR_DETAIL: String;
     SURFACE_TREAT_TYPE: String;
     SURFACE_TREAT_EXTRA_INFO: String;
     // 包装及运输
     TRANSPORT_TYPE: String;
     TRANSPORT_PLACE: String;
     PACKAGEING_TYPE: String;
+    SPECIAL_PACK_DETAIL: String;
     NEED_FUME_CERTIFICATE: String;
     ADDRESS_INFO: String;
     REMARK: String;
