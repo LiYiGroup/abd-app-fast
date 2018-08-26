@@ -14,7 +14,7 @@ export class InnerOrderService {
   constructor(private http: HttpClient) { }
 
   getExistedBumpInfo(orderNo:string, bumpId: string) {
-    return this.http.get<OrderListDetailTableModel> (this.existBumpInfo + orderNo + "卍" + bumpId).pipe( catchError(this.handleError) );
+    return this.http.get<OrderListDetailTableModel> (this.existBumpInfo + (orderNo + "|DASH|" + bumpId).replace("/","|SLASH|")).pipe( catchError(this.handleError) );
   }
 
   private handleError(error: HttpErrorResponse) {
