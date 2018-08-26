@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'order-list/detail', component: OrderListDetailComponent },
   { path: 'order-list/detail/:orderNo', component: OrderListDetailComponent },
   { path: 'order-list/bom', component: InnerOrderComponent },
-  { path: 'order-list/bom/:bumpId', component: InnerOrderComponent }
+  { path: 'order-list/bom/:bumpInfo', component: InnerOrderComponent }
 ];
 
 @NgModule ({

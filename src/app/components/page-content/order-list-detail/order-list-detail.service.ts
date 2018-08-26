@@ -26,7 +26,7 @@ export class OrderListDetailService {
   }
 
   delOrderListDetailTableData(orderNo:string, bumpIdList: String[]) {
-    return this.http.delete<any> (this.orderListDetailTable + orderNo + "卍" + bumpIdList.toString()).pipe( catchError(this.handleError) );
+    return this.http.delete<any> (this.orderListDetailTable + orderNo + "|DASH|" + bumpIdList.toString()).pipe( catchError(this.handleError) );
   }
 
   saveOrderListDetailForm(orderListDetailFormModel: any) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderListSearchModel, OrderListTableModel, OrderDetailListTableModel } from '../../../models/order-list.model';
 import { OrderListService } from './order-list.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-list',
@@ -10,7 +11,7 @@ import { OrderListService } from './order-list.service';
 })
 export class OrderListComponent implements OnInit {  
 
-  constructor(private orderListService: OrderListService) { }
+  constructor(private orderListService: OrderListService,public router: Router) { }
 
   ngOnInit() {
     this.getOrderList();
@@ -33,7 +34,7 @@ export class OrderListComponent implements OnInit {
   orderDetailListTableAllChecked = false;
   orderDetailListTableIndeterminate = false;
   orderDetailListTableDisplayData = [];
-  orderDetailListTableCheckedData = [];
+  orderDetailListTableCheckedData :Array<OrderDetailListTableModel> = [];
   orderDetailListTableData :Array<OrderDetailListTableModel>;
 
   orderListCurrentPageDataChange($event: Array<any>): void {
@@ -83,16 +84,6 @@ export class OrderListComponent implements OnInit {
     this.refreshOrderDetailListStatus();
   }
 
-  onSubmit() {
-    // DATE CONVERT
-    this.orderListSearchModel.DELIVERY_DATE_ST_STR = this.orderListSearchModel.DELIVERY_DATE_ST.toLocaleDateString();
-    this.orderListSearchModel.DELIVERY_DATE_ED_STR = this.orderListSearchModel.DELIVERY_DATE_ED.toLocaleDateString();
-    this.orderListSearchModel.DEPARTURE_DATE_ST_STR = this.orderListSearchModel.DELIVERY_DATE_ST.toLocaleDateString();
-    this.orderListSearchModel.DEPARTURE_DATE_ED_STR = this.orderListSearchModel.DELIVERY_DATE_ED.toLocaleDateString();
-    // JSON
-    console.log(JSON.stringify(this.orderListSearchModel));
-  }
-
   getOrderList() {
     this.orderListService.getOrderList().subscribe((data) => (this.orderListTableData = data), error => this.error = error);
   }
@@ -120,6 +111,26 @@ export class OrderListComponent implements OnInit {
     } else {
       submitList.push(orderItem.ORDER_NO);
       this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
+    }
+  }
+
+  jumpToBOM() {
+    if (this.orderDetailListTableCheckedData[0] == undefined) {
+      return false;
+    } else {
+      this.router.navigate(['/order-list/bom'], {
+        queryParams: {
+          orderNo: this.orderDetailListTableCheckedData[0].ORDER_NO,
+          bumpId: this.orderDetailListTableCheckedData[0].BUMP_ID
+        }
+      });
+    }
+  }
+
+  handleUpload(obj) {
+    if (obj.type == "success") {
+      // REFRESH HERE
+      this.getOrderList();
     }
   }
 }
