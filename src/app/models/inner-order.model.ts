@@ -24,7 +24,9 @@ export class BasicAndSealModel {
     ABD_SEAL_INFO: String;
     OTHER_SEAL_PROVIDER: String;
     OTHER_SEAL_INFO: String;
+    OTHER_SEAL_MODEL: String;
     NEED_SEAL_COOLER_FLG: String;
+    SEAL_COOLER_MODEL: String;
     // 轴承品牌
     BEARING_BRAND: String;
     // 轴承其他信息
@@ -98,7 +100,7 @@ export class OtherComponentModel {
     // 包装及运输
     TRANSPORT_TYPE: String;
     TRANSPORT_PLACE: String;
-    PACKAGEING_TYPE: String;
+    PACKAGING_TYPE: String;
     SPECIAL_PACK_DETAIL: String;
     NEED_FUME_CERTIFICATE: String;
     ADDRESS_INFO: String;

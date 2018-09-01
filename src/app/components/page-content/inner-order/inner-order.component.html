@@ -724,17 +724,17 @@
   <br>
   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <div nz-col class="gutter-row" nzSpan="4">
-      <label for="PACKAGEING_TYPE">包装要求</label>
+      <label for="PACKAGING_TYPE">包装要求</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.PACKAGEING_TYPE" name="PACKAGEING_TYPE" #PACKAGEING_TYPE="ngModel" nzAllowClear nzPlaceHolder="请选择包装要求...">
+      <nz-select [(ngModel)]="otherComponentModel.PACKAGING_TYPE" name="PACKAGING_TYPE" #PACKAGING_TYPE="ngModel" nzAllowClear nzPlaceHolder="请选择包装要求...">
         <nz-option nzValue="ABD_PACK" nzLabel="ABD标准胶合板封闭"></nz-option>
         <nz-option nzValue="HOLLOWED_WOOD_PACK" nzLabel="木条镂空包装"></nz-option>
         <nz-option nzValue="CLOSURE_WOOD_PACK" nzLabel="全封闭木板包装"></nz-option>
         <nz-option nzValue="EXPORT_STANDARD_PACK" nzLabel="出口标准包装"></nz-option>
         <nz-option nzValue="SPECIAL_PACK" nzLabel="特殊要求"></nz-option>
       </nz-select>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="otherComponentModel.PACKAGEING_TYPE">
+      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="otherComponentModel.PACKAGING_TYPE">
         <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'EXPORT_STANDARD_PACK'">
           <label for="NEED_FUME_CERTIFICATE">重蒸证明是否需要</label>
         </div>
@@ -745,7 +745,7 @@
           </nz-select>
         </div>
       </div>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="otherComponentModel.PACKAGEING_TYPE=='SPECIAL_PACK'">
+      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="otherComponentModel.PACKAGING_TYPE=='SPECIAL_PACK'">
         <div nz-col class="gutter-row" nzSpan="4">
           <label for="SPECIAL_PACK_DETAIL">特殊要求详情</label>
         </div>
@@ -780,7 +780,7 @@
     </div>
   </div>
   <br>
-  <button nz-button nzType="primary" type="button">保存</button>
+  <button nz-button nzType="primary" type="button" (click)="saveInnerOrder()">保存</button>
   <nz-divider nzType="vertical"></nz-divider>
   <button nz-button nzType="primary" type="button">导出</button>
 </form>

@@ -21,12 +21,16 @@ export class InnerOrderComponent implements OnInit {
   orderNo: string;
   bumpId: string;
 
+  
+  // ---------FORM OBJECTS START---------
   // ORDER LIST FORM
   basicAndSealModel = new BasicAndSealModel();
   otherComponentModel = new OtherComponentModel();
-
+  // GRID
   componentListTableData: Array<ComponentListTableModel>;
   basicPartListTableData: Array<BasicPartListTableModel>;
+  // ---------FORM OBJECTS END-----------
+
   // LOAD ITEM BELOW WHEN INIT
   orderListDetailTableModel = new OrderListDetailTableModel();
 
@@ -38,6 +42,8 @@ export class InnerOrderComponent implements OnInit {
       this.bumpId = params.bumpId; 
       // GET BUMP DATA THROUGH BUMPID AND ORDERNO
       this.getExistedBumpInfo();
+      this.getBasicSealInfo();
+      this.getOtherComponentInfo();
     });
   }
 
@@ -45,5 +51,22 @@ export class InnerOrderComponent implements OnInit {
     this.innerOrderService.
         getExistedBumpInfo(this.orderNo, this.bumpId).
         subscribe((data) => (this.orderListDetailTableModel = data), error => this.error = error);
+  }
+
+  getBasicSealInfo () {
+    this.innerOrderService.
+        getBasicSealInfo(this.orderNo, this.bumpId).
+        subscribe((data) => (this.basicAndSealModel = data), error => this.error = error);
+  }
+
+  getOtherComponentInfo() {
+    this.innerOrderService.
+    getOtherComponentInfo(this.orderNo, this.bumpId).
+        subscribe((data) => (this.otherComponentModel = data), error => this.error = error);
+  }
+
+  saveInnerOrder() {
+    this.innerOrderService.
+        saveInnerOrder(this.orderListDetailTableModel,this.basicAndSealModel,this.componentListTableData, this.basicPartListTableData, this.otherComponentModel).subscribe((data) => (console.log(data)), error => this.error = error);
   }
 }
