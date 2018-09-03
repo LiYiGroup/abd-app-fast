@@ -27,6 +27,7 @@ export class BasicAndSealModel {
     OTHER_SEAL_MODEL: String;
     NEED_SEAL_COOLER_FLG: String;
     SEAL_COOLER_MODEL: String;
+    INSTALL_DIRECTION: String;
     // 轴承品牌
     BEARING_BRAND: String;
     // 轴承其他信息
@@ -74,7 +75,7 @@ export class OtherComponentModel {
     ANCHOR_BOLT_MATERIAL: String;
     ANCHOR_BOLT_EXTRA_NUT_SPEC: String;
     ANCHOR_BOLT_EXTRA_PAD_SPEC: String;
-    ANCHOR_BOLT_NUM: String;
+    ANCHOR_BOLT_NUM: number;
     // 联轴器
     COUPLING_TYPE: String;
     COUPLING_BUMP_COUPLET: String;
@@ -83,13 +84,13 @@ export class OtherComponentModel {
     COUPLING_JUMP_RING: String;
     COUPLING_PROVIDER: String;
     COUPLING_SPEC: String;
-    COUPLING_NUM: String;
+    COUPLING_NUM: number;
     SPECIAL_COUPLING_TYPE_DETAIL: String;
     // 电机
     ELECTRIC_MOTER_TYPE: String;
     ELECTRIC_MOTER_PROVIDER: String;
-    ELECTRIC_MOTER_POWER: String;
-    ELECTRIC_MOTER_SPEED: String;
+    ELECTRIC_MOTER_POWER: number;
+    ELECTRIC_MOTER_SPEED: number;
     ELECTRIC_MOTER_PFV: String;
     ELECTRIC_MOTER_EXTRA_INFO: String;
     // 油漆及外表颜色

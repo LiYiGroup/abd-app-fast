@@ -1,0 +1,128 @@
+<h1>联轴器类型数据库</h1>
+<form nz-form  #CouplingTypeDataSearchForm="ngForm">
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="BUMP_TYPE">泵型号</label>
+            <input nz-input [(ngModel)]="otherComponentModelSearchModel.BUMP_TYPE" name="BUMP_TYPE" #BUMP_TYPE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="BASE_TYPE">底座型号</label>
+            <input nz-input [(ngModel)]="otherComponentModelSearchModel.BASE_TYPE" name="BASE_TYPE" #BASE_TYPE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_HOOD_TYPE">联轴器罩型号</label>
+            <input nz-input [(ngModel)]="otherComponentModelSearchModel.COUPLING_HOOD_TYPE" name="COUPLING_HOOD_TYPE" #COUPLING_HOOD_TYPE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_BUMP_COUPLET">泵联型号</label>
+            <input nz-input [(ngModel)]="otherComponentModelSearchModel.COUPLING_BUMP_COUPLET" name="COUPLING_BUMP_COUPLET" #ORDER_UNIT="ngModel">
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_ELECTRIC_COUPLET">电联型号</label>
+            <input nz-input [(ngModel)]="otherComponentModelSearchModel.COUPLING_ELECTRIC_COUPLET" name="COUPLING_ELECTRIC_COUPLET" #COUPLING_ELECTRIC_COUPLET="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_PIN">柱销型号</label>
+            <input nz-input [(ngModel)]="otherComponentModelSearchModel.COUPLING_PIN" name="COUPLING_PIN" #COUPLING_PIN="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6" >
+            <label for="COUPLING_JUMP_RING">卡簧型号</label>
+            <input nz-input [(ngModel)]="otherComponentModelSearchModel.COUPLING_JUMP_RING" name="COUPLING_JUMP_RING" #COUPLING_JUMP_RING="ngModel">
+        </div>
+      <!--导出和导入没有实际功能-->
+        <div nz-col class="gutter-row" nzSpan="6"  class="btn_area">
+            <button nz-button nzType="primary" type="submit">导出</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzType="primary" type="button" (click)="getOtherComponentModelWithCondition(otherComponentModelSearchModel)">查询</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <nz-upload
+                [nzShowUploadList]="false"
+                nzAction="http://localhost:53366/api/orderListUpload/">
+                <button nz-button type="button" nzType="primary">导入</button>
+            </nz-upload>
+        </div>
+    </div>
+    <br>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <button nz-button nzType="primary" type="button" (click)="showModal()">新建</button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <button nz-button nzType="primary" type="button" (click)="deleteOtherComponentModelTableData()">删除</button>
+    <br><br>
+    
+    <div class="grid_area">
+        <nz-table
+        #OtherComponentMOdelSelectionTable
+        [nzData]="otherComponentModelTableData"
+        [nzPageSize]="10"
+        [nzHideOnSinglePage]="false"
+        (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)"
+        (nzPageIndexChange)="refreshOrderListStatus()"
+        (nzPageSizeChange)="refreshOrderListStatus()"
+        nzSize="small">
+        <thead>
+            <tr>
+            <th nzShowCheckbox [(nzChecked)]="orderListTableAllChecked" [nzIndeterminate]="orderListTableIndeterminate" (nzCheckedChange)="orderListCheckAll($event)"></th>
+            <th>序号</th>
+            <th>泵型号</th>
+            <th>底座型号</th>
+            <th>联轴器罩型号</th>
+            <th>泵联型号</th>
+            <th>电联型号</th>
+            <th>注销型号</th>
+            <th>卡簧型号</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of OtherComponentMOdelSelectionTable.data; let i=index" >
+            <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderListStatus($event)"></td>
+            <td (click)="showModal(data)">{{i+1}}</td>
+            <td (click)="showModal(data)">{{data.BUMP_TYPE}}</td>
+            <td (click)="showModal(data)">{{data.BASE_TYPE}}</td>
+            <td (click)="showModal(data)">{{data.COUPLING_HOOD_TYPE}}</td>
+            <td (click)="showModal(data)">{{data.COUPLING_BUMP_COUPLET}}</td>
+            <td (click)="showModal(data)">{{data.COUPLING_ELECTRIC_COUPLET}}</td>
+            <td (click)="showModal(data)">{{data.COUPLING_PIN}}</td>
+            <td (click)="showModal(data)">{{data.COUPLING_JUMP_RING}}</td>
+            </tr>
+        </tbody>
+        </nz-table>
+    </div>
+</form>
+
+<!-- Model-->
+<nz-modal nzWidth="750" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="联轴器型号数据库信息编辑" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="BUMP_TYPE">泵型号</label>
+            <input nz-input [(ngModel)]="currentBumpInfo.BUMP_TYPE" name="BUMP_TYPE" #BUMP_TYPE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="BASE_TYPE">底座型号</label>
+            <input nz-input [(ngModel)]="currentBumpInfo.BASE_TYPE" name="BASE_TYPE" #BASE_TYPE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_HOOD_TYPE">联轴器型号</label>
+            <input nz-input [(ngModel)]="currentBumpInfo.COUPLING_HOOD_TYPE" name="COUPLING_HOOD_TYPE" #COUPLING_HOOD_TYPE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_BUMP_COUPLET">泵联型号</label>
+            <input nz-input [(ngModel)]="currentBumpInfo.COUPLING_BUMP_COUPLET" name="COUPLING_BUMP_COUPLET" #COUPLING_BUMP_COUPLET="ngModel">
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_ELECTRIC_COUPLET">电联型号</label>
+            <input nz-input [(ngModel)]="currentBumpInfo.COUPLING_ELECTRIC_COUPLET" name="COUPLING_ELECTRIC_COUPLET" #COUPLING_ELECTRIC_COUPLET="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_PIN">柱销型号</label>
+            <input nz-input [(ngModel)]="currentBumpInfo.COUPLING_PIN" name="COUPLING_PIN" #COUPLING_PIN="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_JUMP_RING">卡簧型号</label>
+            <input nz-input [(ngModel)]="currentBumpInfo.COUPLING_JUMP_RING" name="COUPLING_JUMP_RING" #COUPLING_JUMP_RING="ngModel">
+        </div>
+    </div>
+</nz-modal>

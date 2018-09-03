@@ -14,6 +14,7 @@ const httpOptions = {
 @Injectable()
 export class InnerOrderService {
   bomInfo = 'http://localhost:53366/api/innerOrder/';
+  modelLibrary = 'http://localhost:53366/api/innerOrder/modelLibrary/';
   existBumpInfo = 'http://localhost:53366/api/innerOrder/existBumpInfo/';
   basicSealInfo = 'http://localhost:53366/api/innerOrder/basicSealInfo/';
   otherComponentInfo = 'http://localhost:53366/api/innerOrder/otherComponentInfo/';
@@ -45,6 +46,10 @@ export class InnerOrderService {
     integeationMap["otherComponentModel"] = otherComponentModel;
     
     return JSON.stringify(integeationMap);
+  }
+
+  getModelLibrary(bumpType: string) {
+    return this.http.get(this.modelLibrary + bumpType.replace("/","|SLASH|")).pipe( catchError(this.handleError) );
   }
 
   private handleError(error: HttpErrorResponse) {

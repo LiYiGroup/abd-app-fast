@@ -14,6 +14,10 @@ import { OrderListComponent } from './components/page-content/order-list/order-l
 import { AppRoutingModule } from './app-routing.module';
 import { OrderListDetailComponent } from './components/page-content/order-list-detail/order-list-detail.component';
 import { InnerOrderComponent } from './components/page-content/inner-order/inner-order.component';
+import { OtherComponentModelComponent } from './components/page-content/other-component-model/other-component-model.component';
+import { AbdDoubleSealMstComponent } from './components/page-content/abd-double-seal-mst/abd-double-seal-mst.component';
+import { AbdIntegrateSealMstComponent } from './components/page-content/abd-integrate-seal-mst/abd-integrate-seal-mst.component';
+import { AbdSingleSealMstComponent } from './components/page-content/abd-single-seal-mst/abd-single-seal-mst.component';
 
 registerLocaleData(zh);
 
@@ -24,7 +28,11 @@ registerLocaleData(zh);
     HeaderComponent,
     OrderListComponent,
     OrderListDetailComponent,
-    InnerOrderComponent
+    InnerOrderComponent,
+    OtherComponentModelComponent,
+    AbdDoubleSealMstComponent,
+    AbdIntegrateSealMstComponent,
+    AbdSingleSealMstComponent
   ],
   imports: [
     BrowserModule,
