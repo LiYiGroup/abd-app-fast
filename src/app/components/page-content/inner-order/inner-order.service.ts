@@ -18,6 +18,8 @@ export class InnerOrderService {
   existBumpInfo = 'http://localhost:53366/api/innerOrder/existBumpInfo/';
   basicSealInfo = 'http://localhost:53366/api/innerOrder/basicSealInfo/';
   otherComponentInfo = 'http://localhost:53366/api/innerOrder/otherComponentInfo/';
+  bomGridDataByUpload = 'http://localhost:53366/api/innerOrder/BOMGridData/';
+  bomGridDataForDisplay = 'http://localhost:53366/api/innerOrder/BOMGridData/';
   constructor(private http: HttpClient) { }
 
   getExistedBumpInfo(orderNo:string, bumpId: string) {
@@ -50,6 +52,14 @@ export class InnerOrderService {
 
   getModelLibrary(bumpType: string) {
     return this.http.get(this.modelLibrary + bumpType.replace("/","|SLASH|")).pipe( catchError(this.handleError) );
+  }
+
+  getGridDataByUpload() {
+    return this.http.get(this.bomGridDataByUpload).pipe( catchError(this.handleError) );
+  }
+
+  getDisplayGridData(orderNo:string, bumpId: string) {
+    return this.http.get(this.bomGridDataForDisplay + (orderNo + "|DASH|" + bumpId).replace("/","|SLASH|")).pipe( catchError(this.handleError) );
   }
 
   private handleError(error: HttpErrorResponse) {

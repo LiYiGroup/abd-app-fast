@@ -93,7 +93,6 @@ export class InnerOrderComponent implements OnInit {
       // GET BUMP DATA THROUGH BUMPID AND ORDERNO
       this.getExistedBumpInfo();
       this.getBasicSealInfo();
-      this.getOtherComponentInfo();
     });
   }
 
@@ -106,13 +105,13 @@ export class InnerOrderComponent implements OnInit {
   getBasicSealInfo () {
     this.innerOrderService
         .getBasicSealInfo(this.orderNo, this.bumpId)
-        .subscribe((data) => {if(data){this.basicAndSealModel = data}}, error => this.error = error);
+        .subscribe((data) => {if(data){this.basicAndSealModel = data;this.getOtherComponentInfo()}}, error => this.error = error);
   }
 
   getOtherComponentInfo() {
     this.innerOrderService
         .getOtherComponentInfo(this.orderNo, this.bumpId)
-        .subscribe((data) => {if(data){this.otherComponentModel = data}}, error => this.error = error);
+        .subscribe((data) => {if(data){this.otherComponentModel = data};this.getDisplayGridData()}, error => this.error = error);
   }
 
   saveInnerOrder() {
@@ -310,5 +309,21 @@ export class InnerOrderComponent implements OnInit {
     this.otherComponentModel.COUPLING_ELECTRIC_COUPLET = modelLibrary.COUPLING_ELECTRIC_COUPLET;
     this.otherComponentModel.COUPLING_PIN = modelLibrary.COUPLING_PIN;
     this.otherComponentModel.COUPLING_JUMP_RING = modelLibrary.COUPLING_JUMP_RING;
+  }
+
+  handleUpload(obj) {
+    if (obj.type == "success") {
+      // GET GRID HERE
+      this.innerOrderService.getGridDataByUpload().subscribe((data) => { if (data) { this.makeGridData(data) }}, error => this.error = error);
+    }
+  }
+
+  getDisplayGridData() {
+    this.innerOrderService.getDisplayGridData(this.orderNo, this.bumpId).subscribe((data) => { if (data) { this.makeGridData(data) }}, error => this.error = error);
+  }
+
+  makeGridData(data) {
+    this.componentListTableData = data.innerOrderGridBomItemStandard;
+    this.basicPartListTableData = data.innerOrderGridBomItemBase;
   }
 }

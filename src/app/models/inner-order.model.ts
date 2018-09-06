@@ -39,10 +39,13 @@ export class ComponentListTableModel {
     
     ORDER_NO: String;
     BUMP_ID: String;
-    COMPONENT_NAME: String;
-    COMPONENT_SPEC: String;
-    COMPONENT_NUMBER: Number;
-    COMPONENT_MATERIAL: String;
+    BOM_ID: String;
+    ITEM_NO: Number;
+    ITEM_NAME: String;
+    SPEC: String;
+    QTY: String;
+    MATERIAL: String;
+    REMARK: String;
     
 }
 
@@ -50,10 +53,13 @@ export class BasicPartListTableModel {
     
     ORDER_NO: String;
     BUMP_ID: String;
-    BASIC_PART_NAME: String;
-    BASIC_PART_SPEC: String;
-    BASIC_PART_NUMBER: Number;
-    BASIC_PART_MATERIAL: String;
+    BOM_ID: String;
+    ITEM_NO: Number;
+    ITEM_NAME: String;
+    SPEC: String;
+    QTY: String;
+    MATERIAL: String;
+    REMARK: String;
     
 }
 

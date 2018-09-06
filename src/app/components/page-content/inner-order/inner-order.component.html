@@ -315,7 +315,12 @@
     </div>
   </div>
   <br>
-  <button nz-button nzType="primary" type="button">从明细表导入零件</button>
+  <nz-upload
+  [nzShowUploadList]="false"
+  (nzChange)="handleUpload($event)"
+  nzAction="http://localhost:53366/api/BOMUpload/">
+    <button nz-button type="button" nzType="primary">从明细表导入</button>
+  </nz-upload>
   <br>
   <br>
   <div class="grid_area">
@@ -337,10 +342,10 @@
       <tbody>
         <tr *ngFor="let data of componentListSelectionTable.data; let i=index">
           <td>{{i+1}}</td>
-          <td>data.COMPONENT_NAME</td>
-          <td>data.COMPONENT_SPEC</td>
-          <td>data.COMPONENT_NUMBER</td>
-          <td>data.COMPONENT_MATERIAL</td>
+          <td>{{data.ITEM_NAME}}</td>
+          <td>{{data.SPEC}}</td>
+          <td>{{data.QTY}}</td>
+          <td>{{data.MATERIAL}}</td>
         </tr>
       </tbody>
     </nz-table>
@@ -369,11 +374,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of basicPartListSelectionTable.data; let i=index">
-          <td>{{1+1}}</td>
-          <td>data.BASIC_PART_NAME</td>
-          <td>data.BASIC_PART_SPEC</td>
-          <td>data.BASIC_PART_NUMBER</td>
-          <td>data.BASIC_PART_MATERIAL</td>
+          <td>{{i+1}}</td>
+          <td>{{data.ITEM_NAME}}</td>
+          <td>{{data.SPEC}}</td>
+          <td>{{data.QTY}}</td>
+          <td>{{data.MATERIAL}}</td>
         </tr>
       </tbody>
     </nz-table>
