@@ -15,7 +15,7 @@ export class OrderListDetailTableModel {
     // DB
     ORDER_NO: String;
     BUMP_ID: String;
-    BUMP_NM:String;
+    BUMP_NM: String;
     STATION: String;
     BUMP_TYPE: String;
     NUMBER: number;

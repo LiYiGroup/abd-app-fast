@@ -24,7 +24,10 @@ export class BasicAndSealModel {
     ABD_SEAL_INFO: String;
     OTHER_SEAL_PROVIDER: String;
     OTHER_SEAL_INFO: String;
+    OTHER_SEAL_MODEL: String;
     NEED_SEAL_COOLER_FLG: String;
+    SEAL_COOLER_MODEL: String;
+    INSTALL_DIRECTION: String;
     // 轴承品牌
     BEARING_BRAND: String;
     // 轴承其他信息
@@ -36,10 +39,13 @@ export class ComponentListTableModel {
     
     ORDER_NO: String;
     BUMP_ID: String;
-    COMPONENT_NAME: String;
-    COMPONENT_SPEC: String;
-    COMPONENT_NUMBER: Number;
-    COMPONENT_MATERIAL: String;
+    BOM_ID: String;
+    ITEM_NO: Number;
+    ITEM_NAME: String;
+    SPEC: String;
+    QTY: String;
+    MATERIAL: String;
+    REMARK: String;
     
 }
 
@@ -47,10 +53,13 @@ export class BasicPartListTableModel {
     
     ORDER_NO: String;
     BUMP_ID: String;
-    BASIC_PART_NAME: String;
-    BASIC_PART_SPEC: String;
-    BASIC_PART_NUMBER: Number;
-    BASIC_PART_MATERIAL: String;
+    BOM_ID: String;
+    ITEM_NO: Number;
+    ITEM_NAME: String;
+    SPEC: String;
+    QTY: String;
+    MATERIAL: String;
+    REMARK: String;
     
 }
 
@@ -72,7 +81,7 @@ export class OtherComponentModel {
     ANCHOR_BOLT_MATERIAL: String;
     ANCHOR_BOLT_EXTRA_NUT_SPEC: String;
     ANCHOR_BOLT_EXTRA_PAD_SPEC: String;
-    ANCHOR_BOLT_NUM: String;
+    ANCHOR_BOLT_NUM: number;
     // 联轴器
     COUPLING_TYPE: String;
     COUPLING_BUMP_COUPLET: String;
@@ -81,13 +90,13 @@ export class OtherComponentModel {
     COUPLING_JUMP_RING: String;
     COUPLING_PROVIDER: String;
     COUPLING_SPEC: String;
-    COUPLING_NUM: String;
+    COUPLING_NUM: number;
     SPECIAL_COUPLING_TYPE_DETAIL: String;
     // 电机
     ELECTRIC_MOTER_TYPE: String;
     ELECTRIC_MOTER_PROVIDER: String;
-    ELECTRIC_MOTER_POWER: String;
-    ELECTRIC_MOTER_SPEED: String;
+    ELECTRIC_MOTER_POWER: number;
+    ELECTRIC_MOTER_SPEED: number;
     ELECTRIC_MOTER_PFV: String;
     ELECTRIC_MOTER_EXTRA_INFO: String;
     // 油漆及外表颜色
@@ -98,7 +107,7 @@ export class OtherComponentModel {
     // 包装及运输
     TRANSPORT_TYPE: String;
     TRANSPORT_PLACE: String;
-    PACKAGEING_TYPE: String;
+    PACKAGING_TYPE: String;
     SPECIAL_PACK_DETAIL: String;
     NEED_FUME_CERTIFICATE: String;
     ADDRESS_INFO: String;
