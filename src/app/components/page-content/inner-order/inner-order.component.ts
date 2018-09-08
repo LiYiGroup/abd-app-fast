@@ -9,6 +9,7 @@ import { AbdDoubleSealMstService } from '../abd-double-seal-mst/abd-double-seal-
 import { AbdSingleSealMstSearchModel } from '../../../models/abd-single-seal-mst.model';
 import { AbdDoubleSealMstSearchModel } from '../../../models/abd-double-seal-mst.model';
 import { AbdIntegrateSealMstSearchModel } from '../../../models/abd-integrate-seal-mst.model';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-inner-order',
@@ -21,7 +22,8 @@ export class InnerOrderComponent implements OnInit {
   constructor(public activeRouter: ActivatedRoute, private innerOrderService: InnerOrderService,
               private abdSingleSealMstService: AbdSingleSealMstService,
               private abdDoubleSealMstService: AbdDoubleSealMstService,
-              private abdIntegrateSealMstService: AbdIntegrateSealMstService) { }
+              private abdIntegrateSealMstService: AbdIntegrateSealMstService,
+              private message: NzMessageService) { }
 
   // ERROR
   error: any;
@@ -65,11 +67,12 @@ export class InnerOrderComponent implements OnInit {
     window.setTimeout(() => {
       this.isVisible = false;
       this.isOkLoading = false;
-    }, 1500);
+    }, 1000);
   }
 
   handleCancel(): void {
     this.isVisible = false;
+    this.basicAndSealModel.ABD_SEAL_INFO = "";
   }
   
   // ---------FORM OBJECTS START---------
@@ -271,7 +274,7 @@ export class InnerOrderComponent implements OnInit {
 
     // 保存操作
     this.innerOrderService.
-        saveInnerOrder(this.orderListDetailTableModel,this.basicAndSealModel,this.componentListTableData, this.basicPartListTableData, this.otherComponentModel).subscribe((data) => (console.log(data)), error => this.error = error);
+        saveInnerOrder(this.orderListDetailTableModel,this.basicAndSealModel,this.componentListTableData, this.basicPartListTableData, this.otherComponentModel).subscribe((data) => (this.message.success('保存成功！', { nzDuration: 1000 })), error => this.error = error);
   }
 
   selectSingleItem (modelItem: AbdSingleSealMstSearchModel) {

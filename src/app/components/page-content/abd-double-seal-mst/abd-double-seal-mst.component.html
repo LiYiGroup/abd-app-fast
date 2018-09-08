@@ -3,48 +3,46 @@
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="MEDIUM_END_MOVABLE_RING">介质端动环材质</label>
-            <input nz-input [(ngModel)]="otherComponentModelSearchModel.MEDIUM_END_MOVABLE_RING" name="MEDIUM_END_MOVABLE_RING" #MEDIUM_END_MOVABLE_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModelSearchModel.MEDIUM_END_MOVABLE_RING" name="MEDIUM_END_MOVABLE_RING" #MEDIUM_END_MOVABLE_RING="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="MEDIUM_END_STATIC_RING">介质端静环材质</label>
-            <input nz-input [(ngModel)]="otherComponentModelSearchModel.MEDIUM_END_STATIC_RING" name="MEDIUM_END_STATIC_RING" #MEDIUM_END_STATIC_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModelSearchModel.MEDIUM_END_STATIC_RING" name="MEDIUM_END_STATIC_RING" #MEDIUM_END_STATIC_RING="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="ATMOSPHERIC_END_MOVABLE_RING">大气端动环材质</label>
-            <input nz-input [(ngModel)]="otherComponentModelSearchModel.ATMOSPHERIC_END_MOVABLE_RING" name="ATMOSPHERIC_END_MOVABLE_RING" #ATMOSPHERIC_END_MOVABLE_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModelSearchModel.ATMOSPHERIC_END_MOVABLE_RING" name="ATMOSPHERIC_END_MOVABLE_RING" #ATMOSPHERIC_END_MOVABLE_RING="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="ATMOSPHERIC_END_STATIC_RING">大气端静环材质</label>
-            <input nz-input [(ngModel)]="otherComponentModelSearchModel.ATMOSPHERIC_END_STATIC_RING" name="ATMOSPHERIC_END_STATIC_RING" #ATMOSPHERIC_END_STATIC_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModelSearchModel.ATMOSPHERIC_END_STATIC_RING" name="ATMOSPHERIC_END_STATIC_RING" #ATMOSPHERIC_END_STATIC_RING="ngModel">
         </div>
     </div>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="SPRING">弹簧材质</label>
-            <input nz-input [(ngModel)]="otherComponentModelSearchModel.SPRING" name="SPRING" #SPRING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModelSearchModel.SPRING" name="SPRING" #SPRING="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="METAL_BASE">金属基件材质</label>
-            <input nz-input [(ngModel)]="otherComponentModelSearchModel.METAL_BASE" name="METAL_BASE" #METAL_BASE="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModelSearchModel.METAL_BASE" name="METAL_BASE" #METAL_BASE="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6" >
             <label for="O_TYPE_RING">O-型圈材质</label>
-            <input nz-input [(ngModel)]="otherComponentModelSearchModel.O_TYPE_RING" name="O_TYPE_RING" #O_TYPE_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModelSearchModel.O_TYPE_RING" name="O_TYPE_RING" #O_TYPE_RING="ngModel">
         </div>
       <!--导出和导入没有实际功能-->
         <div nz-col class="gutter-row" nzSpan="6"  class="btn_area">
-            <button nz-button nzType="primary" type="submit">导出</button>
-            <nz-divider nzType="vertical"></nz-divider>
-            <button nz-button nzType="primary" type="button" (click)="getOtherComponentModelWithCondition(otherComponentModelSearchModel)">查询</button>
-            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzType="primary" type="submit" hidden>导出</button>
             <nz-upload
                 [nzShowUploadList]="false"
                 nzAction="http://localhost:53366/api/orderListUpload/">
-                <button nz-button type="button" nzType="primary">导入</button>
+                <button nz-button type="button" nzType="primary" hidden>导入</button>
             </nz-upload>
         </div>
     </div>
     <br>
+    <button nz-button nzType="primary" type="button" (click)="getOtherComponentModelWithCondition(otherComponentModelSearchModel)">查询</button>
     <nz-divider nzType="horizontal"></nz-divider>
     <button nz-button nzType="primary" type="button" (click)="showModal()">新建</button>
     <nz-divider nzType="vertical"></nz-divider>
@@ -60,18 +58,19 @@
         (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)"
         (nzPageIndexChange)="refreshOrderListStatus()"
         (nzPageSizeChange)="refreshOrderListStatus()"
+        [nzScroll]="{ x: '1500px', y: '1000px' }"
         nzSize="small">
         <thead>
             <tr>
             <th nzShowCheckbox [(nzChecked)]="orderListTableAllChecked" [nzIndeterminate]="orderListTableIndeterminate" (nzCheckedChange)="orderListCheckAll($event)"></th>
-            <th>序号</th>
-            <th>介质端动环材质</th>
-            <th>介质端静环材质</th>
-            <th>大气端动环材质</th>
-            <th>大气端静环材质</th>
-            <th>弹簧材质</th>
-            <th>金属基件材质</th>
-            <th>O-型圈材质</th>
+            <th nzWidth="100px">序号</th>
+            <th nzWidth="300px">介质端动环材质</th>
+            <th nzWidth="300px">介质端静环材质</th>
+            <th nzWidth="300px">大气端动环材质</th>
+            <th nzWidth="300px">大气端静环材质</th>
+            <th nzWidth="300px">弹簧材质</th>
+            <th nzWidth="300px">金属基件材质</th>
+            <th nzWidth="300px">O-型圈材质</th>
             </tr>
         </thead>
         <tbody>
@@ -92,37 +91,37 @@
 </form>
 
 <!-- Model-->
-<nz-modal nzWidth="750" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="联轴器型号数据库信息编辑" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+<nz-modal nzWidth="50%" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="联轴器型号数据库信息编辑" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="MEDIUM_END_MOVABLE_RING">介质端动环材质</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.MEDIUM_END_MOVABLE_RING" name="MEDIUM_END_MOVABLE_RING" #MEDIUM_END_MOVABLE_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MEDIUM_END_MOVABLE_RING" name="MEDIUM_END_MOVABLE_RING" #MEDIUM_END_MOVABLE_RING="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="MEDIUM_END_STATIC_RING">介质端静环材质</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.MEDIUM_END_STATIC_RING" name="MEDIUM_END_STATIC_RING" #MEDIUM_END_STATIC_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MEDIUM_END_STATIC_RING" name="MEDIUM_END_STATIC_RING" #MEDIUM_END_STATIC_RING="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="ATMOSPHERIC_END_MOVABLE_RING">大气端动环材质</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.ATMOSPHERIC_END_MOVABLE_RING" name="ATMOSPHERIC_END_MOVABLE_RING" #ATMOSPHERIC_END_MOVABLE_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.ATMOSPHERIC_END_MOVABLE_RING" name="ATMOSPHERIC_END_MOVABLE_RING" #ATMOSPHERIC_END_MOVABLE_RING="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="ATMOSPHERIC_END_STATIC_RING">大气端静环材质</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.ATMOSPHERIC_END_STATIC_RING" name="ATMOSPHERIC_END_STATIC_RING" #ATMOSPHERIC_END_STATIC_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.ATMOSPHERIC_END_STATIC_RING" name="ATMOSPHERIC_END_STATIC_RING" #ATMOSPHERIC_END_STATIC_RING="ngModel">
         </div>
     </div>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="SPRING">弹簧材质</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.SPRING" name="SPRING" #SPRING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SPRING" name="SPRING" #SPRING="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="METAL_BASE">金属基件材质</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.METAL_BASE" name="METAL_BASE" #METAL_BASE="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.METAL_BASE" name="METAL_BASE" #METAL_BASE="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="O_TYPE_RING">O-型圈材质</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.O_TYPE_RING" name="O_TYPE_RING" #O_TYPE_RING="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.O_TYPE_RING" name="O_TYPE_RING" #O_TYPE_RING="ngModel">
         </div>
     </div>
 </nz-modal>
