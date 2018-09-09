@@ -91,7 +91,7 @@
       <label for="LIFT">扬程</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input  type="number" [(ngModel)]="orderListDetailTableModel.LIFT" name="LIFT" #LIFT="ngModel" disabled>
+      <input nz-input type="number" [(ngModel)]="orderListDetailTableModel.LIFT" name="LIFT" #LIFT="ngModel" disabled>
     </div>
   </div>
   <br>
@@ -279,24 +279,6 @@
   <br>
   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <div nz-col class="gutter-row" nzSpan="4">
-      <label for="BEARING_BRAND">轴承品牌</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-radio-group [(ngModel)]="basicAndSealModel.BEARING_BRAND" name="BEARING_BRAND" #BEARING_BRAND="ngModel">
-        <label nz-radio [ngStyle]="style" nzValue="SKF">SKF</label>
-        <label nz-radio [ngStyle]="style" nzValue="FAG">FAG</label>
-        <label nz-radio [ngStyle]="style" nzValue="NSK">NSK</label>
-        <label nz-radio [ngStyle]="style" nzValue="OTHER">其它 
-            <input nz-input maxlength="50" 
-            *ngIf="basicAndSealModel.BEARING_BRAND=='OTHER'"
-            [(ngModel)]="basicAndSealModel.BEARING_OTHER_INFO" name="BEARING_OTHER_INFO" #BEARING_OTHER_INFO="ngModel">
-        </label>
-      </nz-radio-group>
-    </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
       <label for="INSTALL_DIRECTION">装配进出口方向</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
@@ -315,6 +297,39 @@
     </div>
   </div>
   <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="BEARING_BRAND">轴承品牌</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <nz-radio-group [(ngModel)]="basicAndSealModel.BEARING_BRAND" name="BEARING_BRAND" #BEARING_BRAND="ngModel">
+        <label nz-radio [ngStyle]="style" nzValue="SKF">SKF</label>
+        <label nz-radio [ngStyle]="style" nzValue="FAG">FAG</label>
+        <label nz-radio [ngStyle]="style" nzValue="NSK">NSK</label>
+        <label nz-radio [ngStyle]="style" nzValue="OTHER">其它 
+            <input nz-input maxlength="50" 
+            *ngIf="basicAndSealModel.BEARING_BRAND=='OTHER'"
+            [(ngModel)]="basicAndSealModel.BEARING_OTHER_INFO" name="BEARING_OTHER_INFO" #BEARING_OTHER_INFO="ngModel">
+        </label>
+      </nz-radio-group>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="BEARING_SPEC">轴承型号</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <input nz-input maxlength="50" [(ngModel)]="bumpInfoInGrid.SPEC" name="SPEC" #BEARING_SPEC="ngModel" disabled>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="BEARING_NUM">轴承数量</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <input nz-input maxlength="50" [(ngModel)]="bumpInfoInGrid.QTY" name="BEARING_NUM" #BEARING_NUM="ngModel" disabled>
+    </div>
+  </div>
+  <br>
   <nz-upload
   [nzShowUploadList]="false"
   (nzChange)="handleUpload($event)"
@@ -329,7 +344,7 @@
     [nzData]="componentListTableData"
     [nzPageSize]="5"
     [nzHideOnSinglePage]="true"
-    [nzScroll]="{ x: '1500px', y: '1000px' }"
+    [nzScroll]="{ x: '1500px' }"
     nzSize="small">
       <thead>
         <tr>
@@ -363,7 +378,7 @@
     [nzData]="basicPartListTableData"
     [nzPageSize]="5"
     [nzHideOnSinglePage]="true"
-    [nzScroll]="{ x: '1500px', y: '1000px' }"
+    [nzScroll]="{ x: '1500px' }"
     nzSize="small">
       <thead>
         <tr>
@@ -815,7 +830,7 @@
   <button nz-button nzType="primary" type="button" hidden>导出</button>
 </form>
 <!-- Model-->
-<nz-modal nzWidth="50%" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="材料配置库" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+<nz-modal [nzOkText]="null" nzWidth="50%" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="材料配置库" (nzOnCancel)="handleCancel()">
   <div *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_SINGLE')">
     <div class="grid_area">
       <nz-table
@@ -823,7 +838,7 @@
       [nzData]="ABDSingleTableData"
       [nzPageSize]="5"
       [nzHideOnSinglePage]="true"
-      [nzScroll]="{ x: '800px', y: '1000px' }"
+      [nzScroll]="{ x: '800px' }"
       nzSize="small">
         <thead>
           <tr>
@@ -853,7 +868,7 @@
       [nzData]="ABDDoubleTableData"
       [nzPageSize]="5"
       [nzHideOnSinglePage]="true"
-      [nzScroll]="{ x: '800px', y: '1000px' }"
+      [nzScroll]="{ x: '800px' }"
       nzSize="small">
         <thead>
           <tr>
@@ -887,7 +902,7 @@
       [nzData]="ABDIntegrateTableData"
       [nzPageSize]="5"
       [nzHideOnSinglePage]="true"
-      [nzScroll]="{ x: '800px', y: '1000px' }"
+      [nzScroll]="{ x: '800px' }"
       nzSize="small">
         <thead>
           <tr>

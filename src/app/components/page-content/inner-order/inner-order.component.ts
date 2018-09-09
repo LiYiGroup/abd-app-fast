@@ -33,9 +33,7 @@ export class InnerOrderComponent implements OnInit {
   bumpId: string;
 
   // MODEL
-  
   isVisible = false;
-  isOkLoading = false;
 
   ABDSingleTableData = new Array<AbdSingleSealMstSearchModel>();
   ABDDoubleTableData = new Array<AbdDoubleSealMstSearchModel>();
@@ -62,14 +60,6 @@ export class InnerOrderComponent implements OnInit {
     }
   }
 
-  handleOk(): void {
-    this.isOkLoading = true;
-    window.setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-    }, 1000);
-  }
-
   handleCancel(): void {
     this.isVisible = false;
     this.basicAndSealModel.ABD_SEAL_INFO = "";
@@ -80,6 +70,7 @@ export class InnerOrderComponent implements OnInit {
   basicAndSealModel = new BasicAndSealModel();
   otherComponentModel = new OtherComponentModel();
   // GRID
+  bumpInfoInGrid = new ComponentListTableModel();
   componentListTableData: Array<ComponentListTableModel>;
   basicPartListTableData: Array<BasicPartListTableModel>;
   // ---------FORM OBJECTS END-----------
@@ -279,14 +270,17 @@ export class InnerOrderComponent implements OnInit {
 
   selectSingleItem (modelItem: AbdSingleSealMstSearchModel) {
     this.basicAndSealModel.ABD_SEAL_INFO = this.makeSealInfoStr("S", modelItem);
+    this.isVisible =false;
   }
 
   selectDoubleItem (modelItem: AbdDoubleSealMstSearchModel) {
     this.basicAndSealModel.ABD_SEAL_INFO = this.makeSealInfoStr("D", modelItem);
+    this.isVisible =false;
   }
 
   selectIntegrationItem (modelItem: AbdIntegrateSealMstSearchModel) {
     this.basicAndSealModel.ABD_SEAL_INFO = this.makeSealInfoStr("I", modelItem);
+    this.isVisible =false;
   }
 
   makeSealInfoStr (type: string, modelItem: any) {
@@ -312,6 +306,14 @@ export class InnerOrderComponent implements OnInit {
     this.otherComponentModel.COUPLING_ELECTRIC_COUPLET = modelLibrary.COUPLING_ELECTRIC_COUPLET;
     this.otherComponentModel.COUPLING_PIN = modelLibrary.COUPLING_PIN;
     this.otherComponentModel.COUPLING_JUMP_RING = modelLibrary.COUPLING_JUMP_RING;
+    // 选择项目，要把对应的项目选成ABD
+    // 底座
+    this.otherComponentModel.BASE_TYPE = "ABD_BASE";
+    // 联轴器罩
+    this.otherComponentModel.COUPLING_HOOD_TYPE = "ABD_HOOD_TYPE";
+    // 联轴器
+    this.otherComponentModel.COUPLING_TYPE = "ABD_ELASTIC_PIN_COUPLING_TYPE";
+
   }
 
   handleUpload(obj) {
@@ -326,6 +328,7 @@ export class InnerOrderComponent implements OnInit {
   }
 
   makeGridData(data) {
+    this.bumpInfoInGrid = data.innerOrderGridBomItemStandard.shift();
     this.componentListTableData = data.innerOrderGridBomItemStandard;
     this.basicPartListTableData = data.innerOrderGridBomItemBase;
   }

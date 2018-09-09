@@ -21,3 +21,8 @@
 .abd-footer {
     text-align: center;
 }
+
+/* Rewrite the global style of disabled */
+:host >>> .ant-input-disabled {
+    color:rgba(0, 0, 0, 0.65)!important;
+}

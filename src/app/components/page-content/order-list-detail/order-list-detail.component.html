@@ -46,7 +46,7 @@
 <nz-divider nzType="horizontal"></nz-divider>
 <button *ngIf="isUpdate == true" nz-button nzType="primary" (click)="showModal()">新建</button>
 <nz-divider *ngIf="isUpdate == true" nzType="vertical"></nz-divider>
-<button nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">删除</button>
+<button *ngIf="isUpdate == true" nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">删除</button>
 <br>
 <br>
 <div class="grid_area">
@@ -58,7 +58,7 @@
     (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)"
     (nzPageIndexChange)="refreshOrderDetailListStatus()"
     (nzPageSizeChange)="refreshOrderDetailListStatus()"
-    [nzScroll]="{ x: '2000px', y: '1000px' }"
+    [nzScroll]="{ x: '2000px' }"
     nzSize="small">
     <thead>
         <tr>

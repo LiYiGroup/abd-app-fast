@@ -72,7 +72,7 @@
         (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)"
         (nzPageIndexChange)="refreshOrderListStatus()"
         (nzPageSizeChange)="refreshOrderListStatus()"
-        [nzScroll]="{ x: '2000px', y: '1000px' }"
+        [nzScroll]="{ x: '2500px' }"
         nzSize="small">
         <thead>
             <tr>
@@ -86,7 +86,7 @@
             <th nzWidth="280px">订货单位</th>
             <th nzWidth="150px">销售员</th>
             <th nzWidth="500px">备注</th>
-            <th nzWidth="200px">操作</th>
+            <th nzWidth="200px" nzRight="0px">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -101,7 +101,7 @@
             <td>{{data.ORDER_UNIT}}</td>
             <td>{{data.SALES_PERSON}}</td>
             <td>{{data.REMARK}}</td>
-            <td>
+            <td nzRight="0px">
                 <!-- 注意此处的路由写法，开头必须要有'/ -->
                 <a routerLink='/order-list/detail/{{data.ORDER_NO.replace("/","|SLASH|")}}'>修改</a>
                 <nz-divider nzType="vertical"></nz-divider>
@@ -121,7 +121,7 @@
         (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)"
         (nzPageIndexChange)="refreshOrderDetailListStatus()"
         (nzPageSizeChange)="refreshOrderDetailListStatus()"
-        [nzScroll]="{ x: '2000px', y: '1000px' }"
+        [nzScroll]="{ x: '2000px' }"
         nzSize="small">
         <!-- 设置x轴滚动与y轴滚动 -->
         <thead>

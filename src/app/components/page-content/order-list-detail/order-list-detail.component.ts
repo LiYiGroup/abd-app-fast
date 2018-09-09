@@ -143,7 +143,7 @@ export class OrderListDetailComponent implements OnInit {
   }
 
   saveOrderListDetailTable() {
-    this.orderListDetailService.saveOrderListDetailTable(this.currentBumpInfo).subscribe((data) => (this.getOrderListDetailTable()), error => this.message.error('请先保存订单！', { nzDuration: 1000 }));
+    this.orderListDetailService.saveOrderListDetailTable(this.currentBumpInfo).subscribe((data) => (this.getOrderListDetailTable()), error => console.log(error));
   }
 
 }
