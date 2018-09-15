@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbdSingleSealMstSearchModel} from '../../../models/abd-single-seal-mst.model';
 import { AbdSingleSealMstService } from './abd-single-seal-mst.service';
 import { ActivatedRoute } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'abd-single-seal-mst',
@@ -11,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AbdSingleSealMstComponent implements OnInit {
 
-  constructor(private OtherComponentModelService: AbdSingleSealMstService, private route: ActivatedRoute) { }
+  constructor(private OtherComponentModelService: AbdSingleSealMstService, private message: NzMessageService, private route: ActivatedRoute) { }
 
   // ERROR
   error: any;
@@ -106,13 +107,13 @@ if (Item == undefined) {
     for (var i = 0; i < this.orderListTableCheckedData.length; i++) {
       submitList.push(this.orderListTableCheckedData[i].ID);
     }
-    this.OtherComponentModelService.deleteOtherComponentModelTableData(submitList).subscribe(delRes => {console.log(delRes.data); this.getOtherComponentModel() }, error => this.error = error);
+    this.OtherComponentModelService.deleteOtherComponentModelTableData(submitList).subscribe(delRes => {this.message.success('删除成功！', { nzDuration: 1000 }); this.getOtherComponentModel() }, error => this.error = error);
  
  
   }
 } else {
   submitList.push(Item.BUMP_TYPE);
-  this.OtherComponentModelService.deleteOtherComponentModelTableData(submitList).subscribe(delRes => {console.log(delRes.data); this.getOtherComponentModel() }, error => this.error = error);
+  this.OtherComponentModelService.deleteOtherComponentModelTableData(submitList).subscribe(delRes => {this.message.success('删除成功！', { nzDuration: 1000 }); this.getOtherComponentModel() }, error => this.error = error);
  }
 }
 //保存（插入）数据到数据库

@@ -18,11 +18,11 @@ export class OrderListDetailService {
   constructor(private http: HttpClient) { }
 
   getOrderListDetailForm(orderNo: String) {
-    return this.http.get<OrderListDetailFormModel>(this.orderListDetailForm + orderNo).pipe( retry(3), catchError(this.handleError));
+    return this.http.get<OrderListDetailFormModel>(this.orderListDetailForm + orderNo.replace("/","|SLASH|")).pipe( retry(3), catchError(this.handleError));
   }
 
   getOrderListDetailTable(orderNo: String) {
-    return this.http.get<Array<OrderListDetailTableModel>>(this.orderListDetailTable + orderNo).pipe( retry(3), catchError(this.handleError));
+    return this.http.get<Array<OrderListDetailTableModel>>(this.orderListDetailTable + orderNo.replace("/","|SLASH|")).pipe( retry(3), catchError(this.handleError));
   }
 
   delOrderListDetailTableData(orderNo:string, bumpIdList: String[]) {

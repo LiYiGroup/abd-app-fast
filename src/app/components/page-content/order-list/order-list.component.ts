@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderListSearchModel, OrderListTableModel, OrderDetailListTableModel } from '../../../models/order-list.model';
 import { OrderListService } from './order-list.service';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-order-list',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class OrderListComponent implements OnInit {  
 
-  constructor(private orderListService: OrderListService,public router: Router) { }
+  constructor(private orderListService: OrderListService, private message: NzMessageService, public router: Router) { }
 
   ngOnInit() {
     this.getOrderList();
@@ -104,13 +105,13 @@ export class OrderListComponent implements OnInit {
     if (orderItem == undefined) {
       if (this.orderListTableCheckedData.length > 0) {
         for (var i = 0; i < this.orderListTableCheckedData.length; i++) {
-          submitList.push(this.orderListTableCheckedData[i].ORDER_NO);
+          submitList.push(this.orderListTableCheckedData[i].ORDER_NO.replace("/","|SLASH|"));
         }
-        this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
+        this.orderListService.delOrderListItem(submitList).subscribe(delRes => {this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
       }
     } else {
-      submitList.push(orderItem.ORDER_NO);
-      this.orderListService.delOrderListItem(submitList).subscribe(delRes => {console.log(delRes.data); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
+      submitList.push(orderItem.ORDER_NO.replace("/","|SLASH|"));
+      this.orderListService.delOrderListItem(submitList).subscribe(delRes => {this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
     }
   }
 
@@ -120,6 +121,7 @@ export class OrderListComponent implements OnInit {
     } else {
       this.router.navigate(['/order-list/bom'], {
         queryParams: {
+          // 同时勾选多个时，进入第一个的泵信息
           orderNo: this.orderDetailListTableCheckedData[0].ORDER_NO,
           bumpId: this.orderDetailListTableCheckedData[0].BUMP_ID
         }
@@ -131,6 +133,7 @@ export class OrderListComponent implements OnInit {
     if (obj.type == "success") {
       // REFRESH HERE
       this.getOrderList();
+      this.message.success('导入成功！', { nzDuration: 1000 })
     }
   }
 }

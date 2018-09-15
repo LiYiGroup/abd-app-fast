@@ -2,21 +2,21 @@
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="ORDER_NO">订单编号</label>
-        <input nz-input [(ngModel)]="orderListDetailFormModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="CONTRACT_NO">合同编号</label>
-        <input nz-input [(ngModel)]="orderListDetailFormModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="PROJECT_NM">项目名称</label>
-        <input nz-input [(ngModel)]="orderListDetailFormModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
     </div>
 </div>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="ORDER_UNIT">订货单位</label>
-        <input nz-input [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="DEPARTURE_DATE">下发日期</label><br>
@@ -31,22 +31,22 @@
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="APPLICATION_ENGINEER">应用工程师</label>
-        <input nz-input [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="SALES_PERSON">销售员</label>
-        <input nz-input [(ngModel)]="orderListDetailFormModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="REMARK">备注</label>
-        <input nz-input [(ngModel)]="orderListDetailFormModel.REMARK" name="REMARK" #REMARK="ngModel">
+        <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.REMARK" name="REMARK" #REMARK="ngModel">
     </div>
 </div>
 <br>
 <nz-divider nzType="horizontal"></nz-divider>
-<button nz-button nzType="primary" (click)="showModal()">新建</button>
-<nz-divider nzType="vertical"></nz-divider>
-<button nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">删除</button>
+<button *ngIf="isUpdate == true" nz-button nzType="primary" (click)="showModal()">新建</button>
+<nz-divider *ngIf="isUpdate == true" nzType="vertical"></nz-divider>
+<button *ngIf="isUpdate == true" nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">删除</button>
 <br>
 <br>
 <div class="grid_area">
@@ -58,22 +58,23 @@
     (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)"
     (nzPageIndexChange)="refreshOrderDetailListStatus()"
     (nzPageSizeChange)="refreshOrderDetailListStatus()"
+    [nzScroll]="{ x: '2000px' }"
     nzSize="small">
     <thead>
         <tr>
-        <th nzShowCheckbox [(nzChecked)]="orderListDetailTableAllChecked" [nzIndeterminate]="orderListDetailTableIndeterminate" (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
-        <th>序号</th>
-        <th>泵名称</th>
-        <th>工位</th>
-        <th>型号</th>
-        <th>数量</th>
-        <th>流量</th>
-        <th>扬程</th>
-        <th>材质</th>
-        <th>机封</th>
-        <th>序列号</th>
-        <th>状态</th>
-        <th>备注</th>
+        <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="orderListDetailTableAllChecked" [nzIndeterminate]="orderListDetailTableIndeterminate" (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
+        <th nzWidth="50px">序号</th>
+        <th nzWidth="100px">泵名称</th>
+        <th nzWidth="100px">工位</th>
+        <th nzWidth="200px">型号</th>
+        <th nzWidth="50px">数量</th>
+        <th nzWidth="50px">流量</th>
+        <th nzWidth="50px">扬程</th>
+        <th nzWidth="100px">材质</th>
+        <th nzWidth="100px">机封</th>
+        <th nzWidth="300px">序列号</th>
+        <th nzWidth="100px">状态</th>
+        <th nzWidth="300px">备注</th>
         </tr>
     </thead>
     <tbody>
@@ -103,55 +104,55 @@
 </div>
 <br>
 <!-- Model-->
-<nz-modal nzWidth="750" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="泵信息编辑" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+<nz-modal nzWidth="75%" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="泵信息编辑" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="BUMP_NM">泵名称</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.BUMP_NM" name="BUMP_NM" #BUMP_NM="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.BUMP_NM" name="BUMP_NM" #BUMP_NM="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="STATION">工位</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.STATION" name="STATION" #STATION="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.STATION" name="STATION" #STATION="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="BUMP_TYPE">型号</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.BUMP_TYPE" name="BUMP_TYPE" #BUMP_TYPE="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.BUMP_TYPE" name="BUMP_TYPE" #BUMP_TYPE="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="NUMBER">数量</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.NUMBER" name="NUMBER" #NUMBER="ngModel">
+            <input nz-input type="number" [(ngModel)]="currentBumpInfo.NUMBER" name="NUMBER" #NUMBER="ngModel">
         </div>
     </div>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="FLOW">流量</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.FLOW" name="FLOW" #FLOW="ngModel">
+            <input nz-input type="number" [(ngModel)]="currentBumpInfo.FLOW" name="FLOW" #FLOW="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="LIFT">扬程</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.LIFT" name="LIFT" #LIFT="ngModel">
+            <input nz-input type="number" [(ngModel)]="currentBumpInfo.LIFT" name="LIFT" #LIFT="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="MATERIAL">材质</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.MATERIAL" name="MATERIAL" #MATERIAL="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MATERIAL" name="MATERIAL" #MATERIAL="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="SEAL">机封</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.SEAL" name="SEAL" #SEAL="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SEAL" name="SEAL" #SEAL="ngModel">
         </div>
     </div>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="BUMP_SERIAL_NO">序列号</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.BUMP_SERIAL_NO" name="BUMP_SERIAL_NO" #BUMP_SERIAL_NO="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.BUMP_SERIAL_NO" name="BUMP_SERIAL_NO" #BUMP_SERIAL_NO="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="STATUS">状态</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.STATUS" name="STATUS" #STATUS="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.STATUS" name="STATUS" #STATUS="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="12">
             <label for="REMARK">备注</label>
-            <input nz-input [(ngModel)]="currentBumpInfo.REMARK" name="REMARK" #REMARK="ngModel">
+            <input nz-input maxlength="200" [(ngModel)]="currentBumpInfo.REMARK" name="REMARK" #REMARK="ngModel">
         </div>
     </div>
 </nz-modal>

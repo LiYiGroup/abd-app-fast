@@ -9,6 +9,7 @@ import { AbdDoubleSealMstService } from '../abd-double-seal-mst/abd-double-seal-
 import { AbdSingleSealMstSearchModel } from '../../../models/abd-single-seal-mst.model';
 import { AbdDoubleSealMstSearchModel } from '../../../models/abd-double-seal-mst.model';
 import { AbdIntegrateSealMstSearchModel } from '../../../models/abd-integrate-seal-mst.model';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-inner-order',
@@ -21,7 +22,8 @@ export class InnerOrderComponent implements OnInit {
   constructor(public activeRouter: ActivatedRoute, private innerOrderService: InnerOrderService,
               private abdSingleSealMstService: AbdSingleSealMstService,
               private abdDoubleSealMstService: AbdDoubleSealMstService,
-              private abdIntegrateSealMstService: AbdIntegrateSealMstService) { }
+              private abdIntegrateSealMstService: AbdIntegrateSealMstService,
+              private message: NzMessageService) { }
 
   // ERROR
   error: any;
@@ -31,9 +33,7 @@ export class InnerOrderComponent implements OnInit {
   bumpId: string;
 
   // MODEL
-  
   isVisible = false;
-  isOkLoading = false;
 
   ABDSingleTableData = new Array<AbdSingleSealMstSearchModel>();
   ABDDoubleTableData = new Array<AbdDoubleSealMstSearchModel>();
@@ -60,16 +60,9 @@ export class InnerOrderComponent implements OnInit {
     }
   }
 
-  handleOk(): void {
-    this.isOkLoading = true;
-    window.setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-    }, 1500);
-  }
-
   handleCancel(): void {
     this.isVisible = false;
+    this.basicAndSealModel.ABD_SEAL_INFO = "";
   }
   
   // ---------FORM OBJECTS START---------
@@ -77,6 +70,7 @@ export class InnerOrderComponent implements OnInit {
   basicAndSealModel = new BasicAndSealModel();
   otherComponentModel = new OtherComponentModel();
   // GRID
+  bumpInfoInGrid = new ComponentListTableModel();
   componentListTableData: Array<ComponentListTableModel>;
   basicPartListTableData: Array<BasicPartListTableModel>;
   // ---------FORM OBJECTS END-----------
@@ -271,19 +265,22 @@ export class InnerOrderComponent implements OnInit {
 
     // 保存操作
     this.innerOrderService.
-        saveInnerOrder(this.orderListDetailTableModel,this.basicAndSealModel,this.componentListTableData, this.basicPartListTableData, this.otherComponentModel).subscribe((data) => (console.log(data)), error => this.error = error);
+        saveInnerOrder(this.orderListDetailTableModel,this.basicAndSealModel,this.componentListTableData, this.basicPartListTableData, this.otherComponentModel).subscribe((data) => (this.message.success('保存成功！', { nzDuration: 1000 })), error => this.error = error);
   }
 
   selectSingleItem (modelItem: AbdSingleSealMstSearchModel) {
     this.basicAndSealModel.ABD_SEAL_INFO = this.makeSealInfoStr("S", modelItem);
+    this.isVisible =false;
   }
 
   selectDoubleItem (modelItem: AbdDoubleSealMstSearchModel) {
     this.basicAndSealModel.ABD_SEAL_INFO = this.makeSealInfoStr("D", modelItem);
+    this.isVisible =false;
   }
 
   selectIntegrationItem (modelItem: AbdIntegrateSealMstSearchModel) {
     this.basicAndSealModel.ABD_SEAL_INFO = this.makeSealInfoStr("I", modelItem);
+    this.isVisible =false;
   }
 
   makeSealInfoStr (type: string, modelItem: any) {
@@ -309,6 +306,14 @@ export class InnerOrderComponent implements OnInit {
     this.otherComponentModel.COUPLING_ELECTRIC_COUPLET = modelLibrary.COUPLING_ELECTRIC_COUPLET;
     this.otherComponentModel.COUPLING_PIN = modelLibrary.COUPLING_PIN;
     this.otherComponentModel.COUPLING_JUMP_RING = modelLibrary.COUPLING_JUMP_RING;
+    // 选择项目，要把对应的项目选成ABD
+    // 底座
+    this.otherComponentModel.BASE_TYPE = "ABD_BASE";
+    // 联轴器罩
+    this.otherComponentModel.COUPLING_HOOD_TYPE = "ABD_HOOD_TYPE";
+    // 联轴器
+    this.otherComponentModel.COUPLING_TYPE = "ABD_ELASTIC_PIN_COUPLING_TYPE";
+
   }
 
   handleUpload(obj) {
@@ -323,6 +328,7 @@ export class InnerOrderComponent implements OnInit {
   }
 
   makeGridData(data) {
+    this.bumpInfoInGrid = data.innerOrderGridBomItemStandard.shift();
     this.componentListTableData = data.innerOrderGridBomItemStandard;
     this.basicPartListTableData = data.innerOrderGridBomItemBase;
   }

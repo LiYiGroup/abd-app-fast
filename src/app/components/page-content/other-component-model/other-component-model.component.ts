@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OtherComponentModelSearchModel} from '../../../models/other-component-model.model';
 import { OtherComponentModelService } from './other-component-model.service';
 import { ActivatedRoute } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-other-component-model',
@@ -11,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OtherComponentModelComponent implements OnInit {
 
-  constructor(private OtherComponentModelService: OtherComponentModelService, private route: ActivatedRoute) { }
+  constructor(private OtherComponentModelService: OtherComponentModelService, private message: NzMessageService, private route: ActivatedRoute) { }
 
   // ERROR
   error: any;
@@ -106,13 +107,13 @@ if (Item == undefined) {
     for (var i = 0; i < this.orderListTableCheckedData.length; i++) {
       submitList.push(this.orderListTableCheckedData[i].BUMP_TYPE);
     }
-    this.OtherComponentModelService.deleteOtherComponentModelTableData(submitList).subscribe(delRes => {console.log(delRes.data); this.getOtherComponentModel() }, error => this.error = error);
+    this.OtherComponentModelService.deleteOtherComponentModelTableData(submitList).subscribe(delRes => {this.message.success('删除成功！', { nzDuration: 1000 }); this.getOtherComponentModel() }, error => this.error = error);
  
  
   }
 } else {
   submitList.push(Item.BUMP_TYPE);
-  this.OtherComponentModelService.deleteOtherComponentModelTableData(submitList).subscribe(delRes => {console.log(delRes.data); this.getOtherComponentModel() }, error => this.error = error);
+  this.OtherComponentModelService.deleteOtherComponentModelTableData(submitList).subscribe(delRes => {this.message.success('删除成功！', { nzDuration: 1000 }); this.getOtherComponentModel() }, error => this.error = error);
  }
 }
 //保存（插入）数据到数据库
