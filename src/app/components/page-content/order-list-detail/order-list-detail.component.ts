@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrderListDetailFormModel, OrderListDetailTableModel } from '../../../models/order-list-detail.model';
 import { OrderListDetailService } from './order-list-detail.service';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Location } from '@angular/common';
 

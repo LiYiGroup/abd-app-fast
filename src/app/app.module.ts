@@ -18,6 +18,7 @@ import { OtherComponentModelComponent } from './components/page-content/other-co
 import { AbdDoubleSealMstComponent } from './components/page-content/abd-double-seal-mst/abd-double-seal-mst.component';
 import { AbdIntegrateSealMstComponent } from './components/page-content/abd-integrate-seal-mst/abd-integrate-seal-mst.component';
 import { AbdSingleSealMstComponent } from './components/page-content/abd-single-seal-mst/abd-single-seal-mst.component';
+import { OrderQueryComponent } from './components/page-content/order-query/order-query.component';
 
 registerLocaleData(zh);
 
@@ -32,7 +33,8 @@ registerLocaleData(zh);
     OtherComponentModelComponent,
     AbdDoubleSealMstComponent,
     AbdIntegrateSealMstComponent,
-    AbdSingleSealMstComponent
+    AbdSingleSealMstComponent,
+    OrderQueryComponent
   ],
   imports: [
     BrowserModule,

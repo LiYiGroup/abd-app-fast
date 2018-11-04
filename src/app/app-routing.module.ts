@@ -7,6 +7,7 @@ import { AbdIntegrateSealMstComponent } from './components/page-content/abd-inte
 import { OtherComponentModelComponent } from './components/page-content/other-component-model/other-component-model.component';
 import { AbdDoubleSealMstComponent } from './components/page-content/abd-double-seal-mst/abd-double-seal-mst.component';
 import { AbdSingleSealMstComponent } from './components/page-content/abd-single-seal-mst/abd-single-seal-mst.component';
+import { OrderQueryComponent } from './components/page-content/order-query/order-query.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/order-list', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'other-component-model', component: OtherComponentModelComponent },
   { path: 'abd-double-seal-mst', component: AbdDoubleSealMstComponent },
   { path: 'abd-integrate-seal-mst', component: AbdIntegrateSealMstComponent },
-  { path: 'abd-single-seal-mst', component: AbdSingleSealMstComponent }
+  { path: 'abd-single-seal-mst', component: AbdSingleSealMstComponent },
+  { path: 'order-query', component: OrderQueryComponent }
 ];
 
 @NgModule ({
