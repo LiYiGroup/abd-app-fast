@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderQuerySearchModel} from '../../../models/order-query.model';
-import { OrderQueryTableModel} from '../../../models/order-query.model';
+import { OrderQueryResultSearchModel } from '../../../models/order-query.model';
+import { OrderQueryResultTableModel } from '../../../models/order-query.model';
 import { OrderQueryService } from './order-query.service';
 import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -9,7 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd';
   selector: 'app-order-query',
   templateUrl: './order-query.component.html',
   styleUrls: ['./order-query.component.css'],
-  providers: [ OrderQueryService ]
+  providers: [OrderQueryService]
 })
 export class OrderQueryComponent implements OnInit {
 
@@ -18,28 +18,28 @@ export class OrderQueryComponent implements OnInit {
   // ERROR
   error: any;
   // SEARCH FORM
-  orderQuerySearchModel = new OrderQuerySearchModel();
+  orderQueryResultSearchModel = new OrderQueryResultSearchModel();
 
   orderListTableIndeterminate = false;
   orderListTableDisplayData = [];
-  orderQueryTableData :Array<OrderQueryTableModel>;
+  orderQueryResultTableData: Array<OrderQueryResultTableModel>;
 
   orderListCurrentPageDataChange($event: Array<any>): void {
     this.orderListTableDisplayData = $event;
     this.refreshOrderListStatus();
   }
   refreshOrderListStatus(): void {
-    if(this.orderListTableDisplayData===null) {
+    if (this.orderListTableDisplayData === null) {
       return;
-    }    
+    }
   }
-  
+
   //show model
   isVisible = false;
   isOkLoading = false;
 
-  currentOrderInfo = new OrderQueryTableModel();
-  
+  currentOrderInfo = new OrderQueryResultTableModel();
+
   handleOk(): void {
     this.isOkLoading = true;
     window.setTimeout(() => {
@@ -59,11 +59,11 @@ export class OrderQueryComponent implements OnInit {
 
   //查询方法
   getOrderQueryModel() {
-    this.OrderQueryService.getOrderQueryModel().subscribe((data) => (this.orderQueryTableData = data), error => this.error = error);
+    this.OrderQueryService.getOrderQueryModel().subscribe((data) => (this.orderQueryResultTableData = data), error => this.error = error);
   }
- 
-  getOrderQueryWithCondition(searchCondition: OrderQuerySearchModel) {
-    this.OrderQueryService.getOrderQueryWithCondition(searchCondition).subscribe((data) => (this.orderQueryTableData = data), error => this.error = error);
+
+  getOrderQueryWithCondition(searchCondition: OrderQueryResultSearchModel) {
+    this.OrderQueryService.getOrderQueryWithCondition(searchCondition).subscribe((data) => (this.orderQueryResultTableData = data), error => this.error = error);
   }
 
 }

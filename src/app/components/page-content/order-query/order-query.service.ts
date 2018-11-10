@@ -5,8 +5,8 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { OrderQuerySearchModel } from '../../../models/order-query.model';
-import { OrderQueryTableModel } from '../../../models/order-query.model';
+import { OrderQueryResultSearchModel } from '../../../models/order-query.model';
+import { OrderQueryResultTableModel } from '../../../models/order-query.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
@@ -17,20 +17,20 @@ const httpOptions = {
 })
 export class OrderQueryService {
 
-  orderquerymodel = 'http://localhost:53366/api/orderquery/';
+  orderquerymodel = 'http://localhost:53366/api/orderqueryresult/';
 
   constructor(private http: HttpClient) { }
 
   //查询所有的数据
-  getOrderQueryModel()  {
-    return this.http.get<Array<OrderQueryTableModel>>(this.orderquerymodel).pipe( retry(3), catchError(this.handleError) );
+  getOrderQueryModel() {
+    return this.http.get<Array<OrderQueryResultTableModel>>(this.orderquerymodel).pipe(retry(3), catchError(this.handleError));
   }
   //按条件查询
-  getOrderQueryWithCondition(searchCondition: OrderQuerySearchModel) {
-    return this.http.post<Array<OrderQueryTableModel>>(this.orderquerymodel+"searchWithCond", this.makeSearchCondition(JSON.stringify(searchCondition)), httpOptions).pipe( retry(3), catchError(this.handleError) );
+  getOrderQueryWithCondition(searchCondition: OrderQueryResultSearchModel) {
+    return this.http.post<Array<OrderQueryResultTableModel>>(this.orderquerymodel + "searchWithCond", this.makeSearchCondition(JSON.stringify(searchCondition)), httpOptions).pipe(retry(3), catchError(this.handleError));
   }
   makeSearchCondition(searchCondition: string) {
-    var tempSearchCondition = JSON.parse(searchCondition);  
+    var tempSearchCondition = JSON.parse(searchCondition);
     return JSON.stringify(tempSearchCondition);
   }
 

@@ -3,16 +3,18 @@ import { OrderListSearchModel, OrderListTableModel, OrderDetailListTableModel } 
 import { OrderListService } from './order-list.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
+import { ActivatedRoute } from '@angular/router';
+import { OrderListAttachmentTableModel } from '../../../models/order-list-attachment.model';
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.css'],
-  providers: [ OrderListService ]
+  providers: [OrderListService]
 })
-export class OrderListComponent implements OnInit {  
+export class OrderListComponent implements OnInit {
 
-  constructor(private orderListService: OrderListService, private message: NzMessageService, public router: Router) { }
+  constructor(private orderListService: OrderListService, private message: NzMessageService, public router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getOrderList();
@@ -28,15 +30,15 @@ export class OrderListComponent implements OnInit {
   orderListTableAllChecked = false;
   orderListTableIndeterminate = false;
   orderListTableDisplayData = [];
-  orderListTableCheckedData :Array<OrderListTableModel> = [];
-  orderListTableData :Array<OrderListTableModel>;
+  orderListTableCheckedData: Array<OrderListTableModel> = [];
+  orderListTableData: Array<OrderListTableModel>;
 
   // ORDER DETAIL LIST TABLE
   orderDetailListTableAllChecked = false;
   orderDetailListTableIndeterminate = false;
   orderDetailListTableDisplayData = [];
-  orderDetailListTableCheckedData :Array<OrderDetailListTableModel> = [];
-  orderDetailListTableData :Array<OrderDetailListTableModel>;
+  orderDetailListTableCheckedData: Array<OrderDetailListTableModel> = [];
+  orderDetailListTableData: Array<OrderDetailListTableModel>;
 
   orderListCurrentPageDataChange($event: Array<any>): void {
     this.orderListTableDisplayData = $event;
@@ -49,14 +51,14 @@ export class OrderListComponent implements OnInit {
   }
 
   refreshOrderListStatus(): void {
-    if(this.orderListTableDisplayData===null) {
+    if (this.orderListTableDisplayData === null) {
       return;
     }
     const allChecked = this.orderListTableDisplayData.filter(value => !value.disabled).every(value => value.checked === true);
     const allUnChecked = this.orderListTableDisplayData.filter(value => !value.disabled).every(value => !value.checked);
     this.orderListTableAllChecked = allChecked;
     this.orderListTableIndeterminate = (!allChecked) && (!allUnChecked);
-    this.orderListTableCheckedData = this.orderListTableDisplayData.filter(e=>e.checked);
+    this.orderListTableCheckedData = this.orderListTableDisplayData.filter(e => e.checked);
   }
 
   refreshOrderDetailListStatus(): void {
@@ -64,7 +66,7 @@ export class OrderListComponent implements OnInit {
     const allUnChecked = this.orderDetailListTableDisplayData.filter(value => !value.disabled).every(value => !value.checked);
     this.orderDetailListTableAllChecked = allChecked;
     this.orderDetailListTableIndeterminate = (!allChecked) && (!allUnChecked);
-    this.orderDetailListTableCheckedData = this.orderDetailListTableDisplayData.filter(e=>e.checked);
+    this.orderDetailListTableCheckedData = this.orderDetailListTableDisplayData.filter(e => e.checked);
   }
 
   orderListCheckAll(value: boolean): void {
@@ -105,13 +107,13 @@ export class OrderListComponent implements OnInit {
     if (orderItem == undefined) {
       if (this.orderListTableCheckedData.length > 0) {
         for (var i = 0; i < this.orderListTableCheckedData.length; i++) {
-          submitList.push(this.orderListTableCheckedData[i].ORDER_NO.replace("/","|SLASH|"));
+          submitList.push(this.orderListTableCheckedData[i].ORDER_NO.replace("/", "|SLASH|"));
         }
-        this.orderListService.delOrderListItem(submitList).subscribe(delRes => {this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
+        this.orderListService.delOrderListItem(submitList).subscribe(delRes => { this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
       }
     } else {
-      submitList.push(orderItem.ORDER_NO.replace("/","|SLASH|"));
-      this.orderListService.delOrderListItem(submitList).subscribe(delRes => {this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
+      submitList.push(orderItem.ORDER_NO.replace("/", "|SLASH|"));
+      this.orderListService.delOrderListItem(submitList).subscribe(delRes => { this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderList(); this.orderDetailListTableData = [] }, error => this.error = error);
     }
   }
 

@@ -8,9 +8,9 @@ describe('CouplingTypeDataComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderQueryComponent ]
+      declarations: [OrderQueryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +22,4 @@ describe('CouplingTypeDataComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+}); 

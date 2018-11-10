@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'abd-double-seal-mst', component: AbdDoubleSealMstComponent },
   { path: 'abd-integrate-seal-mst', component: AbdIntegrateSealMstComponent },
   { path: 'abd-single-seal-mst', component: AbdSingleSealMstComponent },
-  { path: 'order-query', component: OrderQueryComponent }
+  { path: 'order-query', component: OrderQueryComponent },
+  { path: 'order-list/:orderNo', component: OrderListComponent }
 ];
 
 @NgModule ({

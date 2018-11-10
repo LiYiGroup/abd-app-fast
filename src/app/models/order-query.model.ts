@@ -1,4 +1,4 @@
-export class OrderQuerySearchModel {
+export class OrderQueryResultSearchModel {
 
     SALES_PERSON: String;
     ORDER_UNIT: String;
@@ -14,10 +14,8 @@ export class OrderQuerySearchModel {
     ORDER_NO: String;
 }
 
+export class OrderQueryResultTableModel {
 
-export class OrderQueryTableModel {
-
-    NO: number;
     SALES_PERSON: String;
     ORDER_UNIT: String;
     PROJECT_NM: String;

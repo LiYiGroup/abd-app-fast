@@ -1,0 +1,19 @@
+label {
+    line-height: 2.5;
+}
+
+nz-date-picker ::ng-deep .ant-calendar-picker {
+    width: 100%;
+}
+
+nz-date-picker {
+    display: inline-block;
+}
+
+.btn_area {
+    text-align: right;
+}
+
+.grid_area {
+    height: 600px;
+} 

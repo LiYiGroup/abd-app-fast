@@ -20,21 +20,29 @@
     </div>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="DEPARTURE_DATE_ST">下发日期</label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DEPARTURE_DATE_ST" name="DEPARTURE_DATE_ST" #DEPARTURE_DATE_ST="ngModel"></nz-date-picker>
+            <label for="DEPARTURE_DATE_ST">下发日期</label>
+            <br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DEPARTURE_DATE_ST" name="DEPARTURE_DATE_ST"
+                #DEPARTURE_DATE_ST="ngModel"></nz-date-picker>
         </div>
 
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="DEPARTURE_DATE_ED"></label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DEPARTURE_DATE_ED" name="DEPARTURE_DATE_ED" #DEPARTURE_DATE_ED="ngModel"></nz-date-picker>
+            <label for="DEPARTURE_DATE_ED"></label>
+            <br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DEPARTURE_DATE_ED" name="DEPARTURE_DATE_ED"
+                #DEPARTURE_DATE_ED="ngModel"></nz-date-picker>
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="DELIVERY_DATE_ST">交货日期</label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DELIVERY_DATE_ST" name="DELIVERY_DATE_ST" #DELIVERY_DATE_ST="ngModel"></nz-date-picker>
+            <label for="DELIVERY_DATE_ST">交货日期</label>
+            <br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DELIVERY_DATE_ST" name="DELIVERY_DATE_ST"
+                #DELIVERY_DATE_ST="ngModel"></nz-date-picker>
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="DELIVERY_DATE_ED"></label><br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DELIVERY_DATE_ED" name="DELIVERY_DATE_ED" #DELIVERY_DATE_ED="ngModel"></nz-date-picker>
+            <label for="DELIVERY_DATE_ED"></label>
+            <br>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListSearchModel.DELIVERY_DATE_ED" name="DELIVERY_DATE_ED"
+                #DELIVERY_DATE_ED="ngModel"></nz-date-picker>
         </div>
     </div>
 
@@ -49,10 +57,7 @@
             <button nz-button nzType="primary" type="button" hidden>导出</button>
             <button nz-button nzType="primary" type="button" (click)="getOrderListWithCondition(orderListSearchModel)">查询</button>
             <nz-divider nzType="vertical"></nz-divider>
-            <nz-upload
-                [nzShowUploadList]="false"
-                (nzChange)="handleUpload($event)"
-                nzAction="http://localhost:53366/api/orderListUpload/">
+            <nz-upload [nzShowUploadList]="false" (nzChange)="handleUpload($event)" nzAction="http://localhost:53366/api/orderListUpload/">
                 <button nz-button type="button" nzType="primary">导入</button>
             </nz-upload>
         </div>
@@ -62,108 +67,170 @@
     <button nz-button nzType="primary" type="button" routerLink="/order-list/detail">新建</button>
     <!--<nz-divider nzType="vertical"></nz-divider>-->
     <button hidden nz-button nzType="primary" type="button" (click)="deleteOrderListItem()">删除</button>
-    <br><br>
+    <br>
+    <br>
     <div class="grid_area">
-        <nz-table
-        #orderListSelectionTable
-        [nzData]="orderListTableData"
-        [nzPageSize]="5"
-        [nzHideOnSinglePage]="false"
-        (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)"
-        (nzPageIndexChange)="refreshOrderListStatus()"
-        (nzPageSizeChange)="refreshOrderListStatus()"
-        [nzScroll]="{ x: '2500px' }"
-        nzSize="small">
-        <thead>
-            <tr>
-            <th nzShowCheckbox [(nzChecked)]="orderListTableAllChecked" [nzIndeterminate]="orderListTableIndeterminate" (nzCheckedChange)="orderListCheckAll($event)"></th>
-            <th nzWidth="100px">序号</th>
-            <th nzWidth="300px">订单编号</th>
-            <th nzWidth="300px">合同编号</th>
-            <th nzWidth="300px">项目名称</th>
-            <th nzWidth="150px">下发日期</th>
-            <th nzWidth="150px">交货日期</th>
-            <th nzWidth="280px">订货单位</th>
-            <th nzWidth="150px">销售员</th>
-            <th nzWidth="500px">备注</th>
-            <th nzWidth="200px" nzRight="0px">操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let data of orderListSelectionTable.data; let i=index" (click)="getOrderListDetailTable(data)">
-            <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderListStatus($event)"></td>
-            <td>{{i+1}}</td>
-            <td>{{data.ORDER_NO}}</td>
-            <td>{{data.CONTRACT_NO}}</td>
-            <td>{{data.PROJECT_NM}}</td>
-            <td>{{data.DEPARTURE_DATE | date:'yyyy/MM/dd'}}</td>
-            <td>{{data.DELIVERY_DATE | date:'yyyy/MM/dd'}}</td>
-            <td>{{data.ORDER_UNIT}}</td>
-            <td>{{data.SALES_PERSON}}</td>
-            <td>{{data.REMARK}}</td>
-            <td nzRight="0px">
-                <!-- 注意此处的路由写法，开头必须要有'/ -->
-                <a routerLink='/order-list/detail/{{data.ORDER_NO.replace("/","|SLASH|")}}'>修改</a>
-                <nz-divider nzType="vertical"></nz-divider>
-                <a (click)="deleteOrderListItem(data)">删除</a>
-            </td>
-            </tr>
-        </tbody>
+        <nz-table #orderListSelectionTable [nzData]="orderListTableData" [nzPageSize]="5" [nzHideOnSinglePage]="false" (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)"
+            (nzPageIndexChange)="refreshOrderListStatus()" (nzPageSizeChange)="refreshOrderListStatus()" [nzScroll]="{ x: '2500px' }"
+            nzSize="small">
+            <thead>
+                <tr>
+                    <th nzShowCheckbox [(nzChecked)]="orderListTableAllChecked" [nzIndeterminate]="orderListTableIndeterminate" (nzCheckedChange)="orderListCheckAll($event)"></th>
+                    <th nzWidth="100px">序号</th>
+                    <th nzWidth="300px">订单编号</th>
+                    <th nzWidth="300px">合同编号</th>
+                    <th nzWidth="300px">项目名称</th>
+                    <th nzWidth="150px">下发日期</th>
+                    <th nzWidth="150px">交货日期</th>
+                    <th nzWidth="280px">订货单位</th>
+                    <th nzWidth="150px">销售员</th>
+                    <th nzWidth="500px">备注</th>
+                    <th nzWidth="200px" nzRight="0px">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of orderListSelectionTable.data; let i=index" (click)="getOrderListDetailTable(data)">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderListStatus($event)"></td>
+                    <td>{{i+1}}</td>
+                    <td>{{data.ORDER_NO}}</td>
+                    <td>{{data.CONTRACT_NO}}</td>
+                    <td>{{data.PROJECT_NM}}</td>
+                    <td>{{data.DEPARTURE_DATE | date:'yyyy/MM/dd'}}</td>
+                    <td>{{data.DELIVERY_DATE | date:'yyyy/MM/dd'}}</td>
+                    <td>{{data.ORDER_UNIT}}</td>
+                    <td>{{data.SALES_PERSON}}</td>
+                    <td>{{data.REMARK}}</td>
+                    <td nzRight="0px">
+                        <!-- 注意此处的路由写法，开头必须要有'/ -->
+                        <a routerLink='/order-list/detail/{{data.ORDER_NO.replace("/","|SLASH|")}}'>修改</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a (click)="deleteOrderListItem(data)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
         </nz-table>
     </div>
+    <br>
     <nz-divider nzType="horizontal"></nz-divider>
     <div class="grid_area">
-        <nz-table
-        #orderDetailListSelectionTable
-        [nzData]="orderDetailListTableData"
-        [nzPageSize]="5"
-        [nzHideOnSinglePage]="false"
-        (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)"
-        (nzPageIndexChange)="refreshOrderDetailListStatus()"
-        (nzPageSizeChange)="refreshOrderDetailListStatus()"
-        [nzScroll]="{ x: '2000px' }"
-        nzSize="small">
-        <!-- 设置x轴滚动与y轴滚动 -->
-        <thead>
-            <tr>
-            <th nzShowCheckbox [(nzChecked)]="orderDetailListTableAllChecked" [nzIndeterminate]="orderDetailListTableIndeterminate" (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
-            <th nzWidth="100px">序号</th>
-            <th nzWidth="300px">泵名称</th>
-            <th nzWidth="500px">工位</th>
-            <th nzWidth="500px">型号</th>
-            <th nzWidth="200px">数量</th>
-            <th nzWidth="200px">流量</th>
-            <th nzWidth="200px">扬程</th>
-            <th nzWidth="200px">材质</th>
-            <th nzWidth="200px">机封</th>
-            <th nzWidth="800px">序列号</th>
-            <th nzWidth="200px">状态</th>
-            <th nzWidth="800px">备注</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let data of orderDetailListSelectionTable.data; let i=index">
-            <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderDetailListStatus($event)"></td>
-            <td>{{i+1}}</td>
-            <td>{{data.BUMP_NM}}</td>
-            <td>{{data.STATION}}</td>
-            <td>{{data.BUMP_TYPE}}</td>
-            <td>{{data.NUMBER}}</td>
-            <td>{{data.FLOW}}</td>
-            <td>{{data.LIFT}}</td>
-            <td>{{data.MATERIAL}}</td>
-            <td>{{data.SEAL}}</td>
-            <td>{{data.BUMP_SERIAL_NO}}</td>
-            <td>{{data.STATUS}}</td>
-            <td>{{data.REMARK}}</td>
-            </tr>
-        </tbody>
+        <nz-table #orderDetailListSelectionTable [nzData]="orderDetailListTableData" [nzPageSize]="5" [nzHideOnSinglePage]="false"
+            (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)" (nzPageIndexChange)="refreshOrderDetailListStatus()"
+            (nzPageSizeChange)="refreshOrderDetailListStatus()" [nzScroll]="{ x: '6000px' }" nzSize="small">
+            <!-- 设置x轴滚动与y轴滚动 -->
+            <thead>
+                <tr>
+                    <th nzShowCheckbox [(nzChecked)]="orderDetailListTableAllChecked" [nzIndeterminate]="orderDetailListTableIndeterminate" (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
+                    <th nzWidth="100px">序号</th>
+                    <th nzWidth="500px">泵名称</th>
+                    <th nzWidth="500px">型号</th>
+                    <th nzWidth="500px">数量</th>
+
+                    <th nzWidth="500px">单位</th>
+                    <th nzWidth="500px">单价</th>
+                    <th nzWidth="500px">金额</th>
+                    <th nzWidth="800px">序列号</th>
+
+                    <th nzWidth="500px">流量</th>
+                    <th nzWidth="500px">扬程</th>
+
+                    <th nzWidth="500px">材质-泵体</th>
+                    <th nzWidth="500px">材质-叶轮</th>
+                    <th nzWidth="500px">材质-轴</th>
+
+                    <th nzWidth="500px">电机-品牌</th>
+                    <th nzWidth="500px">电机-要求</th>
+
+                    <th nzWidth="1000px">密封/液下深度-形式</th>
+                    <th nzWidth="1000px">密封/液下深度-品牌/其他</th>
+
+                    <th nzWidth="500px">轴承品牌</th>
+                    <th nzWidth="500px">联轴器</th>
+                    <th nzWidth="500px">机封冷却器</th>
+                    <th nzWidth="500px">装置汽蚀余量</th>
+                    <th nzWidth="500px">泵实际转速</th>
+
+                    <th nzWidth="500px">工位</th>
+                    <th nzWidth="500px">温度</th>
+                    <th nzWidth="500px">密度</th>
+                    <th nzWidth="500px">入口压力</th>
+
+                    <th nzWidth="500px">介质</th>
+                    <th nzWidth="500px">粘度</th>
+                    <th nzWidth="500px">含颗粒情况</th>
+
+                    <th nzWidth="500px">工作压力</th>
+                    <th nzWidth="500px">法兰标准</th>
+                    <th nzWidth="500px">法兰等级</th>
+                    <th nzWidth="500px">底座</th>
+                    <th nzWidth="500px">联轴器罩</th>
+
+                    <th nzWidth="500px">地脚螺栓</th>
+                    <th nzWidth="500px">油漆</th>
+                    <th nzWidth="500px">表面特殊处理</th>
+                    <th nzWidth="500px">包装</th>
+                    <th nzWidth="500px">运输</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of orderDetailListSelectionTable.data; let i=index">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderDetailListStatus($event)"></td>
+                    <td>{{i+1}}</td>
+                    <td>{{data.BUMP_NM}}</td>
+                    <td>{{data.BUMP_TYPE}}</td>
+                    <td>{{data.NUMBER}}</td>
+
+                    <td>{{data.UNIT}}</td>
+                    <td>{{data.PRICE}}</td>
+                    <td>{{data.AMOUNT}}</td>
+                    <td>{{data.BUMP_SERIAL_NO}}</td>
+
+                    <td>{{data.FLOW}}</td>
+                    <td>{{data.LIFT}}</td>
+
+                    <td>{{data.MATERIAL_BUMP}}</td>
+                    <td>{{data.MATERIAL_FAN}}</td>
+                    <td>{{data.MATERIAL_ROLLER}}</td>
+
+                    <td>{{data.MOTOR_BRAND_NAME}}</td>
+                    <td>{{data.MOTOR_DEMAND}}</td>
+
+                    <td>{{data.SEAL_FORM_NAME}}</td>
+                    <td>{{data.SEAL_BRAND_NAME}}</td>
+
+                    <td>{{data.ROLLER_BRAND_NAME}}</td>
+                    <td>{{data.COUPLING_NAME}}</td>
+                    <td>{{data.SEAL_COOLER_NAME}}</td>
+                    <td>{{data.CAVITATION_ALLOWANCE}}</td>
+                    <td>{{data.ACTUAL_BUMP_SPEED}}</td>
+
+                    <td>{{data.STATION}}</td>
+                    <td>{{data.TEMPERATURE}}</td>
+                    <td>{{data.DENSITY}}</td>
+                    <td>{{data.IN_PRESSURE}}</td>
+
+                    <td>{{data.MEDIUM}}</td>
+                    <td>{{data.VISCOSITY}}</td>
+                    <td>{{data.PARTICULATES}}</td>
+
+                    <td>{{data.WORKING_PRESSURE}}</td>
+                    <td>{{data.FLANGES_STANDARD_NAME}}</td>
+                    <td>{{data.FLANGES_LEVEL_NAME}}</td>
+                    <td>{{data.BASE_NAME}}</td>
+                    <td>{{data.COUPLING_HOOD_NAME}}</td>
+
+                    <td>{{data.ANCHOR_BOLT_NAME}}</td>
+                    <td>{{data.PAINT_NAME}}</td>
+                    <td>{{data.SURFACE_TREATMENT_NAME}}</td>
+                    <td>{{data.PACKAGE_NAME}}</td>
+                    <td>{{data.TRANSPORT_NAME}}</td>
+                </tr>
+            </tbody>
         </nz-table>
     </div>
     <br>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
-      <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
-          <button nz-button nzType="primary" type="button" (click)="jumpToBOM()">BOM</button>
+        <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
+            <button nz-button nzType="primary" type="button" (click)="jumpToBOM()">BOM</button>
         </div>
     </div>
 </form>

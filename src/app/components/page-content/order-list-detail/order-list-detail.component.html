@@ -5,43 +5,157 @@
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
+        <label for="APPLICATION_ENGINEER">应用工程师</label>
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="DEBUG ">调试</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.DEBUG" name="DEBUG" #DEBUG="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictDebug" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+       </select>  
+    </div>
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="8">
         <label for="CONTRACT_NO">合同编号</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
+        <label for="DEPARTURE_DATE">下发日期</label>
+        <br>
+        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DEPARTURE_DATE" name="DEPARTURE_DATE"
+            #DEPARTURE_DATE="ngModel"></nz-date-picker>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="TOTAL_QTY">总数量</label>
+        <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TOTAL_QTY" name="TOTAL_QTY" #TOTAL_QTY="ngModel">
+    </div>
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="8">
         <label for="PROJECT_NM">项目名称</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
     </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="DELIVERY_DATE">交货日期</label>
+        <br>
+        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DELIVERY_DATE" name="DELIVERY_DATE"
+            #DELIVERY_DATE="ngModel"></nz-date-picker>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="TEX_RATE">税率</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.TEX_RATE" name="TEX_RATE" #TEX_RATE="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictTexRate" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+       </select>  
+    </div>
 </div>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="ORDER_UNIT">订货单位</label>
-        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="DEPARTURE_DATE">下发日期</label><br>
-        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DEPARTURE_DATE" name="DEPARTURE_DATE" #DEPARTURE_DATE="ngModel"></nz-date-picker>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="DELIVERY_DATE">交货日期</label><br>
-        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DELIVERY_DATE" name="DELIVERY_DATE" #DELIVERY_DATE="ngModel"></nz-date-picker>
-    </div>
-</div>
-
-<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="APPLICATION_ENGINEER">应用工程师</label>
-        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
-    </div>
     <div nz-col class="gutter-row" nzSpan="8">
         <label for="SALES_PERSON">销售员</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
-        <label for="REMARK">备注</label>
-        <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.REMARK" name="REMARK" #REMARK="ngModel">
+        <label for="GUARANTEE_DATE">质保期</label>
+        <br>
+        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.GUARANTEE_DATE" name="GUARANTEE_DATE"
+            #GUARANTEE_DATE="ngModel"></nz-date-picker>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="TOTAL_AMT">合同总额</label>
+        <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TOTAL_AMT" name="TOTAL_AMT" #TOTAL_AMT="ngModel">
     </div>
 </div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="16">
+        <label for="PAYMENT">付款方式</label>
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.PAYMENT" name="PAYMENT" #PAYMENT="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="TARGET_PRICE">目标价</label>
+        <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TARGET_PRICE" name="TARGET_PRICE" #TARGET_PRICE="ngModel">
+    </div>
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">  
+    <div nz-col class="gutter-row" nzSpan="16">
+        <label for="ORDER_UNIT">订货单位</label>
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+        <label for="DISCOUNT">折扣</label>
+        <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.DISCOUNT" name="DISCOUNT" #DISCOUNT="ngModel">
+    </div>
+</div>
+<nz-divider nzType="horizontal"></nz-divider>
+<h2>随货资料</h2>
+ <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="QUALIFICATION">合格证：</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.QUALIFICATION" name="QUALIFICATION" #QUALIFICATION="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictQualification" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="IDENTIFICATION">说明书：</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.IDENTIFICATION" name="IDENTIFICATION" #IDENTIFICATION="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictIdentification" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="PRODUCT_SAMPLE">产品样本：</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.PRODUCT_SAMPLE" name="PRODUCT_SAMPLE" #PRODUCT_SAMPLE="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictProductSample" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="DYNAMIC_REPORT">动平衡报告：</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.DYNAMIC_REPORT" name="DYNAMIC_REPORT" #DYNAMIC_REPORT="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictDynamicReport" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="STATIC_REPORT">静压试验报告：</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.STATIC_REPORT" name="STATIC_REPORT" #STATIC_REPORT="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictStaticReport" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="PERFORMANCE_REPORT">性能试验报告：</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.PERFORMANCE_REPORT" name="PERFORMANCE_REPORT" #PERFORMANCE_REPORT="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictPerformanceReport" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="BLUEPRINT">图纸：</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.BLUEPRINT" name="BLUEPRINT" #BLUEPRINT="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictBlueprint" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="PERFORMANCE_CURVE">性能曲线：</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.PERFORMANCE_CURVE" name="PERFORMANCE_CURVE" #PERFORMANCE_CURVE="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictPerformanceCurve" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="OTHER">其他：</label>
+        <input nz-input maxlength="50" [(ngModel)]="orderListAttachment.OTHER" name="OTHER" #OTHER="ngModel">
+    </div>
+</div>
+
 <br>
 <nz-divider nzType="horizontal"></nz-divider>
 <button *ngIf="isUpdate == true" nz-button nzType="primary" (click)="showModal()">新建</button>
@@ -50,69 +164,153 @@
 <br>
 <br>
 <div class="grid_area">
-    <nz-table
-    #orderDetailListSelectionTable
-    [nzData]="orderListDetailTableData"
-    [nzPageSize]="5"
-    [nzHideOnSinglePage]="false"
-    (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)"
-    (nzPageIndexChange)="refreshOrderDetailListStatus()"
-    (nzPageSizeChange)="refreshOrderDetailListStatus()"
-    [nzScroll]="{ x: '2000px' }"
-    nzSize="small">
-    <thead>
-        <tr>
-        <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="orderListDetailTableAllChecked" [nzIndeterminate]="orderListDetailTableIndeterminate" (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
-        <th nzWidth="50px">序号</th>
-        <th nzWidth="100px">泵名称</th>
-        <th nzWidth="100px">工位</th>
-        <th nzWidth="200px">型号</th>
-        <th nzWidth="50px">数量</th>
-        <th nzWidth="50px">流量</th>
-        <th nzWidth="50px">扬程</th>
-        <th nzWidth="100px">材质</th>
-        <th nzWidth="100px">机封</th>
-        <th nzWidth="300px">序列号</th>
-        <th nzWidth="100px">状态</th>
-        <th nzWidth="300px">备注</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of orderDetailListSelectionTable.data; let i=index">
-        <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderDetailListStatus($event)"></td>
-        <td (click)="showModal(data)">{{i+1}}</td>
-        <td (click)="showModal(data)">{{data.BUMP_NM}}</td>
-        <td (click)="showModal(data)">{{data.STATION}}</td>
-        <td (click)="showModal(data)">{{data.BUMP_TYPE}}</td>
-        <td (click)="showModal(data)">{{data.NUMBER}}</td>
-        <td (click)="showModal(data)">{{data.FLOW}}</td>
-        <td (click)="showModal(data)">{{data.LIFT}}</td>
-        <td (click)="showModal(data)">{{data.MATERIAL}}</td>
-        <td (click)="showModal(data)">{{data.SEAL}}</td>
-        <td (click)="showModal(data)">{{data.BUMP_SERIAL_NO}}</td>
-        <td (click)="showModal(data)">{{data.STATUS}}</td>
-        <td (click)="showModal(data)">{{data.REMARK}}</td>
-        </tr>
-    </tbody>
+    <nz-table #orderDetailListSelectionTable [nzData]="orderListDetailTableData" [nzPageSize]="5" [nzHideOnSinglePage]="false"
+        (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)" (nzPageIndexChange)="refreshOrderDetailListStatus()"
+        (nzPageSizeChange)="refreshOrderDetailListStatus()" [nzScroll]="{ x: '6000px' }" nzSize="small">
+        <thead>
+            <tr>
+                <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="orderListDetailTableAllChecked" [nzIndeterminate]="orderListDetailTableIndeterminate"
+                    (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
+                <th nzWidth="100px">序号</th>
+                <th nzWidth="500px">泵名称</th>
+                <th nzWidth="500px">型号</th>
+                <th nzWidth="500px">数量</th>
+
+                <th nzWidth="500px">单位</th>
+                <th nzWidth="500px">单价</th>
+                <th nzWidth="500px">金额</th>
+                <th nzWidth="800px">序列号</th>
+
+                <th nzWidth="500px">流量</th>
+                <th nzWidth="500px">扬程</th>
+
+                <th nzWidth="500px">材质-泵体</th>
+                <th nzWidth="500px">材质-叶轮</th>
+                <th nzWidth="500px">材质-轴</th>
+
+                <th nzWidth="500px">电机-品牌</th>
+                <th nzWidth="500px">电机-要求</th>
+
+                <th nzWidth="1000px">密封/液下深度-形式</th>
+                <th nzWidth="1000px">密封/液下深度-品牌/其他</th>
+
+                <th nzWidth="500px">轴承品牌</th>
+                <th nzWidth="500px">联轴器</th>
+                <th nzWidth="500px">机封冷却器</th>
+                <th nzWidth="500px">装置汽蚀余量</th>
+                <th nzWidth="500px">泵实际转速</th>
+
+                <th nzWidth="500px">工位</th>
+                <th nzWidth="500px">温度</th>
+                <th nzWidth="500px">密度</th>
+                <th nzWidth="500px">入口压力</th>
+
+                <th nzWidth="500px">介质</th>
+                <th nzWidth="500px">粘度</th>
+                <th nzWidth="500px">含颗粒情况</th>
+
+                <th nzWidth="500px">工作压力</th>
+                <th nzWidth="500px">法兰标准</th>
+                <th nzWidth="500px">法兰等级</th>
+                <th nzWidth="500px">底座</th>
+                <th nzWidth="500px">联轴器罩</th>
+
+                <th nzWidth="500px">地脚螺栓</th>
+                <th nzWidth="500px">油漆</th>
+                <th nzWidth="500px">表面特殊处理</th>
+                <th nzWidth="500px">包装</th>
+                <th nzWidth="500px">运输</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of orderDetailListSelectionTable.data; let i=index">
+                <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderDetailListStatus($event)"></td>
+                <td (click)="showModal(data)">{{i+1}}</td>
+                <td (click)="showModal(data)">{{data.BUMP_NM}}</td>
+                <td (click)="showModal(data)">{{data.BUMP_TYPE}}</td>
+                <td (click)="showModal(data)">{{data.NUMBER}}</td>
+
+                <td (click)="showModal(data)">{{data.UNIT}}</td>
+                <td (click)="showModal(data)">{{data.PRICE}}</td>
+                <td (click)="showModal(data)">{{data.AMOUNT}}</td>
+                <td (click)="showModal(data)">{{data.BUMP_SERIAL_NO}}</td>
+
+                <td (click)="showModal(data)">{{data.FLOW}}</td>
+                <td (click)="showModal(data)">{{data.LIFT}}</td>
+
+                <td (click)="showModal(data)">{{data.MATERIAL_BUMP}}</td>
+                <td (click)="showModal(data)">{{data.MATERIAL_FAN}}</td>
+                <td (click)="showModal(data)">{{data.MATERIAL_ROLLER}}</td>
+
+                <td (click)="showModal(data)">{{data.MOTOR_BRAND_NAME}}</td>
+                <td (click)="showModal(data)">{{data.MOTOR_DEMAND}}</td>
+
+                <td (click)="showModal(data)">{{data.SEAL_FORM_NAME}}</td>
+                <td (click)="showModal(data)">{{data.SEAL_BRAND_NAME}}</td>
+
+                <td (click)="showModal(data)">{{data.ROLLER_BRAND_NAME}}</td>
+                <td (click)="showModal(data)">{{data.COUPLING_NAME}}</td>
+                <td (click)="showModal(data)">{{data.SEAL_COOLER_NAME}}</td>
+                <td (click)="showModal(data)">{{data.CAVITATION_ALLOWANCE}}</td>
+                <td (click)="showModal(data)">{{data.ACTUAL_BUMP_SPEED}}</td>
+
+                <td (click)="showModal(data)">{{data.STATION}}</td>
+                <td (click)="showModal(data)">{{data.TEMPERATURE}}</td>
+                <td (click)="showModal(data)">{{data.DENSITY}}</td>
+                <td (click)="showModal(data)">{{data.IN_PRESSURE}}</td>
+
+                <td (click)="showModal(data)">{{data.MEDIUM}}</td>
+                <td (click)="showModal(data)">{{data.VISCOSITY}}</td>
+                <td (click)="showModal(data)">{{data.PARTICULATES}}</td>
+
+                <td (click)="showModal(data)">{{data.WORKING_PRESSURE}}</td>
+                <td (click)="showModal(data)">{{data.FLANGES_STANDARD_NAME}}</td>
+                <td (click)="showModal(data)">{{data.FLANGES_LEVEL_NAME}}</td>
+                <td (click)="showModal(data)">{{data.BASE_NAME}}</td>
+                <td (click)="showModal(data)">{{data.COUPLING_HOOD_NAME}}</td>
+
+                <td (click)="showModal(data)">{{data.ANCHOR_BOLT_NAME}}</td>
+                <td (click)="showModal(data)">{{data.PAINT_NAME}}</td>
+                <td (click)="showModal(data)">{{data.SURFACE_TREATMENT_NAME}}</td>
+                <td (click)="showModal(data)">{{data.PACKAGE_NAME}}</td>
+                <td (click)="showModal(data)">{{data.TRANSPORT_NAME}}</td>
+            </tr>
+        </tbody>
     </nz-table>
+    <br>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">  
+        <div nz-col class="gutter-row" nzSpan="24">
+            <label for="REMARK">备注</label>
+            <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.REMARK" name="REMARK" #REMARK="ngModel">
+        </div>  
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">  
+        <div nz-col class="gutter-row" nzSpan="24">
+            <label for="CHANGE_HIS1">变更1</label>
+            <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.CHANGE_HIS1" name="CHANGE_HIS1" #CHANGE_HIS1="ngModel">
+        </div>  
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">  
+        <div nz-col class="gutter-row" nzSpan="24">
+            <label for="CHANGE_HIS2">变更2</label>
+            <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.CHANGE_HIS2" name="CHANGE_HIS2" #CHANGE_HIS2="ngModel">
+        </div>  
+    </div>
     <br>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
-            <button nz-button nzType="primary" type="button" (click)="saveOrderListDetailForm(orderListDetailFormModel)">保存</button>
+            <button nz-button nzType="primary" type="button" (click)="saveOrderListDetailForm(orderListDetailFormModel,orderListAttachment)">保存</button>
         </div>
     </div>
 </div>
 <br>
 <!-- Model-->
-<nz-modal nzWidth="75%" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="泵信息编辑" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+<nz-modal nzWidth="75%" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="泵信息编辑" (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="BUMP_NM">泵名称</label>
             <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.BUMP_NM" name="BUMP_NM" #BUMP_NM="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="6">
-            <label for="STATION">工位</label>
-            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.STATION" name="STATION" #STATION="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="BUMP_TYPE">型号</label>
@@ -122,37 +320,210 @@
             <label for="NUMBER">数量</label>
             <input nz-input type="number" [(ngModel)]="currentBumpInfo.NUMBER" name="NUMBER" #NUMBER="ngModel">
         </div>
-    </div>
-    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="FLOW">流量</label>
-            <input nz-input type="number" [(ngModel)]="currentBumpInfo.FLOW" name="FLOW" #FLOW="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="6">
-            <label for="LIFT">扬程</label>
-            <input nz-input type="number" [(ngModel)]="currentBumpInfo.LIFT" name="LIFT" #LIFT="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="6">
-            <label for="MATERIAL">材质</label>
-            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MATERIAL" name="MATERIAL" #MATERIAL="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="6">
-            <label for="SEAL">机封</label>
-            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SEAL" name="SEAL" #SEAL="ngModel">
+            <label for="UNIT">单位</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.UNIT" name="UNIT" #UNIT="ngModel">
         </div>
     </div>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="PRICE">单价</label>
+            <input nz-input type="number" [(ngModel)]="currentBumpInfo.PRICE" name="PRICE" #PRICE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="AMOUNT">金额</label>
+            <input nz-input type="number" [(ngModel)]="currentBumpInfo.AMOUNT" name="AMOUNT" #AMOUNT="ngModel">
+        </div>
         <div nz-col class="gutter-row" nzSpan="6">
             <label for="BUMP_SERIAL_NO">序列号</label>
             <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.BUMP_SERIAL_NO" name="BUMP_SERIAL_NO" #BUMP_SERIAL_NO="ngModel">
         </div>
         <div nz-col class="gutter-row" nzSpan="6">
-            <label for="STATUS">状态</label>
-            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.STATUS" name="STATUS" #STATUS="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="12">
-            <label for="REMARK">备注</label>
-            <input nz-input maxlength="200" [(ngModel)]="currentBumpInfo.REMARK" name="REMARK" #REMARK="ngModel">
+            <label for="FLOW">流量</label>
+            <input nz-input type="number" [(ngModel)]="currentBumpInfo.FLOW" name="FLOW" #FLOW="ngModel">
         </div>
     </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="LIFT">扬程</label>
+            <input nz-input type="number" [(ngModel)]="currentBumpInfo.LIFT" name="LIFT" #LIFT="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="MATERIAL_BUMP">材质-泵体</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MATERIAL_BUMP" name="MATERIAL_BUMP" #MATERIAL_BUMP="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="MATERIAL_FAN">材质-叶轮</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MATERIAL_FAN" name="MATERIAL_FAN" #MATERIAL_FAN="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="MATERIAL_ROLLER">材质-轴</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MATERIAL_ROLLER" name="MATERIAL_ROLLER" #MATERIAL_ROLLER="ngModel">
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="MOTOR_BRAND">电机-品牌</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MOTOR_BRAND" name="MOTOR_BRAND" #MOTOR_BRAND="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictMotor" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="MOTOR_DEMAND">电机-要求</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MOTOR_DEMAND" name="MOTOR_DEMAND" #MOTOR_DEMAND="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="SEAL_FORM">密封/液下深度-形式</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SEAL_FORM" name="SEAL_FORM" #SEAL_FORM="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictSealForm" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="SEAL_BRAND">密封/液下深度-品牌/其他</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SEAL_BRAND" name="SEAL_BRAND" #SEAL_BRAND="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictSealBrand" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="ROLLER_BRAND">轴承品牌</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.ROLLER_BRAND" name="ROLLER_BRAND" #ROLLER_BRAND="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictRollerBrand" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING">联轴器</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.COUPLING" name="COUPLING" #COUPLING="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictCoupling" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="SEAL_COOLER">机封冷却器</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SEAL_COOLER" name="SEAL_COOLER" #SEAL_COOLER="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictSealCooler" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="CAVITATION_ALLOWANCE">装置汽蚀余量</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.CAVITATION_ALLOWANCE" name="CAVITATION_ALLOWANCE" #CAVITATION_ALLOWANCE="ngModel">
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="ACTUAL_BUMP_SPEED">泵实际转速</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.ACTUAL_BUMP_SPEED" name="ACTUAL_BUMP_SPEED" #ACTUAL_BUMP_SPEED="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="STATION">工位</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.STATION" name="STATION" #STATION="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="TEMPERATURE">温度</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.TEMPERATURE" name="TEMPERATURE" #TEMPERATURE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="DENSITY">密度</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.DENSITY" name="DENSITY" #DENSITY="ngModel">
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="IN_PRESSURE">入口压力</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.IN_PRESSURE" name="IN_PRESSURE" #IN_PRESSURE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="MEDIUM">介质</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.MEDIUM" name="MEDIUM" #MEDIUM="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="VISCOSITY">粘度</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.VISCOSITY" name="VISCOSITY" #VISCOSITY="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="PARTICULATES">含颗粒情况</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.PARTICULATES" name="PARTICULATES" #PARTICULATES="ngModel">
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="WORKING_PRESSURE">工作压力</label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.WORKING_PRESSURE" name="WORKING_PRESSURE" #WORKING_PRESSURE="ngModel">
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="FLANGES_STANDARD">法兰标准</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.FLANGES_STANDARD" name="FLANGES_STANDARD" #FLANGES_STANDARD="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictFlangesStd" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="FLANGES_LEVEL">法兰等级</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.FLANGES_LEVEL" name="FLANGES_LEVEL" #FLANGES_LEVEL="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictFlangesLvl" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="BASE">底座</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.BASE" name="BASE" #BASE="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictBase" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="COUPLING_HOOD">联轴器罩</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.COUPLING_HOOD" name="COUPLING_HOOD" #COUPLING_HOOD="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictCouplingHood" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="ANCHOR_BOLT">地脚螺栓</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.ANCHOR_BOLT" name="ANCHOR_BOLT" #ANCHOR_BOLT="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictAnchorBolt" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="PAINT">油漆</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.PAINT" name="PAINT" #PAINT="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictPaint" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="SURFACE_TREATMENT">表面特殊处理</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SURFACE_TREATMENT" name="SURFACE_TREATMENT" #SURFACE_TREATMENT="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictSurfaceTreatment" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="PACKAGE">包装</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.PACKAGE" name="PACKAGE" #PACKAGE="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictPackage" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+            <label for="TRANSPORT ">运输</label>
+            <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.TRANSPORT" name="TRANSPORT" #TRANSPORT="ngModel">
+                <option [ngValue]=""></option>
+                <option *ngFor="let data of mDictTransport" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+            </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="12">
+        </div>
+    </div> 
 </nz-modal>
