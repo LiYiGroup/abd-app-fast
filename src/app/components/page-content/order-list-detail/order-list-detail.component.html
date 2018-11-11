@@ -246,7 +246,7 @@
                 <td (click)="showModal(data)">{{data.MOTOR_DEMAND}}</td>
 
                 <td (click)="showModal(data)">{{data.SEAL_FORM_NAME}}</td>
-                <td (click)="showModal(data)">{{data.SEAL_BRAND_NAME}}</td>
+                <td (click)="showModal(data)">{{data.SEAL_BRAND_SHOW}}</td>
 
                 <td (click)="showModal(data)">{{data.ROLLER_BRAND_NAME}}</td>
                 <td (click)="showModal(data)">{{data.COUPLING_NAME}}</td>
@@ -277,6 +277,11 @@
             </tr>
         </tbody>
     </nz-table>
+    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
+        <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
+            <button nz-button nzType="primary" type="button" (click)="jumpToBOM()">BOM</button>
+        </div>
+    </div>
     <br>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">  
         <div nz-col class="gutter-row" nzSpan="24">
@@ -380,12 +385,16 @@
                 <option *ngFor="let data of mDictSealForm" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
             </select>
         </div>
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="SEAL_BRAND">密封/液下深度-品牌/其他</label>
             <select nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SEAL_BRAND" name="SEAL_BRAND" #SEAL_BRAND="ngModel">
                 <option [ngValue]=""></option>
                 <option *ngFor="let data of mDictSealBrand" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
             </select>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="3">
+            <label for="SEAL_BRAND_MANUAL"></label>
+            <input nz-input maxlength="50" [(ngModel)]="currentBumpInfo.SEAL_BRAND_MANUAL" name="SEAL_BRAND_MANUAL" #SEAL_BRAND_MANUAL="ngModel">
         </div>
     </div>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">

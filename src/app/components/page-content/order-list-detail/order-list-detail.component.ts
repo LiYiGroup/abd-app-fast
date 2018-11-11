@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrderListDetailFormModel, OrderListDetailTableModel } from '../../../models/order-list-detail.model';
 import { mDict } from '../../../models/m-dict';
+import { OrderDetailListTableModel } from '../../../models/order-list.model';
 import { OrderListAttachmentTableModel } from '../../../models/order-list-attachment.model';
 import { OrderListDetailService } from './order-list-detail.service';
 import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-detail-list',
@@ -15,7 +17,7 @@ import { Location } from '@angular/common';
 })
 export class OrderListDetailComponent implements OnInit {
 
-  constructor(private orderListDetailService: OrderListDetailService, private message: NzMessageService, private location: Location, private route: ActivatedRoute) { }
+  constructor(private orderListDetailService: OrderListDetailService, private message: NzMessageService, public router: Router, private location: Location, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getMdictInfo();
@@ -212,6 +214,20 @@ export class OrderListDetailComponent implements OnInit {
     const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
     if (orderNo !== undefined && orderNo !== null) {
       this.orderListDetailService.getOrderListAttachment(orderNo).subscribe((data) => (this.orderListAttachment = data), error => this.error = error);
+    }
+  }
+
+  jumpToBOM() {
+    if (this.orderListDetailTableCheckedData[0] == undefined) {
+      return false;
+    } else {
+      this.router.navigate(['/order-list/bom'], {
+        queryParams: {
+          // 同时勾选多个时，进入第一个的泵信息
+          orderNo: this.orderListDetailTableCheckedData[0].ORDER_NO,
+          bumpId: this.orderListDetailTableCheckedData[0].BUMP_ID
+        }
+      });
     }
   }
 }

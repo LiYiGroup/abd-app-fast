@@ -97,6 +97,9 @@ export interface OrderDetailListTableModel {
     SURFACE_TREATMENT_NAME: String;
     PACKAGE_NAME: String;
     TRANSPORT_NAME: String;
+    
+    SEAL_BRAND_MANUAL: String;
+    SEAL_BRAND_SHOW: String;
     // GRID
     checked: Boolean;
     disabled: Boolean;
