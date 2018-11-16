@@ -7,6 +7,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { OrderListDetailFormModel, OrderListDetailTableModel } from '../../../models/order-list-detail.model';
 import { mDict } from '../../../models/m-dict';
 import { OrderListAttachmentTableModel } from '../../../models/order-list-attachment.model';
+import { AccessoriesTemplateModel} from '../../../models/accessories-template.model'; 
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
@@ -17,6 +18,7 @@ export class OrderListDetailService {
   orderListDetailForm = 'http://localhost:53366/api/orderListDetailForm/';
   orderListAttachment = 'http://localhost:53366/api/OrderListAttachment/';
   orderListDetailTable = 'http://localhost:53366/api/orderListDetailTable/';
+  accessoriesTemplate = 'http://localhost:53366/api/accessoriestemplate/';
   constructor(private http: HttpClient) { }
 
   getOrderListDetailForm(orderNo: String) {
@@ -27,8 +29,16 @@ export class OrderListDetailService {
     return this.http.get<Array<OrderListDetailTableModel>>(this.orderListDetailTable + orderNo.replace("/", "|SLASH|")).pipe(retry(3), catchError(this.handleError));
   }
 
+  getAccessoriesTemplate(orderNo: String) {
+    return this.http.get<Array<AccessoriesTemplateModel>>(this.accessoriesTemplate + orderNo.replace("/", "|SLASH|")).pipe(retry(3), catchError(this.handleError));
+  }
+
   delOrderListDetailTableData(orderNo: string, bumpIdList: String[]) {
     return this.http.delete<any>(this.orderListDetailTable + orderNo + "|DASH|" + bumpIdList.toString()).pipe(catchError(this.handleError));
+  }
+
+  delAccessoriesTemplateData(SeqID: String) {
+    return this.http.delete<any>(this.accessoriesTemplate + SeqID ).pipe(catchError(this.handleError));
   }
 
   saveOrderListDetailForm(orderListDetailFormModel: any) {
@@ -41,6 +51,10 @@ export class OrderListDetailService {
 
   saveOrderListDetailTable(currentBumpInfo: any) {
     return this.http.post<any>(this.orderListDetailTable, this.checkInput(JSON.stringify(currentBumpInfo)), httpOptions).pipe(retry(3), catchError(this.handleError));
+  }
+
+  saveAccessoriesTemplateTable(currentAccTemp: any) {
+    return this.http.post<any>(this.accessoriesTemplate, this.checkInput(JSON.stringify(currentAccTemp)), httpOptions).pipe(retry(3), catchError(this.handleError));
   }
 
   checkInput(orderListDetailFormModel: string) {

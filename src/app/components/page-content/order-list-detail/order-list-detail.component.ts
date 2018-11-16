@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrderListDetailFormModel, OrderListDetailTableModel } from '../../../models/order-list-detail.model';
 import { mDict } from '../../../models/m-dict';
-import { OrderDetailListTableModel } from '../../../models/order-list.model';
+import { AccessoriesTemplateModel } from '../../../models/accessories-template.model';
 import { OrderListAttachmentTableModel } from '../../../models/order-list-attachment.model';
 import { OrderListDetailService } from './order-list-detail.service';
 import { ActivatedRoute } from '@angular/router';
@@ -24,8 +24,17 @@ export class OrderListDetailComponent implements OnInit {
     this.getOrderListDetailForm();
     this.getOrderListDetailTable();
     this.getOrderListAttachment();
+    this.getAccessoriesTemplate();
+/*     this.message.success(this.orderListDetailTableData.length.toString());
+    for (var i = 0; i < this.orderListDetailTableData.length; i++) {
+      this.message.success("1");
+      this.OrderListDetail_AMT = this.OrderListDetail_AMT + this.orderListDetailTableData[i].AMOUNT;
+    }
+    this.message.success(this.OrderListDetail_AMT.toString()); */
   }
 
+/*   OrderListDetail_AMT = 0;
+  AccessoriesTemp_AMT = 0; */
   // MODEL
   isVisible = false;
   isOkLoading = false;
@@ -56,6 +65,35 @@ export class OrderListDetailComponent implements OnInit {
     this.isVisible = true;
   }
 
+  // MODEL
+  isVisibleAcc = false;
+  isOkLoadingAcc = false;
+
+  //IS UPDATE FLG
+  isUpdateAcc = false;
+  currentAccInfo = new AccessoriesTemplateModel();
+  showModalAcc(currentData: any): void {
+    if (currentData == null) {
+      // INSERT
+      currentData = new AccessoriesTemplateModel();
+      var orderNo = this.route.snapshot.paramMap.get('orderNo');
+      if (orderNo == null || orderNo == undefined) {
+        // NEW ORDER, GET ORDER FROM FORM
+        if (this.accessoriesTemplateFormModel.ORDER_NO == null || this.accessoriesTemplateFormModel.ORDER_NO == undefined) {
+          // ERROR MSG HERE TODO..
+          return;
+        } else {
+          currentData.ORDER_NO = this.accessoriesTemplateFormModel.ORDER_NO;
+        }
+      } else {
+        currentData.ORDER_NO = orderNo;
+      }
+    }
+    // EDIT
+    this.currentAccInfo = currentData;
+    this.isVisibleAcc = true;
+  }
+
   handleOk(): void {
     this.isOkLoading = true;
     this.saveOrderListDetailTable();
@@ -70,6 +108,20 @@ export class OrderListDetailComponent implements OnInit {
     this.isVisible = false;
   }
 
+  handleOkAcc(): void {
+    this.isOkLoadingAcc = true;
+    this.saveAccessoriesTemplateTable();
+    window.setTimeout(() => {
+      this.isVisibleAcc = false;
+      this.isOkLoadingAcc = false;
+    }, 1500);
+  }
+
+  handleCancelAcc(): void {
+    this.getAccessoriesTemplate();
+    this.isVisibleAcc = false;
+  }
+
   // ERROR
   error: any;
 
@@ -77,6 +129,7 @@ export class OrderListDetailComponent implements OnInit {
   orderListDetailFormModel = new OrderListDetailFormModel();
   orderListSearchSubmitData = {};
 
+  accessoriesTemplateFormModel = new AccessoriesTemplateModel();
   // ORDER DETAIL LIST TABLE
   orderListDetailTableAllChecked = false;
   orderListDetailTableIndeterminate = false;
@@ -84,9 +137,20 @@ export class OrderListDetailComponent implements OnInit {
   orderListDetailTableCheckedData = [];
   orderListDetailTableData: Array<OrderListDetailTableModel>;
 
+  accessoriesTemplateTableAllChecked = false;
+  accessoriesTemplateTableIndeterminate = false;
+  accessoriesTemplateTableDisplayData = [];
+  accessoriesTemplateTableCheckedData = [];
+  accessoriesTemplateTableData: Array<AccessoriesTemplateModel>;
+
   orderDetailListCurrentPageDataChange($event: Array<any>): void {
     this.orderListDetailTableDisplayData = $event;
     this.refreshOrderDetailListStatus();
+  }
+
+  accessoriesTemplateCurrentPageDataChange($event: Array<any>): void {
+    this.accessoriesTemplateTableDisplayData = $event;
+    this.refreshaccessoriesTemplateStatus();
   }
 
   refreshOrderDetailListStatus(): void {
@@ -97,6 +161,14 @@ export class OrderListDetailComponent implements OnInit {
     this.orderListDetailTableCheckedData = this.orderListDetailTableDisplayData.filter(e => e.checked);
   }
 
+  refreshaccessoriesTemplateStatus(): void {
+    const allChecked = this.accessoriesTemplateTableDisplayData.filter(value => !value.disabled).every(value => value.checked === true);
+    const allUnChecked = this.accessoriesTemplateTableDisplayData.filter(value => !value.disabled).every(value => !value.checked);
+    this.accessoriesTemplateTableAllChecked = allChecked;
+    this.accessoriesTemplateTableIndeterminate = (!allChecked) && (!allUnChecked);
+    this.accessoriesTemplateTableCheckedData = this.accessoriesTemplateTableDisplayData.filter(e => e.checked);
+  }
+
   orderDetailListCheckAll(value: boolean): void {
     this.orderListDetailTableDisplayData.forEach(data => {
       if (!data.disabled) {
@@ -104,6 +176,15 @@ export class OrderListDetailComponent implements OnInit {
       }
     });
     this.refreshOrderDetailListStatus();
+  }
+
+  accessoriesTemplateCheckAll(value: boolean): void {
+    this.accessoriesTemplateTableDisplayData.forEach(data => {
+      if (!data.disabled) {
+        data.checked = value;
+      }
+    });
+    this.refreshaccessoriesTemplateStatus();
   }
 
   getOrderListDetailForm(): any {
@@ -122,7 +203,14 @@ export class OrderListDetailComponent implements OnInit {
       this.orderListDetailService.getOrderListDetailTable(orderNo).subscribe((data) => (this.orderListDetailTableData = data), error => this.error = error);
       this.isUpdate = true;
     }
+  }
 
+  getAccessoriesTemplate(): any {
+    const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
+    if (orderNo !== undefined && orderNo !== null) {
+      this.orderListDetailService.getAccessoriesTemplate(orderNo).subscribe((data) => (this.accessoriesTemplateTableData = data), error => this.error = error);
+    }
+    this.isUpdateAcc = true;
   }
 
   deleteOrderListDetailTableData(bumpItem: any) {
@@ -144,6 +232,17 @@ export class OrderListDetailComponent implements OnInit {
     }
   }
 
+  deleteAccessoriesTemplateTableData(AccItem: any) {
+    const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
+
+    if (AccItem == undefined) {
+      if (this.accessoriesTemplateTableCheckedData.length > 0) {
+
+        this.orderListDetailService.delAccessoriesTemplateData(this.accessoriesTemplateTableCheckedData[0].SEQ_ID).subscribe(delRes => { this.message.success('删除成功！', { nzDuration: 1000 }); this.getAccessoriesTemplate() }, error => this.error = error);
+      }
+    }
+  }
+
   saveOrderListDetailForm(orderListDetailFormModel: any, orderListAttachment: any) {
     orderListAttachment.ORDER_NO = orderListDetailFormModel.ORDER_NO;
     this.orderListDetailService.saveOrderListAttachment(orderListAttachment).subscribe((data) => { (this.message.success('随货资料保存成功！', { nzDuration: 1000 })); this.location.back(); }, error => this.error = error);
@@ -152,6 +251,10 @@ export class OrderListDetailComponent implements OnInit {
 
   saveOrderListDetailTable() {
     this.orderListDetailService.saveOrderListDetailTable(this.currentBumpInfo).subscribe((data) => (this.getOrderListDetailTable()), error => console.log(error));
+  }
+
+  saveAccessoriesTemplateTable() {
+    this.orderListDetailService.saveAccessoriesTemplateTable(this.currentAccInfo).subscribe((data) => (this.getAccessoriesTemplate()), error => console.log(error));
   }
 
   mDictDebug = new mDict();
