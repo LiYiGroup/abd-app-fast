@@ -33,6 +33,26 @@ export class BasicAndSealModel {
     // 轴承其他信息
     BEARING_OTHER_INFO: String;
 
+
+    //2018-11-13新增    
+    
+    MATERIAL_BUMP:String;	
+	MATERIAL_FAN:String;	
+    MATERIAL_ROLLER :String;	
+    SEAL_FORM:String;
+	SEAL_BRAND :String;	
+    SEAL_BRAND_MANUAL:String;
+	DENSITY:String;
+    FLANGE_LEVEL :String;	
+        
+    DOUBLE_SEAL_PRESSURE:Number;					
+    SERIES:String;		
+    MAIN_SHAFT_FORM:String;			
+    PUMP_STEERING:String;			
+    ASSEMBLE_DIRECTION:String;			
+    LINE_LOCATION_DESCRIPTION:String;			
+    DRAWING_CONFIRM:String;					
+    LUBRICATING_FORM:String;
 }
 
 export class ComponentListTableModel {

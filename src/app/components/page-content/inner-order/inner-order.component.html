@@ -46,16 +46,25 @@
       <label for="WORKING_PRESSURE">工作压力</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input type="number" [(ngModel)]="basicAndSealModel.WORKING_PRESSURE" name="WORKING_PRESSURE" #WORKING_PRESSURE="ngModel">
+      <input nz-input type="number" [(ngModel)]="orderListDetailTableModel.WORKING_PRESSURE" name="WORKING_PRESSURE" #WORKING_PRESSURE="ngModel" disabled>
     </div>
   </div>
   <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" >
     <div nz-col class="gutter-row" nzSpan="4">
       <label for="TEST_PRESSURE">装配完毕泵头测试压力</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
       <input nz-input type="number" [(ngModel)]="basicAndSealModel.TEST_PRESSURE" name="TEST_PRESSURE" #TEST_PRESSURE="ngModel">
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle"  >
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="DOUBLE_SEAL_PRESSURE">双端面机封腔试验压力</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input type="number" [(ngModel)]="basicAndSealModel.DOUBLE_SEAL_PRESSURE" name="DOUBLE_SEAL_PRESSURE" #DOUBLE_SEAL_PRESSURE="ngModel">
     </div>
   </div>
   <br>
@@ -73,7 +82,16 @@
       <label for="FLANGE_STANDARD">法兰标准</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.FLANGE_STANDARD" name="FLANGE_STANDARD" #FLANGE_STANDARD="ngModel">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.FLANGE_STANDARD" name="FLANGE_STANDARD" #FLANGE_STANDARD="ngModel" disabled>
+    </div>
+  </div>
+  <br>
+   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="FLANGE_LEVEL">法兰压力等级</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.FLANGE_LEVEL" name="FLANGE_LEVEL" #FLANGE_LEVEL="ngModel" disabled>
     </div>
   </div>
   <br>
@@ -97,19 +115,27 @@
   <br>
   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <div nz-col class="gutter-row" nzSpan="4">
-      <label for="NPSH">装置汽蚀余量</label>
+      <label for="CAVITATION_ALLOWANCE">装置汽蚀余量</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input type="number" [(ngModel)]="basicAndSealModel.NPSH" name="NPSH" #NPSH="ngModel">
+      <input nz-input type="number" [(ngModel)]="orderListDetailTableModel.CAVITATION_ALLOWANCE" name="CAVITATION_ALLOWANCE" #CAVITATION_ALLOWANCE="ngModel" disabled>
     </div>
   </div>
   <br>
   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <div nz-col class="gutter-row" nzSpan="4">
-      <label for="BUMP_SPEED">泵实际转速</label>
+      <label for="ACTUAL_BUMP_SPEED">泵实际转速</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input type="number" [(ngModel)]="basicAndSealModel.BUMP_SPEED" name="BUMP_SPEED" #BUMP_SPEED="ngModel">
+      <input nz-input type="number" [(ngModel)]="orderListDetailTableModel.ACTUAL_BUMP_SPEED" name="ACTUAL_BUMP_SPEED" #ACTUAL_BUMP_SPEED="ngModel" disabled>
+    </div>
+  </div>
+  <div  nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="MpvMpeMph()" >
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="SERIES">级数</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input type="number" [(ngModel)]="basicAndSealModel.SERIES" name="SERIES" #SERIES="ngModel">
     </div>
   </div>
   <br>
@@ -124,10 +150,37 @@
   <br>
   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <div nz-col class="gutter-row" nzSpan="4">
-      <label for="MEDIA">介质</label>
+      <label for="MEDIUM">介质</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.MEDIA" name="MEDIA" #MEDIA="ngModel">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.MEDIUM" name="MEDIUM" #MEDIUM="ngModel" disabled>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="MATERIAL_BUMP">泵体材质</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.MATERIAL_BUMP" name="MEDIUM" #MATERIAL_BUMP="ngModel" disabled>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="MATERIAL_FAN">叶轮材质</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.MATERIAL_FAN" name="MATERIAL_FAN" #MATERIAL_FAN="ngModel" disabled>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="MATERIAL_ROLLER">轴材质</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.MATERIAL_ROLLER" name="MATERIAL_ROLLER" #MATERIAL_ROLLER="ngModel" disabled>
     </div>
   </div>
   <br>
@@ -136,7 +189,7 @@
       <label for="TEMPERATURE">温度</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input type="number" [(ngModel)]="basicAndSealModel.TEMPERATURE" name="TEMPERATURE" #TEMPERATURE="ngModel">
+      <input nz-input type="number" [(ngModel)]="orderListDetailTableModel.TEMPERATURE" name="TEMPERATURE" #TEMPERATURE="ngModel" disabled>
     </div>
   </div>
   <br>
@@ -145,16 +198,25 @@
       <label for="VISCOSITY">粘度</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input type="number" [(ngModel)]="basicAndSealModel.VISCOSITY" name="VISCOSITY" #VISCOSITY="ngModel">
+      <input nz-input type="number" [(ngModel)]="orderListDetailTableModel.VISCOSITY" name="VISCOSITY" #VISCOSITY="ngModel" disabled>
     </div>
   </div>
   <br>
   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <div nz-col class="gutter-row" nzSpan="4">
-      <label for="INLET_PRESSURE">入口压力</label>
+      <label for="DENSITY">密度</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input type="number" [(ngModel)]="basicAndSealModel.INLET_PRESSURE" name="INLET_PRESSURE" #INLET_PRESSURE="ngModel">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.DENSITY" name="DENSITY" #DENSITY="ngModel" disabled>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="IN_PRESSURE">入口压力</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input type="number" [(ngModel)]="orderListDetailTableModel.IN_PRESSURE" name="IN_PRESSURE" #IN_PRESSURE="ngModel" disabled>
     </div>
   </div>
   <br>
@@ -163,7 +225,7 @@
       <label for="PARTICULATES">含颗粒情况</label>
     </div>
     <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.PARTICULATES" name="PARTICULATES" #PARTICULATES="ngModel">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.PARTICULATES" name="PARTICULATES" #PARTICULATES="ngModel" disabled>
     </div>
   </div>
   <nz-divider nzType="horizontal"></nz-divider>
@@ -177,6 +239,96 @@
     <div nz-col class="gutter-row" nzSpan="20"></div>
   </div>
   <br>
+
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="VpSvpBcSbc()">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="MAIN_SHAFT_FORM">主轴形式</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <nz-select [(ngModel)]="basicAndSealModel.MAIN_SHAFT_FORM" name="MAIN_SHAFT_FORM" #MAIN_SHAFT_FORM="ngModel" nzPlaceHolder="请选择主轴形式...">
+        <nz-option nzValue="电机加长轴" nzLabel="电机加长轴"></nz-option>
+        <nz-option nzValue="电机和泵双轴硬联接" nzLabel="电机和泵双轴硬联接"></nz-option>
+        <nz-option nzValue="泵带独立轴承悬架结构" nzLabel="泵带独立轴承悬架结构"></nz-option>>
+      </nz-select>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="Hds()">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="PUMP_STEERING">泵转向</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <nz-select [(ngModel)]="basicAndSealModel.PUMP_STEERING" name="PUMP_STEERING" #PUMP_STEERING="ngModel" nzPlaceHolder="请选择泵转向...">
+        <nz-option nzValue="从电机端看向泵：泵进水侧在右边" nzLabel="从电机端看向泵：泵进水侧在右边"></nz-option>
+        <nz-option nzValue="从电机端看向泵：泵进水侧在左边" nzLabel="从电机端看向泵：泵进水侧在左边"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="MpeMph()">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="ASSEMBLE_DIRECTION">装配进出口方向</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <nz-select [(ngModel)]="basicAndSealModel.ASSEMBLE_DIRECTION" name="ASSEMBLE_DIRECTION" #ASSEMBLE_DIRECTION="ngModel" nzPlaceHolder="请选择装配进出口方向...">
+        <nz-option nzValue="上进上出" nzLabel="上进上出"></nz-option>
+        <nz-option nzValue="上进右出" nzLabel="上进右出"></nz-option>
+        <nz-option nzValue="上进左出" nzLabel="上进左出"></nz-option>
+        <nz-option nzValue="左进上出" nzLabel="左进上出"></nz-option>
+        <nz-option nzValue="左进左出" nzLabel="左进左出"></nz-option>
+        <nz-option nzValue="左进右出" nzLabel="左进右出"></nz-option>
+        <nz-option nzValue="右进上出" nzLabel="右进上出"></nz-option>
+        <nz-option nzValue="右进左出" nzLabel="右进左出"></nz-option>
+        <nz-option nzValue="右进右出" nzLabel="右进右出"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="LINE_LOCATION_DESCRIPTION">电机接线盒和进线孔位置描述</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input  [(ngModel)]="basicAndSealModel.LINE_LOCATION_DESCRIPTION" name="LINE_LOCATION_DESCRIPTION" #LINE_LOCATION_DESCRIPTION="ngModel">
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="DRAWING_CONFIRM">图纸确认</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <nz-select [(ngModel)]="basicAndSealModel.DRAWING_CONFIRM" name="DRAWING_CONFIRM" #DRAWING_CONFIRM="ngModel" nzPlaceHolder="请确认图纸...">
+        <nz-option nzValue="需要" nzLabel="需要"></nz-option>
+        <nz-option nzValue="不需要" nzLabel="不需要"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <br>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="SEAL_TYPE">密封形式</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.SEAL_FORM" name="SEAL_FORM" #SEAL_FORM="ngModel" disabled>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="SEAL_TYPE">密封品牌</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.SEAL_BRAND" name="SEAL_BRAND" #SEAL_BRAND="ngModel" disabled>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="BySby()">
+    <div nz-col class="gutter-row" nzSpan="4">
+      <label for="SEAL_BRAND_MANUAL">液下深度</label>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="20">
+      <input nz-input  [(ngModel)]="orderListDetailTableModel.SEAL_BRAND_MANUAL" name="SEAL_BRAND_MANUAL" #SEAL_BRAND_MANUAL="ngModel" disabled >
+    </div>
+  </div>
   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
     <div nz-col class="gutter-row" nzSpan="4">
       <label for="SEAL_TYPE">密封</label>
@@ -192,737 +344,709 @@
     </div>
   </div>
   <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"></div>
-    <div nz-col class="gutter-row" nzSpan="20" [ngSwitch]="basicAndSealModel.SEAL_TYPE">
-        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngSwitchCase="'OTHER'">
-          <div nz-col class="gutter-row" nzSpan="4">
-            <label for="OTHER_SEAL_PROVIDER">制造商</label>
+      <div nz-col class="gutter-row" nzSpan="4"></div>
+      <div nz-col class="gutter-row" nzSpan="20" [ngSwitch]="basicAndSealModel.SEAL_TYPE">
+          <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngSwitchCase="'OTHER'">
+            <div nz-col class="gutter-row" nzSpan="4">
+              <label for="OTHER_SEAL_PROVIDER">制造商</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+              <input nz-input maxlength="50"  [(ngModel)]="basicAndSealModel.OTHER_SEAL_PROVIDER" name="OTHER_SEAL_PROVIDER" #OTHER_SEAL_PROVIDER="ngModel">
+            </div>
+            <div nz-col class="gutter-row" nzSpan="4">
+              <label for="OTHER_SEAL_MODEL">型号</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+              <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.OTHER_SEAL_MODEL" name="OTHER_SEAL_MODEL" #OTHER_SEAL_MODEL="ngModel">
+            </div>
           </div>
-          <div nz-col class="gutter-row" nzSpan="8">
-            <input nz-input maxlength="50"  [(ngModel)]="basicAndSealModel.OTHER_SEAL_PROVIDER" name="OTHER_SEAL_PROVIDER" #OTHER_SEAL_PROVIDER="ngModel">
+          <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngSwitchCase="'OTHER'">
+            <div nz-col class="gutter-row" nzSpan="4">
+              <label for="OTHER_SEAL_INFO">其它信息</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="20">
+              <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.OTHER_SEAL_INFO" name="OTHER_SEAL_INFO" #OTHER_SEAL_INFO="ngModel">
+            </div>
           </div>
-          <div nz-col class="gutter-row" nzSpan="4">
-            <label for="OTHER_SEAL_MODEL">型号</label>
+          <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngSwitchCase="'PACKING'">
+            <div nz-col class="gutter-row" nzSpan="4">
+              <label for="SEAL_MODEL">型号</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+              <input nz-input maxlength="50"  [(ngModel)]="basicAndSealModel.SEAL_MODEL" name="SEAL_MODEL" #SEAL_MODEL="ngModel">
+            </div>
+            <div nz-col class="gutter-row" nzSpan="4">
+              <label for="SEAL_MATERIAL">材质</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+              <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.SEAL_MATERIAL" name="SEAL_MATERIAL" #SEAL_MATERIAL="ngModel">
+            </div>
           </div>
-          <div nz-col class="gutter-row" nzSpan="8">
-            <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.OTHER_SEAL_MODEL" name="OTHER_SEAL_MODEL" #OTHER_SEAL_MODEL="ngModel">
+          <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_SINGLE')
+          || (basicAndSealModel.SEAL_TYPE=='ABD_DOUBLE') || (basicAndSealModel.SEAL_TYPE=='ABD_INTEGRATE')">
+            <div nz-col class="gutter-row" nzSpan="4">
+              <label for="SEAL_MODEL">型号</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+              <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.SEAL_MODEL" name="SEAL_MODEL" #SEAL_MODEL="ngModel">
+            </div>
+            <div nz-col class="gutter-row" nzSpan="4">
+              <button nz-button nzType="primary" type="button" (click)="showABDSingleTableDataModal()">材料配置库手动选择</button>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8"></div>
           </div>
-        </div>
-        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngSwitchCase="'OTHER'">
-          <div nz-col class="gutter-row" nzSpan="4">
-            <label for="OTHER_SEAL_INFO">其它信息</label>
+          <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+            <div nz-col class="gutter-row" nzSpan="24">
+            {{basicAndSealModel.ABD_SEAL_INFO}}
+            </div>
           </div>
-          <div nz-col class="gutter-row" nzSpan="20">
-            <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.OTHER_SEAL_INFO" name="OTHER_SEAL_INFO" #OTHER_SEAL_INFO="ngModel">
-          </div>
-        </div>
-        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngSwitchCase="'PACKING'">
-          <div nz-col class="gutter-row" nzSpan="4">
-            <label for="SEAL_MODEL">型号</label>
-          </div>
-          <div nz-col class="gutter-row" nzSpan="8">
-            <input nz-input maxlength="50"  [(ngModel)]="basicAndSealModel.SEAL_MODEL" name="SEAL_MODEL" #SEAL_MODEL="ngModel">
-          </div>
-          <div nz-col class="gutter-row" nzSpan="4">
-            <label for="SEAL_MATERIAL">材质</label>
-          </div>
-          <div nz-col class="gutter-row" nzSpan="8">
-            <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.SEAL_MATERIAL" name="SEAL_MATERIAL" #SEAL_MATERIAL="ngModel">
-          </div>
-        </div>
-        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_SINGLE')
-        || (basicAndSealModel.SEAL_TYPE=='ABD_DOUBLE') || (basicAndSealModel.SEAL_TYPE=='ABD_INTEGRATE')">
-          <div nz-col class="gutter-row" nzSpan="4">
-            <label for="SEAL_MODEL">型号</label>
-          </div>
-          <div nz-col class="gutter-row" nzSpan="8">
-            <input nz-input maxlength="50" [(ngModel)]="basicAndSealModel.SEAL_MODEL" name="SEAL_MODEL" #SEAL_MODEL="ngModel">
-          </div>
-          <div nz-col class="gutter-row" nzSpan="4">
-            <button nz-button nzType="primary" type="button" (click)="showABDSingleTableDataModal()">材料配置库手动选择</button>
-          </div>
-          <div nz-col class="gutter-row" nzSpan="8"></div>
+          <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+            <div nz-col class="gutter-row" nzSpan="4">
+              <label for="SEAL_COOLER">机封冷却器</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="20">
+                <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.SEAL_COOLER" name="SEAL_COOLER" #SEAL_COOLER="ngModel">
+            </div>
         </div>
         <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-          <div nz-col class="gutter-row" nzSpan="24">
-          {{basicAndSealModel.ABD_SEAL_INFO}}
+          <div nz-col class="gutter-row" nzSpan="4"></div>
+          <div nz-col class="gutter-row" nzSpan="20">
+            <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+              <div nz-col class="gutter-row" nzSpan="4">
+                <label for="SEAL_COOLER">型号</label>
+              </div>
+              <div nz-col class="gutter-row" nzSpan="20" [ngSwitch]="orderListDetailTableModel.SEAL_COOLER">
+                <!-- Add additional '' for the case string.-->
+                <div *ngSwitchCase="'需要'"><input nz-input maxlength="50"  [(ngModel)]="basicAndSealModel.SEAL_COOLER_MODEL" name="SEAL_COOLER_MODEL" #SEAL_COOLER_MODEL="ngModel" disabled></div>
+                <div *ngSwitchDefault><input nz-input disabled></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="Mvp()">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="INSTALL_DIRECTION">装配进出口方向</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <nz-select [(ngModel)]="basicAndSealModel.INSTALL_DIRECTION" name="INSTALL_DIRECTION" #INSTALL_DIRECTION="ngModel" nzAllowClear nzPlaceHolder="请选择进出口方向...">
+          <nz-option nzValue="0" nzLabel="0°"></nz-option>
+          <nz-option nzValue="90" nzLabel="90°"></nz-option>
+          <nz-option nzValue="180" nzLabel="180°"></nz-option>
+          <nz-option nzValue="270" nzLabel="270°"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="Mvp()">
+      <div nz-col class="gutter-row" nzSpan="4"></div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <img src="/assets/install_direction.png">
+      </div>
+    </div>
+    <br>
+    
+  
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="ROLLER_BRAND">轴承品牌</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.ROLLER_BRAND" name="ROLLER_BRAND" #ROLLER_BRAND="ngModel" disabled>
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="2">
+        <label for="BEARING_SPEC">轴承型号</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="6">
+        <input nz-input maxlength="50" [(ngModel)]="bumpInfoInGrid.SPEC" name="SPEC" #BEARING_SPEC="ngModel" disabled>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="2">
+        <label for="BEARING_NUM">轴承数量</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="6">
+        <input nz-input maxlength="50" [(ngModel)]="bumpInfoInGrid.QTY" name="BEARING_NUM" #BEARING_NUM="ngModel" disabled>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="2">
+        <label for="LUBRICATING_FORM">润滑方式</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="6">
+        <nz-select [(ngModel)]="basicAndSealModel.LUBRICATING_FORM" name="LUBRICATING_FORM" #LUBRICATING_FORM="ngModel" nzPlaceHolder="请选择润滑方式...">
+          <nz-option nzValue="油脂润滑" nzLabel="油脂润滑"></nz-option>
+          <nz-option nzValue="稀油润滑" nzLabel="稀油润滑"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <br>
+    <nz-upload
+    [nzShowUploadList]="false"
+    (nzChange)="handleUpload($event)"
+    nzAction="http://localhost:53366/api/BOMUpload/">
+      <button nz-button type="button" nzType="primary">从明细表导入</button>
+    </nz-upload>
+    <br>
+    <br>
+    <div class="grid_area">
+      <nz-table
+      #componentListSelectionTable
+      [nzData]="componentListTableData"
+      [nzPageSize]="5"
+      [nzHideOnSinglePage]="true"
+      [nzScroll]="{ x: '1500px' }"
+      nzSize="small">
+        <thead>
+          <tr>
+          <th nzWidth="100px">序号</th>
+          <th nzWidth="300px">名称</th>
+          <th nzWidth="300px">规格及代号</th>
+          <th nzWidth="300px">数量</th>
+          <th nzWidth="300px">材质</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of componentListSelectionTable.data; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{data.ITEM_NAME}}</td>
+            <td>{{data.SPEC}}</td>
+            <td>{{data.QTY}}</td>
+            <td>{{data.MATERIAL}}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4"><h3>基本件</h3></div>
+      <div nz-col class="gutter-row" nzSpan="20"></div>
+    </div>
+    <br>
+    <div class="grid_area">
+      <nz-table
+      #basicPartListSelectionTable
+      [nzData]="basicPartListTableData"
+      [nzPageSize]="5"
+      [nzHideOnSinglePage]="true"
+      [nzScroll]="{ x: '1500px' }"
+      nzSize="small">
+        <thead>
+          <tr>
+          <th nzWidth="100px">序号</th>
+          <th nzWidth="300px">名称</th>
+          <th nzWidth="300px">规格及代号</th>
+          <th nzWidth="300px">数量</th>
+          <th nzWidth="300px">材质</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicPartListSelectionTable.data; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{data.ITEM_NAME}}</td>
+            <td>{{data.SPEC}}</td>
+            <td>{{data.QTY}}</td>
+            <td>{{data.MATERIAL}}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4"><h3>其它附件</h3></div>
+      <div nz-col class="gutter-row" nzSpan="20"></div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle"  *ngIf="BsSbsHdsMpeMph()">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="BASE">底座</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.BASE" name="BASE" #BASE="ngModel" disabled>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="BsSbsHdsMpeMph()">
+      <div nz-col class="gutter-row" nzSpan="4"></div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="BASE_SPEC">型号</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="20" [ngSwitch]="orderListDetailTableModel.BASE">
+            <!-- Add additional '' for the case string.-->
+            <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>
+            <div *ngSwitchDefault><input nz-input maxlength="50"  [(ngModel)]="otherComponentModel.BASE_SPEC" name="BASE_SPEC" #BASE_SPEC="ngModel"></div>
+          </div>
+        </div>
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="orderListDetailTableModel.BASE=='特殊要求'">
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="SPECIAL_BASE_DETAIL">特殊要求详情</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="20">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SPECIAL_BASE_DETAIL" name="SPECIAL_BASE_DETAIL" #SPECIAL_BASE_DETAIL="ngModel">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="BsSbsHdsMpeMph()">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="COUPLING_HOOD">联轴器罩</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.COUPLING_HOOD" name="COUPLING_HOOD" #COUPLING_HOOD="ngModel" disabled>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="BsSbsHdsMpeMph()">
+      <div nz-col class="gutter-row" nzSpan="4"></div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="COUPLING_HOOD_SPEC">型号</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="20" [ngSwitch]="orderListDetailTableModel.COUPLING_HOOD">
+            <!-- Add additional '' for the case string.-->
+            <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>
+            <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_HOOD_SPEC" name="COUPLING_HOOD_SPEC" #COUPLING_HOOD_SPEC="ngModel"></div>
+          </div>
+        </div>
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="orderListDetailTableModel.COUPLING_HOOD=='特殊要求'">
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="SPECIAL_HOOD_TYPE_DETAIL">特殊要求详情</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="20">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50"  [(ngModel)]="otherComponentModel.SPECIAL_HOOD_TYPE_DETAIL" name="SPECIAL_HOOD_TYPE_DETAIL" #SPECIAL_HOOD_TYPE_DETAIL="ngModel">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle"   *ngIf="BsSbsHdsMpeMphBcSbc()">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="ANCHOR_BOLT">地脚螺栓</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.ANCHOR_BOLT" name="ANCHOR_BOLT" #ANCHOR_BOLT="ngModel" disabled>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="BsSbsHdsMpeMphBcSbc()">
+      <div nz-col class="gutter-row" nzSpan="4"></div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+          <div nz-col class="gutter-row" nzSpan="2">
+            <label for="ANCHOR_BOLT_SPEC">规格</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="10" [ngSwitch]="orderListDetailTableModel.ANCHOR_BOLT">
+            <!-- Add additional '' for the case string.-->
+            <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>
+            <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_SPEC" name="ANCHOR_BOLT_SPEC" #ANCHOR_BOLT_SPEC="ngModel"></div>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="2">
+            <label for="ANCHOR_BOLT_MATERIAL">材质</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="10" [ngSwitch]="orderListDetailTableModel.ANCHOR_BOLT">
+            <!-- Add additional '' for the case string.-->
+            <div *ngSwitchCase="'不需要'"><input nz-input [(ngModel)]="otherComponentModel.ANCHOR_BOLT_MATERIAL" name="ANCHOR_BOLT_MATERIAL" #ANCHOR_BOLT_MATERIAL="ngModel" disabled></div>
+            <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_MATERIAL" name="ANCHOR_BOLT_MATERIAL" #ANCHOR_BOLT_MATERIAL="ngModel"></div>
           </div>
         </div>
         <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
           <div nz-col class="gutter-row" nzSpan="4">
-            <label for="NEED_SEAL_COOLER_FLG">机封冷却器</label>
+            <label for="ANCHOR_BOLT_EXTRA_NUT_SPEC">配套螺母规格</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="4" [ngSwitch]="orderListDetailTableModel.ANCHOR_BOLT">
+            <!-- Add additional '' for the case string.-->
+            <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>
+            <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_EXTRA_NUT_SPEC" name="ANCHOR_BOLT_EXTRA_NUT_SPEC" #ANCHOR_BOLT_EXTRA_NUT_SPEC="ngModel"></div>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="ANCHOR_BOLT_EXTRA_PAD_SPEC">配套垫片规格</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="4" [ngSwitch]="orderListDetailTableModel.ANCHOR_BOLT">
+            <!-- Add additional '' for the case string.-->
+            <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>
+            <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_EXTRA_PAD_SPEC" name="ANCHOR_BOLT_EXTRA_PAD_SPEC" #ANCHOR_BOLT_EXTRA_PAD_SPEC="ngModel"></div>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="ANCHOR_BOLT_NUM">数量</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="4" [ngSwitch]="orderListDetailTableModel.ANCHOR_BOLT">
+            <!-- Add additional '' for the case string.-->
+            <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>
+            <div *ngSwitchDefault><input nz-input type="number" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_NUM" name="ANCHOR_BOLT_NUM" #ANCHOR_BOLT_NUM="ngModel"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="BsSbsHdsMpeMph()">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="COUPLING">联轴器</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.COUPLING" name="COUPLING" #COUPLING="ngModel" disabled>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="BsSbsHdsMpeMph()">
+      <div nz-col class="gutter-row" nzSpan="4"></div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="orderListDetailTableModel.COUPLING" disabled>
+          <!--ABD标配弹性柱销-->
+          <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'ABD标配弹性柱销'">
+            <label for="COUPLING_BUMP_COUPLET">泵联型号</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'ABD标配弹性柱销'">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_BUMP_COUPLET" name="COUPLING_BUMP_COUPLET" #COUPLING_BUMP_COUPLET="ngModel">
+          </div>
+          <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'ABD标配弹性柱销'">
+            <label for="COUPLING_ELECTRIC_COUPLET">电联型号</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'ABD标配弹性柱销'">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_ELECTRIC_COUPLET" name="COUPLING_ELECTRIC_COUPLET" #COUPLING_ELECTRIC_COUPLET="ngModel">
+          </div>
+          <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'ABD标配弹性柱销'">
+            <label for="COUPLING_PIN">柱销型号</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'ABD标配弹性柱销'">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_PIN" name="COUPLING_PIN" #COUPLING_PIN="ngModel">
+          </div>
+           <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'ABD标配弹性柱销'">
+            <label for="COUPLING_JUMP_RING">卡簧型号</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'ABD标配弹性柱销'">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_JUMP_RING" name="COUPLING_JUMP_RING" #COUPLING_JUMP_RING="ngModel">
+          </div>
+            <!--ABD标配加长膜片式-->
+          <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'ABD标配加长膜片式'">
+            <label for="COUPLING_PROVIDER">制造商</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'ABD标配加长膜片式'">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50"  [(ngModel)]="otherComponentModel.COUPLING_PROVIDER" name="COUPLING_PROVIDER" #COUPLING_PROVIDER="ngModel">
+          </div>
+          <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'ABD标配加长膜片式'">
+            <label for="COUPLING_SPEC">型号</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'ABD标配加长膜片式'">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_SPEC" name="COUPLING_SPEC" #COUPLING_SPEC="ngModel">
+          </div>
+          <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'ABD标配加长膜片式'">
+            <label for="COUPLING_NUM">数量</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'ABD标配加长膜片式'">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input type="number" [(ngModel)]="otherComponentModel.COUPLING_NUM" name="COUPLING_NUM" #COUPLING_NUM="ngModel">
+          </div>
+          <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'特殊要求'">
+              <label for="COUPLING_PROVIDER">制造商</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'特殊要求'">
+              <!-- Add additional '' for the case string.-->
+              <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_PROVIDER" name="COUPLING_PROVIDER" #COUPLING_PROVIDER="ngModel">
+            </div>
+            <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'特殊要求'">
+              <label for="COUPLING_SPEC">型号</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'特殊要求'">
+              <!-- Add additional '' for the case string.-->
+              <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_SPEC" name="COUPLING_SPEC" #COUPLING_SPEC="ngModel">
+            </div>
+            <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'特殊要求'">
+              <label for="COUPLING_NUM">数量</label>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'特殊要求'">
+              <!-- Add additional '' for the case string.-->
+              <input nz-input type="number" [(ngModel)]="otherComponentModel.COUPLING_NUM" name="COUPLING_NUM" #COUPLING_NUM="ngModel">
+            </div>
+        </div>
+       <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="orderListDetailTableModel.COUPLING=='特殊要求'">
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="SPECIAL_COUPLING_TYPE_DETAIL">特殊要求详情</label>
           </div>
           <div nz-col class="gutter-row" nzSpan="20">
-            <nz-select [(ngModel)]="basicAndSealModel.NEED_SEAL_COOLER_FLG" name="NEED_SEAL_COOLER_FLG" #NEED_SEAL_COOLER_FLG="ngModel" nzPlaceHolder="请选择冷却器种类...">
+            <!--  Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SPECIAL_COUPLING_TYPE_DETAIL" name="SPECIAL_COUPLING_TYPE_DETAIL" #SPECIAL_COUPLING_TYPE_DETAIL="ngModel">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf= "BsSbsHdsMpeMphBcSbcVpSvpBySbyMpv()" >
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="MOTOR_BRAND">电机</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.MOTOR_BRAND" name="MOTOR_BRAND" #MOTOR_BRAND="ngModel" disabled>
+      </div>        
+      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="otherComponentModel.MOTOR_BRAND" > 
+               <div nz-col class="gutter-row"  nzSpan="4" >
+                  <label for="MOTOR_BRAND">制造商</label>
+                </div>
+                <div nz-col class="gutter-row" nzSpan="8" >
+                    <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>  
+                    <div *ngSwitchDefault>  <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_PROVIDER" name="MOTOR_BRAND" #MOTOR_BRAND="ngModel"></div>
+                </div>
+                <div nz-col class="gutter-row"   nzSpan="4" >
+                  <label for="ELECTRIC_MOTER_POWER">功率</label>
+                </div>
+                <div nz-col class="gutter-row" nzSpan="8" >
+                    <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>  
+                    <div *ngSwitchDefault><input nz-input type="number" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_POWER" name="ELECTRIC_MOTER_POWER" #ELECTRIC_MOTER_POWER="ngModel"></div>
+                </div>
+                <div nz-col class="gutter-row" nzSpan="4" >
+                  <label for="ELECTRIC_MOTER_SPEED" >转速</label>
+                </div>
+                <div nz-col class="gutter-row" nzSpan="8" >
+                    <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>  
+                    <div *ngSwitchDefault><input nz-input type="number" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_SPEED" name="ELECTRIC_MOTER_SPEED" #ELECTRIC_MOTER_SPEED="ngModel"></div>
+                </div>
+                <div nz-col class="gutter-row"  nzSpan="4" >
+                  <label for="ELECTRIC_MOTER_PFV">相数/频率/电压</label>
+                </div>
+                <div nz-col class="gutter-row" nzSpan="8" >
+                    <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>  
+                    <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_PFV" name="ELECTRIC_MOTER_PFV" #ELECTRIC_MOTER_PFV="ngModel"></div>
+                </div>
+                <div nz-col class="gutter-row"nzSpan="2" >
+                  <label for="ELECTRIC_MOTER_EXTRA_INFO"  >特殊要求</label>
+                </div>
+                <div nz-col class="gutter-row" nzSpan="20">
+                    <div *ngSwitchCase="'不需要'"><input nz-input disabled></div>  
+                    <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_EXTRA_INFO" name="ELECTRIC_MOTER_EXTRA_INFO" #ELECTRIC_MOTER_EXTRA_INFO="ngModel"></div>
+                </div>        
+          </div>
+      </div>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4"><h2>油漆及外表颜色</h2></div>
+      <div nz-col class="gutter-row" nzSpan="20"></div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="PAINT">色标代号</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.PAINT" name="PAINT" #PAINT="ngModel" disabled>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4"></div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="orderListDetailTableModel.PAINT=='特殊要求'">
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="SPECIAL_COLOR_DETAIL">特殊要求详情</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="20">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SPECIAL_COLOR_DETAIL" name="SPECIAL_COLOR_DETAIL" #SPECIAL_COLOR_DETAIL="ngModel">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="SURFACE_TREATMENT">表面特殊处理要求</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.SURFACE_TREATMENT" name="SURFACE_TREATMENT" #SURFACE_TREATMENT="ngModel" disabled>
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="orderListDetailTableModel.SURFACE_TREATMENT">
+          <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'需要'">
+            <label for="SURFACE_TREAT_EXTRA_INFO">要求描述</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="20" *ngSwitchCase="'需要'">
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SURFACE_TREAT_EXTRA_INFO" name="SURFACE_TREAT_EXTRA_INFO" #SURFACE_TREAT_EXTRA_INFO="ngModel">
+          </div>
+        </div>
+      </div>
+    </div>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4"><h2>包装及运输</h2></div>
+      <div nz-col class="gutter-row" nzSpan="20"></div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="TRANSPORT">运输方式</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.TRANSPORT" name="TRANSPORT" #TRANSPORT="ngModel" disabled>
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="TRANSPORT_PLACE">交货地点</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.TRANSPORT_PLACE" name="TRANSPORT_PLACE" #TRANSPORT_PLACE="ngModel">
+      </div>
+    </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="PACKAGE">包装要求</label>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+          <input nz-input maxlength="50" [(ngModel)]="orderListDetailTableModel.PACKAGE" name="PACKAGE" #PACKAGE="ngModel" disabled>
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="orderListDetailTableModel.PACKAGE">
+          <br>
+          <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'出口标准包装'">
+            <label for="NEED_FUME_CERTIFICATE">重蒸证明是否需要</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="20" *ngSwitchCase="'出口标准包装'">
+            <nz-select [(ngModel)]="otherComponentModel.NEED_FUME_CERTIFICATE" name="NEED_FUME_CERTIFICATE" #NEED_FUME_CERTIFICATE="ngModel"  nzPlaceHolder="请选择是否需要重蒸证明...">
               <nz-option nzValue="NEED" nzLabel="需要"></nz-option>
               <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
             </nz-select>
           </div>
-      </div>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-        <div nz-col class="gutter-row" nzSpan="4"></div>
-        <div nz-col class="gutter-row" nzSpan="20">
-          <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-            <div nz-col class="gutter-row" nzSpan="4">
-              <label for="SEAL_COOLER_MODEL">型号</label>
-            </div>
-            <div nz-col class="gutter-row" nzSpan="20" [ngSwitch]="basicAndSealModel.NEED_SEAL_COOLER_FLG">
-              <!-- Add additional '' for the case string.-->
-              <div *ngSwitchCase="'NEED'"><input nz-input maxlength="50"  [(ngModel)]="basicAndSealModel.SEAL_COOLER_MODEL" name="SEAL_COOLER_MODEL" #SEAL_COOLER_MODEL="ngModel"></div>
-              <div *ngSwitchDefault><input nz-input disabled></div>
-            </div>
+        </div>
+        <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="orderListDetailTableModel.PACKAGE=='特殊要求'">
+          <br>
+          <div nz-col class="gutter-row" nzSpan="4">
+            <label for="SPECIAL_PACK_DETAIL">特殊要求详情</label>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="20">
+            <!-- Add additional '' for the case string.-->
+            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SPECIAL_PACK_DETAIL" name="SPECIAL_PACK_DETAIL" #SPECIAL_PACK_DETAIL="ngModel">
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="INSTALL_DIRECTION">装配进出口方向</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="basicAndSealModel.INSTALL_DIRECTION" name="INSTALL_DIRECTION" #INSTALL_DIRECTION="ngModel" nzAllowClear nzPlaceHolder="请选择进出口方向...">
-        <nz-option nzValue="0" nzLabel="0°"></nz-option>
-        <nz-option nzValue="90" nzLabel="90°"></nz-option>
-        <nz-option nzValue="180" nzLabel="180°"></nz-option>
-        <nz-option nzValue="270" nzLabel="270°"></nz-option>
-      </nz-select>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"></div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <img src="/assets/install_direction.png">
-    </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="BEARING_BRAND">轴承品牌</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-radio-group [(ngModel)]="basicAndSealModel.BEARING_BRAND" name="BEARING_BRAND" #BEARING_BRAND="ngModel">
-        <label nz-radio [ngStyle]="style" nzValue="SKF">SKF</label>
-        <label nz-radio [ngStyle]="style" nzValue="FAG">FAG</label>
-        <label nz-radio [ngStyle]="style" nzValue="NSK">NSK</label>
-        <label nz-radio [ngStyle]="style" nzValue="OTHER">其它 
-            <input nz-input maxlength="50" 
-            *ngIf="basicAndSealModel.BEARING_BRAND=='OTHER'"
-            [(ngModel)]="basicAndSealModel.BEARING_OTHER_INFO" name="BEARING_OTHER_INFO" #BEARING_OTHER_INFO="ngModel">
-        </label>
-      </nz-radio-group>
-    </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="BEARING_SPEC">轴承型号</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-      <input nz-input maxlength="50" [(ngModel)]="bumpInfoInGrid.SPEC" name="SPEC" #BEARING_SPEC="ngModel" disabled>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="BEARING_NUM">轴承数量</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-      <input nz-input maxlength="50" [(ngModel)]="bumpInfoInGrid.QTY" name="BEARING_NUM" #BEARING_NUM="ngModel" disabled>
-    </div>
-  </div>
-  <br>
-  <nz-upload
-  [nzShowUploadList]="false"
-  (nzChange)="handleUpload($event)"
-  nzAction="http://localhost:53366/api/BOMUpload/">
-    <button nz-button type="button" nzType="primary">从明细表导入</button>
-  </nz-upload>
-  <br>
-  <br>
-  <div class="grid_area">
-    <nz-table
-    #componentListSelectionTable
-    [nzData]="componentListTableData"
-    [nzPageSize]="5"
-    [nzHideOnSinglePage]="true"
-    [nzScroll]="{ x: '1500px' }"
-    nzSize="small">
-      <thead>
-        <tr>
-        <th nzWidth="100px">序号</th>
-        <th nzWidth="300px">名称</th>
-        <th nzWidth="300px">规格及代号</th>
-        <th nzWidth="300px">数量</th>
-        <th nzWidth="300px">材质</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of componentListSelectionTable.data; let i=index">
-          <td>{{i+1}}</td>
-          <td>{{data.ITEM_NAME}}</td>
-          <td>{{data.SPEC}}</td>
-          <td>{{data.QTY}}</td>
-          <td>{{data.MATERIAL}}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"><h3>基本件</h3></div>
-    <div nz-col class="gutter-row" nzSpan="20"></div>
-  </div>
-  <br>
-  <div class="grid_area">
-    <nz-table
-    #basicPartListSelectionTable
-    [nzData]="basicPartListTableData"
-    [nzPageSize]="5"
-    [nzHideOnSinglePage]="true"
-    [nzScroll]="{ x: '1500px' }"
-    nzSize="small">
-      <thead>
-        <tr>
-        <th nzWidth="100px">序号</th>
-        <th nzWidth="300px">名称</th>
-        <th nzWidth="300px">规格及代号</th>
-        <th nzWidth="300px">数量</th>
-        <th nzWidth="300px">材质</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of basicPartListSelectionTable.data; let i=index">
-          <td>{{i+1}}</td>
-          <td>{{data.ITEM_NAME}}</td>
-          <td>{{data.SPEC}}</td>
-          <td>{{data.QTY}}</td>
-          <td>{{data.MATERIAL}}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"><h3>其它附件</h3></div>
-    <div nz-col class="gutter-row" nzSpan="20"></div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="BASE_TYPE">底座</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.BASE_TYPE" name="BASE_TYPE" #BASE_TYPE="ngModel" nzPlaceHolder="请选择底座种类...">
-        <nz-option nzValue="ABD_BASE" nzLabel="ABD标准底座"></nz-option>
-        <nz-option nzValue="SPECIAL_BASE" nzLabel="特殊要求"></nz-option>
-        <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
-      </nz-select>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"></div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="BASE_SPEC">型号</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20" [ngSwitch]="otherComponentModel.BASE_TYPE">
-          <!-- Add additional '' for the case string.-->
-          <div *ngSwitchCase="'N/A'"><input nz-input disabled></div>
-          <div *ngSwitchDefault><input nz-input maxlength="50"  [(ngModel)]="otherComponentModel.BASE_SPEC" name="BASE_SPEC" #BASE_SPEC="ngModel"></div>
-        </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="ADDRESS_INFO">收件人地址和信息</label>
       </div>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="otherComponentModel.BASE_TYPE=='SPECIAL_BASE'">
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="SPECIAL_BASE_DETAIL">特殊要求详情</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SPECIAL_BASE_DETAIL" name="SPECIAL_BASE_DETAIL" #SPECIAL_BASE_DETAIL="ngModel">
-        </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ADDRESS_INFO" name="ADDRESS_INFO" #ADDRESS_INFO="ngModel">
       </div>
     </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="COUPLING_HOOD_TYPE">联轴器罩</label>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4"><h2>其他特殊说明</h2></div>
+      <div nz-col class="gutter-row" nzSpan="20"></div>
     </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.COUPLING_HOOD_TYPE" name="COUPLING_HOOD_TYPE" #COUPLING_HOOD_TYPE="ngModel" nzPlaceHolder="请选择联轴器罩种类...">
-        <nz-option nzValue="ABD_HOOD_TYPE" nzLabel="ABD标准联轴器罩"></nz-option>
-        <nz-option nzValue="SPECIAL_HOOD_TYPE" nzLabel="特殊要求"></nz-option>
-        <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
-      </nz-select>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"></div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="COUPLING_HOOD_SPEC">型号</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20" [ngSwitch]="otherComponentModel.COUPLING_HOOD_TYPE">
-          <!-- Add additional '' for the case string.-->
-          <div *ngSwitchCase="'N/A'"><input nz-input disabled></div>
-          <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_HOOD_SPEC" name="COUPLING_HOOD_SPEC" #COUPLING_HOOD_SPEC="ngModel"></div>
-        </div>
+    <br>
+    <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
+      <div nz-col class="gutter-row" nzSpan="4">
+        <label for="REMARK">备注</label>
       </div>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="otherComponentModel.COUPLING_HOOD_TYPE=='SPECIAL_HOOD_TYPE'">
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="SPECIAL_HOOD_TYPE_DETAIL">特殊要求详情</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50"  [(ngModel)]="otherComponentModel.SPECIAL_HOOD_TYPE_DETAIL" name="SPECIAL_HOOD_TYPE_DETAIL" #SPECIAL_HOOD_TYPE_DETAIL="ngModel">
-        </div>
+      <div nz-col class="gutter-row" nzSpan="20">
+        <input nz-input maxlength="200" [(ngModel)]="otherComponentModel.REMARK" name="REMARK" #REMARK="ngModel">
       </div>
     </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="ANCHOR_BOLT_TYPE">地脚螺栓</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.ANCHOR_BOLT_TYPE" name="ANCHOR_BOLT_TYPE" #ANCHOR_BOLT_TYPE="ngModel"  nzPlaceHolder="请选择地脚螺栓种类...">
-        <nz-option nzValue="NEED" nzLabel="需要"></nz-option>
-        <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
-      </nz-select>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"></div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-        <div nz-col class="gutter-row" nzSpan="2">
-          <label for="ANCHOR_BOLT_SPEC">规格</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="10" [ngSwitch]="otherComponentModel.ANCHOR_BOLT_TYPE">
-          <!-- Add additional '' for the case string.-->
-          <div *ngSwitchCase="'N/A'"><input nz-input disabled></div>
-          <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_SPEC" name="ANCHOR_BOLT_SPEC" #ANCHOR_BOLT_SPEC="ngModel"></div>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="2">
-          <label for="ANCHOR_BOLT_MATERIAL">材质</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="10" [ngSwitch]="otherComponentModel.ANCHOR_BOLT_TYPE">
-          <!-- Add additional '' for the case string.-->
-          <div *ngSwitchCase="'N/A'"><input nz-input [(ngModel)]="otherComponentModel.ANCHOR_BOLT_MATERIAL" name="ANCHOR_BOLT_MATERIAL" #ANCHOR_BOLT_MATERIAL="ngModel" disabled></div>
-          <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_MATERIAL" name="ANCHOR_BOLT_MATERIAL" #ANCHOR_BOLT_MATERIAL="ngModel"></div>
-        </div>
-      </div>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="ANCHOR_BOLT_EXTRA_NUT_SPEC">配套螺母规格</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" [ngSwitch]="otherComponentModel.ANCHOR_BOLT_TYPE">
-          <!-- Add additional '' for the case string.-->
-          <div *ngSwitchCase="'N/A'"><input nz-input disabled></div>
-          <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_EXTRA_NUT_SPEC" name="ANCHOR_BOLT_EXTRA_NUT_SPEC" #ANCHOR_BOLT_EXTRA_NUT_SPEC="ngModel"></div>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="ANCHOR_BOLT_EXTRA_PAD_SPEC">配套垫片规格</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" [ngSwitch]="otherComponentModel.ANCHOR_BOLT_TYPE">
-          <!-- Add additional '' for the case string.-->
-          <div *ngSwitchCase="'N/A'"><input nz-input disabled></div>
-          <div *ngSwitchDefault><input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_EXTRA_PAD_SPEC" name="ANCHOR_BOLT_EXTRA_PAD_SPEC" #ANCHOR_BOLT_EXTRA_PAD_SPEC="ngModel"></div>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="ANCHOR_BOLT_NUM">数量</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" [ngSwitch]="otherComponentModel.ANCHOR_BOLT_TYPE">
-          <!-- Add additional '' for the case string.-->
-          <div *ngSwitchCase="'N/A'"><input nz-input disabled></div>
-          <div *ngSwitchDefault><input nz-input type="number" [(ngModel)]="otherComponentModel.ANCHOR_BOLT_NUM" name="ANCHOR_BOLT_NUM" #ANCHOR_BOLT_NUM="ngModel"></div>
-        </div>
+    <br>
+    <button nz-button nzType="primary" type="button" (click)="saveInnerOrder()">保存</button>
+    <button nz-button nzType="primary" type="button" hidden>导出</button>
+  </form>
+  <!-- Model-->
+  <nz-modal [nzOkText]="null" nzWidth="50%" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="材料配置库" (nzOnCancel)="handleCancel()">
+    <div *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_SINGLE')">
+      <div class="grid_area">
+        <nz-table
+        #ABDSingleTable
+        [nzData]="ABDSingleTableData"
+        [nzPageSize]="5"
+        [nzHideOnSinglePage]="true"
+        [nzScroll]="{ x: '800px' }"
+        nzSize="small">
+          <thead>
+            <tr>
+            <th nzWidth="160px">动环材质</th>
+            <th nzWidth="160px">静环材质</th>
+            <th nzWidth="160px">弹簧材质</th>
+            <th nzWidth="160px">金属基件材质</th>
+            <th nzWidth="160px">O型圈材质</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr (click)="selectSingleItem(data)" *ngFor="let data of ABDSingleTable.data; let i=index">
+              <td>{{data.MOVABLE_RING}}</td>
+              <td>{{data.STATIC_RING}}</td>
+              <td>{{data.SPRING}}</td>
+              <td>{{data.METAL_BASE}}</td>
+              <td>{{data.O_TYPE_RING}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
       </div>
     </div>
-  </div>
-  <br>
+    <div *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_DOUBLE')">
+      <div class="grid_area">
+        <nz-table
+        #ABDDoubleTable
+        [nzData]="ABDDoubleTableData"
+        [nzPageSize]="5"
+        [nzHideOnSinglePage]="true"
+        [nzScroll]="{ x: '800px' }"
+        nzSize="small">
+          <thead>
+            <tr>
+            <th nzWidth="160px">介质端动环材质</th>
+            <th nzWidth="160px">介质端静环材质</th>
+            <th nzWidth="160px">大气端动环材质</th>
+            <th nzWidth="160px">大气端静环材质</th>
+            <th nzWidth="160px">弹簧材质</th>
+            <th nzWidth="160px">金属基件材质</th>
+            <th nzWidth="160px">O型圈材质</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr (click)="selectDoubleItem(data)" *ngFor="let data of ABDDoubleTable.data; let i=index">
+              <td>{{data.MEDIUM_END_MOVABLE_RING}}</td>
+              <td>{{data.MEDIUM_END_STATIC_RING}}</td>
+              <td>{{data.ATMOSPHERIC_END_MOVABLE_RING}}</td>
+              <td>{{data.ATMOSPHERIC_END_STATIC_RING}}</td>
+              <td>{{data.SPRING}}</td>
+              <td>{{data.METAL_BASE}}</td>
+              <td>{{data.O_TYPE_RING}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+    <div *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_INTEGRATE')">
+      <div class="grid_area">
+        <nz-table
+        #ABDIntegrateTable
+        [nzData]="ABDIntegrateTableData"
+        [nzPageSize]="5"
+        [nzHideOnSinglePage]="true"
+        [nzScroll]="{ x: '800px' }"
+        nzSize="small">
+          <thead>
+            <tr>
+            <th nzWidth="160px">动环材质</th>
+            <th nzWidth="160px">静环材质</th>
+            <th nzWidth="160px">弹簧材质</th>
+            <th nzWidth="160px">金属基件材质</th>
+            <th nzWidth="160px">O型圈材质</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr (click)="selectIntegrationItem(data)" *ngFor="let data of ABDIntegrateTable.data; let i=index">
+              <td>{{data.MOVABLE_RING}}</td>
+              <td>{{data.STATIC_RING}}</td>
+              <td>{{data.SPRING}}</td>
+              <td>{{data.METAL_BASE}}</td>
+              <td>{{data.O_TYPE_RING}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </nz-modal>
 
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="COUPLING_TYPE">联轴器</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.COUPLING_TYPE" name="COUPLING_TYPE" #COUPLING_TYPE="ngModel"  nzPlaceHolder="请选择联轴器种类...">
-        <nz-option nzValue="ABD_ELASTIC_PIN_COUPLING_TYPE" nzLabel="ABD标配弹性柱销"></nz-option>
-        <nz-option nzValue="ABD_ELONGATED_COUPLING_TYPE" nzLabel="ABD标配加长膜片式"></nz-option>
-        <nz-option nzValue="SPECIAL_COUPLING_TYPE" nzLabel="特殊要求"></nz-option>
-        <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
-      </nz-select>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"></div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="otherComponentModel.COUPLING_TYPE">
-        <!--ABD标配弹性柱销-->
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'ABD_ELASTIC_PIN_COUPLING_TYPE'">
-          <label for="COUPLING_BUMP_COUPLET">泵联型号</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'ABD_ELASTIC_PIN_COUPLING_TYPE'">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_BUMP_COUPLET" name="COUPLING_BUMP_COUPLET" #COUPLING_BUMP_COUPLET="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'ABD_ELASTIC_PIN_COUPLING_TYPE'">
-          <label for="COUPLING_ELECTRIC_COUPLET">电联型号</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'ABD_ELASTIC_PIN_COUPLING_TYPE'">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_ELECTRIC_COUPLET" name="COUPLING_ELECTRIC_COUPLET" #COUPLING_ELECTRIC_COUPLET="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'ABD_ELASTIC_PIN_COUPLING_TYPE'">
-          <label for="COUPLING_PIN">柱销型号</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'ABD_ELASTIC_PIN_COUPLING_TYPE'">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_PIN" name="COUPLING_PIN" #COUPLING_PIN="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'ABD_ELASTIC_PIN_COUPLING_TYPE'">
-          <label for="COUPLING_JUMP_RING">卡簧型号</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'ABD_ELASTIC_PIN_COUPLING_TYPE'">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_JUMP_RING" name="COUPLING_JUMP_RING" #COUPLING_JUMP_RING="ngModel">
-        </div>
-        <!--ABD标配加长膜片式-->
-        <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'ABD_ELONGATED_COUPLING_TYPE'">
-          <label for="COUPLING_PROVIDER">制造商</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'ABD_ELONGATED_COUPLING_TYPE'">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50"  [(ngModel)]="otherComponentModel.COUPLING_PROVIDER" name="COUPLING_PROVIDER" #COUPLING_PROVIDER="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'ABD_ELONGATED_COUPLING_TYPE'">
-          <label for="COUPLING_SPEC">型号</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'ABD_ELONGATED_COUPLING_TYPE'">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_SPEC" name="COUPLING_SPEC" #COUPLING_SPEC="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'ABD_ELONGATED_COUPLING_TYPE'">
-          <label for="COUPLING_NUM">数量</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'ABD_ELONGATED_COUPLING_TYPE'">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input type="number" [(ngModel)]="otherComponentModel.COUPLING_NUM" name="COUPLING_NUM" #COUPLING_NUM="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'SPECIAL_COUPLING_TYPE'">
-            <label for="COUPLING_PROVIDER">制造商</label>
-          </div>
-          <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'SPECIAL_COUPLING_TYPE'">
-            <!-- Add additional '' for the case string.-->
-            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_PROVIDER" name="COUPLING_PROVIDER" #COUPLING_PROVIDER="ngModel">
-          </div>
-          <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'SPECIAL_COUPLING_TYPE'">
-            <label for="COUPLING_SPEC">型号</label>
-          </div>
-          <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'SPECIAL_COUPLING_TYPE'">
-            <!-- Add additional '' for the case string.-->
-            <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.COUPLING_SPEC" name="COUPLING_SPEC" #COUPLING_SPEC="ngModel">
-          </div>
-          <div nz-col class="gutter-row" nzSpan="3" *ngSwitchCase="'SPECIAL_COUPLING_TYPE'">
-            <label for="COUPLING_NUM">数量</label>
-          </div>
-          <div nz-col class="gutter-row" nzSpan="5" *ngSwitchCase="'SPECIAL_COUPLING_TYPE'">
-            <!-- Add additional '' for the case string.-->
-            <input nz-input type="number" [(ngModel)]="otherComponentModel.COUPLING_NUM" name="COUPLING_NUM" #COUPLING_NUM="ngModel">
-          </div>
-      </div>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="otherComponentModel.COUPLING_TYPE=='SPECIAL_COUPLING_TYPE'">
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="SPECIAL_COUPLING_TYPE_DETAIL">特殊要求详情</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SPECIAL_COUPLING_TYPE_DETAIL" name="SPECIAL_COUPLING_TYPE_DETAIL" #SPECIAL_COUPLING_TYPE_DETAIL="ngModel">
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="ELECTRIC_MOTER_TYPE">电机</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_TYPE" name="ELECTRIC_MOTER_TYPE" #ELECTRIC_MOTER_TYPE="ngModel" nzPlaceHolder="请选择是否需要电机...">
-        <nz-option nzValue="NEED" nzLabel="需要"></nz-option>
-        <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
-      </nz-select>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="otherComponentModel.ELECTRIC_MOTER_TYPE">
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'NEED'">
-          <label for="ELECTRIC_MOTER_PROVIDER">制造商</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'NEED'">
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_PROVIDER" name="ELECTRIC_MOTER_PROVIDER" #ELECTRIC_MOTER_PROVIDER="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'NEED'">
-          <label for="ELECTRIC_MOTER_POWER">功率</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'NEED'">
-          <input nz-input type="number" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_POWER" name="ELECTRIC_MOTER_POWER" #ELECTRIC_MOTER_POWER="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'NEED'">
-          <label for="ELECTRIC_MOTER_SPEED">转速</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'NEED'">
-          <input nz-input type="number" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_SPEED" name="ELECTRIC_MOTER_SPEED" #ELECTRIC_MOTER_SPEED="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'NEED'">
-          <label for="ELECTRIC_MOTER_PFV">相数/频率/电压</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="8" *ngSwitchCase="'NEED'">
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_PFV" name="ELECTRIC_MOTER_PFV" #ELECTRIC_MOTER_PFV="ngModel">
-        </div>
-        <div nz-col class="gutter-row" nzSpan="2" *ngSwitchCase="'NEED'">
-          <label for="ELECTRIC_MOTER_EXTRA_INFO">特殊要求</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20" *ngSwitchCase="'NEED'">
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ELECTRIC_MOTER_EXTRA_INFO" name="ELECTRIC_MOTER_EXTRA_INFO" #ELECTRIC_MOTER_EXTRA_INFO="ngModel">
-        </div>        
-      </div>
-    </div>
-  </div>
-  <nz-divider nzType="horizontal"></nz-divider>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"><h2>油漆及外表颜色</h2></div>
-    <div nz-col class="gutter-row" nzSpan="20"></div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="COLOR_TYPE">色标代号</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.COLOR_TYPE" name="COLOR_TYPE" #COLOR_TYPE="ngModel" nzPlaceHolder="请选择色标代号...">
-        <nz-option nzValue="ABD_COLOR" nzLabel="ABD标准色"></nz-option>
-        <nz-option nzValue="SPECIAL_COLOR" nzLabel="特殊要求"></nz-option>
-        <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
-      </nz-select>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"></div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="otherComponentModel.COLOR_TYPE=='SPECIAL_COLOR'">
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="SPECIAL_COLOR_DETAIL">特殊要求详情</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SPECIAL_COLOR_DETAIL" name="SPECIAL_COLOR_DETAIL" #SPECIAL_COLOR_DETAIL="ngModel">
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="SURFACE_TREAT_TYPE">表面特殊处理要求</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.SURFACE_TREAT_TYPE" name="SURFACE_TREAT_TYPE" #SURFACE_TREAT_TYPE="ngModel" nzPlaceHolder="请选择表面处理要求...">
-        <nz-option nzValue="NEED" nzLabel="需要"></nz-option>
-        <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
-      </nz-select>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="otherComponentModel.SURFACE_TREAT_TYPE">
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'NEED'">
-          <label for="SURFACE_TREAT_EXTRA_INFO">要求描述</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20" *ngSwitchCase="'NEED'">
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SURFACE_TREAT_EXTRA_INFO" name="SURFACE_TREAT_EXTRA_INFO" #SURFACE_TREAT_EXTRA_INFO="ngModel">
-        </div>
-      </div>
-    </div>
-  </div>
-  <nz-divider nzType="horizontal"></nz-divider>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"><h2>包装及运输</h2></div>
-    <div nz-col class="gutter-row" nzSpan="20"></div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="TRANSPORT_TYPE">运输方式</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.TRANSPORT_TYPE" name="TRANSPORT_TYPE" #TRANSPORT_TYPE="ngModel" nzPlaceHolder="请选择运输方式...">
-        <nz-option nzValue="SELF" nzLabel="客户自提"></nz-option>
-        <nz-option nzValue="ABD" nzLabel="ABD承运"></nz-option>
-      </nz-select>
-    </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="TRANSPORT_PLACE">交货地点</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.TRANSPORT_PLACE" name="TRANSPORT_PLACE" #TRANSPORT_PLACE="ngModel">
-    </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="PACKAGING_TYPE">包装要求</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <nz-select [(ngModel)]="otherComponentModel.PACKAGING_TYPE" name="PACKAGING_TYPE" #PACKAGING_TYPE="ngModel" nzPlaceHolder="请选择包装要求...">
-        <nz-option nzValue="ABD_PACK" nzLabel="ABD标准胶合板封闭"></nz-option>
-        <nz-option nzValue="HOLLOWED_WOOD_PACK" nzLabel="木条镂空包装"></nz-option>
-        <nz-option nzValue="CLOSURE_WOOD_PACK" nzLabel="全封闭木板包装"></nz-option>
-        <nz-option nzValue="EXPORT_STANDARD_PACK" nzLabel="出口标准包装"></nz-option>
-        <nz-option nzValue="SPECIAL_PACK" nzLabel="特殊要求"></nz-option>
-      </nz-select>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" [ngSwitch]="otherComponentModel.PACKAGING_TYPE">
-        <br>
-        <div nz-col class="gutter-row" nzSpan="4" *ngSwitchCase="'EXPORT_STANDARD_PACK'">
-          <label for="NEED_FUME_CERTIFICATE">重蒸证明是否需要</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20" *ngSwitchCase="'EXPORT_STANDARD_PACK'">
-          <nz-select [(ngModel)]="otherComponentModel.NEED_FUME_CERTIFICATE" name="NEED_FUME_CERTIFICATE" #NEED_FUME_CERTIFICATE="ngModel"  nzPlaceHolder="请选择是否需要重蒸证明...">
-            <nz-option nzValue="NEED" nzLabel="需要"></nz-option>
-            <nz-option nzValue="N/A" nzLabel="不需要"></nz-option>
-          </nz-select>
-        </div>
-      </div>
-      <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle" *ngIf="otherComponentModel.PACKAGING_TYPE=='SPECIAL_PACK'">
-        <br>
-        <div nz-col class="gutter-row" nzSpan="4">
-          <label for="SPECIAL_PACK_DETAIL">特殊要求详情</label>
-        </div>
-        <div nz-col class="gutter-row" nzSpan="20">
-          <!-- Add additional '' for the case string.-->
-          <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.SPECIAL_PACK_DETAIL" name="SPECIAL_PACK_DETAIL" #SPECIAL_PACK_DETAIL="ngModel">
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="ADDRESS_INFO">收件人地址和信息</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input maxlength="50" [(ngModel)]="otherComponentModel.ADDRESS_INFO" name="ADDRESS_INFO" #ADDRESS_INFO="ngModel">
-    </div>
-  </div>
-  <nz-divider nzType="horizontal"></nz-divider>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4"><h2>其他特殊说明</h2></div>
-    <div nz-col class="gutter-row" nzSpan="20"></div>
-  </div>
-  <br>
-  <div nz-row [nzGutter]="30" nzType="flex" nzJustify="space-between" nzAlign="middle">
-    <div nz-col class="gutter-row" nzSpan="4">
-      <label for="REMARK">备注</label>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="20">
-      <input nz-input maxlength="200" [(ngModel)]="otherComponentModel.REMARK" name="REMARK" #REMARK="ngModel">
-    </div>
-  </div>
-  <br>
-  <button nz-button nzType="primary" type="button" (click)="saveInnerOrder()">保存</button>
-  <button nz-button nzType="primary" type="button" hidden>导出</button>
-</form>
-<!-- Model-->
-<nz-modal [nzOkText]="null" nzWidth="50%" nzWrapClassName="my_modal" [(nzVisible)]="isVisible" nzTitle="材料配置库" (nzOnCancel)="handleCancel()">
-  <div *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_SINGLE')">
-    <div class="grid_area">
-      <nz-table
-      #ABDSingleTable
-      [nzData]="ABDSingleTableData"
-      [nzPageSize]="5"
-      [nzHideOnSinglePage]="true"
-      [nzScroll]="{ x: '800px' }"
-      nzSize="small">
-        <thead>
-          <tr>
-          <th nzWidth="160px">动环材质</th>
-          <th nzWidth="160px">静环材质</th>
-          <th nzWidth="160px">弹簧材质</th>
-          <th nzWidth="160px">金属基件材质</th>
-          <th nzWidth="160px">O型圈材质</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr (click)="selectSingleItem(data)" *ngFor="let data of ABDSingleTable.data; let i=index">
-            <td>{{data.MOVABLE_RING}}</td>
-            <td>{{data.STATIC_RING}}</td>
-            <td>{{data.SPRING}}</td>
-            <td>{{data.METAL_BASE}}</td>
-            <td>{{data.O_TYPE_RING}}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
-  </div>
-  <div *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_DOUBLE')">
-    <div class="grid_area">
-      <nz-table
-      #ABDDoubleTable
-      [nzData]="ABDDoubleTableData"
-      [nzPageSize]="5"
-      [nzHideOnSinglePage]="true"
-      [nzScroll]="{ x: '800px' }"
-      nzSize="small">
-        <thead>
-          <tr>
-          <th nzWidth="160px">介质端动环材质</th>
-          <th nzWidth="160px">介质端静环材质</th>
-          <th nzWidth="160px">大气端动环材质</th>
-          <th nzWidth="160px">大气端静环材质</th>
-          <th nzWidth="160px">弹簧材质</th>
-          <th nzWidth="160px">金属基件材质</th>
-          <th nzWidth="160px">O型圈材质</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr (click)="selectDoubleItem(data)" *ngFor="let data of ABDDoubleTable.data; let i=index">
-            <td>{{data.MEDIUM_END_MOVABLE_RING}}</td>
-            <td>{{data.MEDIUM_END_STATIC_RING}}</td>
-            <td>{{data.ATMOSPHERIC_END_MOVABLE_RING}}</td>
-            <td>{{data.ATMOSPHERIC_END_STATIC_RING}}</td>
-            <td>{{data.SPRING}}</td>
-            <td>{{data.METAL_BASE}}</td>
-            <td>{{data.O_TYPE_RING}}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
-  </div>
-  <div *ngIf="(basicAndSealModel.SEAL_TYPE == 'ABD_INTEGRATE')">
-    <div class="grid_area">
-      <nz-table
-      #ABDIntegrateTable
-      [nzData]="ABDIntegrateTableData"
-      [nzPageSize]="5"
-      [nzHideOnSinglePage]="true"
-      [nzScroll]="{ x: '800px' }"
-      nzSize="small">
-        <thead>
-          <tr>
-          <th nzWidth="160px">动环材质</th>
-          <th nzWidth="160px">静环材质</th>
-          <th nzWidth="160px">弹簧材质</th>
-          <th nzWidth="160px">金属基件材质</th>
-          <th nzWidth="160px">O型圈材质</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr (click)="selectIntegrationItem(data)" *ngFor="let data of ABDIntegrateTable.data; let i=index">
-            <td>{{data.MOVABLE_RING}}</td>
-            <td>{{data.STATIC_RING}}</td>
-            <td>{{data.SPRING}}</td>
-            <td>{{data.METAL_BASE}}</td>
-            <td>{{data.O_TYPE_RING}}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
-  </div>
-</nz-modal>
+
+

@@ -209,8 +209,8 @@ export class OrderListDetailComponent implements OnInit {
     const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
     if (orderNo !== undefined && orderNo !== null) {
       this.orderListDetailService.getAccessoriesTemplate(orderNo).subscribe((data) => (this.accessoriesTemplateTableData = data), error => this.error = error);
+      this.isUpdateAcc = true;
     }
-    this.isUpdateAcc = true;
   }
 
   deleteOrderListDetailTableData(bumpItem: any) {

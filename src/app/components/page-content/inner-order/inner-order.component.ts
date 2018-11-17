@@ -93,7 +93,7 @@ export class InnerOrderComponent implements OnInit {
   getExistedBumpInfo () {
     this.innerOrderService
         .getExistedBumpInfo(this.orderNo, this.bumpId)
-        .subscribe((data) => {if(data){this.orderListDetailTableModel = data; this.getAbdStdInfo()}}, error => this.error = error);
+        .subscribe((data) => {if(data){this.orderListDetailTableModel = data ; this.getAbdStdInfo()}}, error => this.error = error);
   }
 
   getBasicSealInfo () {
@@ -315,6 +315,81 @@ export class InnerOrderComponent implements OnInit {
     this.otherComponentModel.COUPLING_TYPE = "ABD_ELASTIC_PIN_COUPLING_TYPE";
 
   }
+
+
+
+
+   //2018-11-11新增
+   // *ngIf="TestPressureShowSelect()"
+  // *ngIf="DoublePressureShowSelect()"
+
+
+  TestPressureShowSelect():any{
+    if( this.orderListDetailTableModel.SEAL_FORM.includes("双端面"))
+      return false;
+    else
+       return true;
+    }
+ 
+   DoublePressureShowSelect():any{
+
+    if(this.orderListDetailTableModel.SEAL_FORM.includes("双端面"))
+    return true
+   }
+
+
+ //BUMP_ID包含Mpv Mpe Mph,级数显示；电机接线盒描述显示
+   MpvMpeMph():any{
+     if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPV") ||   this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPE") ||  this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPH"))
+     return true;
+    }
+   //BUMP_ID包含Vp Svp Bc Sbc,主轴形式显示
+   VpSvpBcSbc():any{
+    if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("VP") ||   this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("SVP") ||  this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BC"))
+    return true;
+   }
+   //BUMP_ID包含Hds，泵转向显示
+   Hds():any{
+    if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("HDS"))
+    return true;
+   }
+   //BUMP_ID包含Mvp,装配出口图显示
+   Mvp():any{
+   if( this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MVP"))
+   return true;
+   }
+   //BUMP_ID包含Mpe Mph,装配出口方向显示
+   MpeMph():any{
+    if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPE")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPH"))
+    return true;
+   }
+   //BUMP_ID包含By Sby，液下深度显示
+   BySby():any{
+   if( this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BY")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("SBY"))
+   return true;
+   }
+
+
+  //BUMP_ID包含BS SBS HDS MPE MPH,显示底座,联轴器罩，联轴器
+   BsSbsHdsMpeMph():any{
+    if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BS")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("HDS")
+    ||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPE")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPH"))
+    return true;
+   }
+   //BUMP_ID包含BS SBS HDS MPE MPH BC SBC显示地脚螺栓
+ BsSbsHdsMpeMphBcSbc():any{
+  if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BS")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("HDS")
+  ||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPE")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPH")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BC"))
+  return true;
+ }
+
+  //BUMP_ID包含BS SBS HDS MPE MPH BC SBC VP SVP BY SBY MPV显示电机 此方法没有使用，原因是 this.orderListDetailTableModel.BUMP_ID拿不到值
+BsSbsHdsMpeMphBcSbcVpSvpBySbyMpv():any{
+ if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BS")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("HDS")
+  ||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPE")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPH")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BC")
+  ||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("VP")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BY")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPV"))
+  return true;
+}
 
   handleUpload(obj) {
     if (obj.type == "success") {
