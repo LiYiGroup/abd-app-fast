@@ -85,7 +85,7 @@
                     <th nzWidth="280px">订货单位</th>
                     <th nzWidth="150px">销售员</th>
                     <th nzWidth="500px">备注</th>
-                    <th nzWidth="200px" nzRight="0px">操作</th>
+                    <th nzWidth="400px" nzRight="0px">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,7 +102,17 @@
                     <td>{{data.REMARK}}</td>
                     <td nzRight="0px">
                         <!-- 注意此处的路由写法，开头必须要有'/ -->
-                        <a routerLink='/order-list/detail/{{data.ORDER_NO.replace("/","|SLASH|")}}'>修改</a>
+                        <a routerLink='/order-list/detail/BO_{{data.ORDER_NO.replace("/","|SLASH|")}}'>
+                            泵下单
+                        </a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a routerLink='/order-list/detail/AC_{{data.ORDER_NO.replace("/","|SLASH|")}}'>
+                            配件下单
+                        </a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a routerLink='/order-list/detail/BA_{{data.ORDER_NO.replace("/","|SLASH|")}}'>
+                            综合下单
+                        </a>
                         <nz-divider nzType="vertical"></nz-divider>
                         <a (click)="deleteOrderListItem(data)">删除</a>
                     </td>

@@ -1,49 +1,18 @@
 <h1>订单详情</h1>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="8">
+    <div nz-col class="gutter-row" nzSpan="6">
         <label for="ORDER_NO">订单编号</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="APPLICATION_ENGINEER">应用工程师</label>
-        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="DEBUG ">调试</label>
-        <select nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.DEBUG" name="DEBUG" #DEBUG="ngModel">
-            <option [ngValue]=""></option>
-            <option *ngFor="let data of mDictDebug" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
-        </select>
-    </div>
-</div>
-<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="CONTRACT_NO">合同编号</label>
-        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="DEPARTURE_DATE">下发日期</label>
-        <br>
-        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DEPARTURE_DATE" name="DEPARTURE_DATE"
-            #DEPARTURE_DATE="ngModel"></nz-date-picker>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8">
+    <div nz-col class="gutter-row" nzSpan="6">
         <label for="TOTAL_QTY">总数量</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TOTAL_QTY" name="TOTAL_QTY" #TOTAL_QTY="ngModel">
     </div>
-</div>
-<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="PROJECT_NM">项目名称</label>
-        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="APPLICATION_ENGINEER">应用工程师</label>
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="DELIVERY_DATE">交货日期</label>
-        <br>
-        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DELIVERY_DATE" name="DELIVERY_DATE"
-            #DELIVERY_DATE="ngModel"></nz-date-picker>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8">
+    <div nz-col class="gutter-row" nzSpan="6">
         <label for="TEX_RATE">税率</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.TEX_RATE" name="TEX_RATE" #TEX_RATE="ngModel">
             <option [ngValue]=""></option>
@@ -52,37 +21,64 @@
     </div>
 </div>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="SALES_PERSON">销售员</label>
-        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="CONTRACT_NO">合同编号</label>
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="8">
-        <label for="GUARANTEE_DATE">质保期</label>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="DEPARTURE_DATE">下发日期</label>
         <br>
-        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.GUARANTEE_DATE" name="GUARANTEE_DATE"
-            #GUARANTEE_DATE="ngModel"></nz-date-picker>
+        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DEPARTURE_DATE" name="DEPARTURE_DATE"
+            #DEPARTURE_DATE="ngModel"></nz-date-picker>
     </div>
-    <div nz-col class="gutter-row" nzSpan="8">
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="DEBUG ">调试</label>
+        <select nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.DEBUG" name="DEBUG" #DEBUG="ngModel">
+            <option [ngValue]=""></option>
+            <option *ngFor="let data of mDictDebug" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
+        </select>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
         <label for="TOTAL_AMT">合同总额</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TOTAL_AMT" name="TOTAL_AMT" #TOTAL_AMT="ngModel">
     </div>
 </div>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="16">
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="PROJECT_NM">项目名称</label>
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="DELIVERY_DATE">交货日期</label>
+        <br>
+        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DELIVERY_DATE" name="DELIVERY_DATE"
+            #DELIVERY_DATE="ngModel"></nz-date-picker>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
         <label for="PAYMENT">付款方式</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.PAYMENT" name="PAYMENT" #PAYMENT="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="8">
+    <div nz-col class="gutter-row" nzSpan="6">
         <label for="TARGET_PRICE">目标价</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TARGET_PRICE" name="TARGET_PRICE" #TARGET_PRICE="ngModel">
     </div>
 </div>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="16">
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="SALES_PERSON">销售员</label>
+        <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
+        <label for="GUARANTEE_DATE">质保期</label>
+        <br>
+        <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.GUARANTEE_DATE" name="GUARANTEE_DATE"
+            #GUARANTEE_DATE="ngModel"></nz-date-picker>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="6">
         <label for="ORDER_UNIT">订货单位</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="8">
+    <div nz-col class="gutter-row" nzSpan="6">
         <label for="DISCOUNT">折扣(%)</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.DISCOUNT" name="DISCOUNT" #DISCOUNT="ngModel">
     </div>
@@ -90,69 +86,69 @@
 <nz-divider nzType="horizontal"></nz-divider>
 <h2>随货资料</h2>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="QUALIFICATION">合格证：</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.QUALIFICATION" name="QUALIFICATION" #QUALIFICATION="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictQualification" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="IDENTIFICATION">说明书：</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.IDENTIFICATION" name="IDENTIFICATION" #IDENTIFICATION="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictIdentification" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="PRODUCT_SAMPLE">产品样本：</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.PRODUCT_SAMPLE" name="PRODUCT_SAMPLE" #PRODUCT_SAMPLE="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictProductSample" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-</div>
-<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="DYNAMIC_REPORT">动平衡报告：</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.DYNAMIC_REPORT" name="DYNAMIC_REPORT" #DYNAMIC_REPORT="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictDynamicReport" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="STATIC_REPORT">静压试验报告：</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.STATIC_REPORT" name="STATIC_REPORT" #STATIC_REPORT="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictStaticReport" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="PERFORMANCE_REPORT">性能试验报告：</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.PERFORMANCE_REPORT" name="PERFORMANCE_REPORT" #PERFORMANCE_REPORT="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictPerformanceReport" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-</div>
-<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="BLUEPRINT">图纸：</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.BLUEPRINT" name="BLUEPRINT" #BLUEPRINT="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictBlueprint" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="PERFORMANCE_CURVE">性能曲线：</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListAttachment.PERFORMANCE_CURVE" name="PERFORMANCE_CURVE" #PERFORMANCE_CURVE="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictPerformanceCurve" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
+    <div nz-col class="gutter-row" nzSpan="15">
         <label for="OTHER">其他：</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListAttachment.OTHER" name="OTHER" #OTHER="ngModel">
+    </div>
+    <div nz-col class="gutter-row" nzSpan="9">
     </div>
 </div>
 <div *ngIf="showFlag == 'BO' || showFlag == 'BA'">
