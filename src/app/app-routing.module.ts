@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/order-list', pathMatch: 'full' },
   { path: 'order-list', component: OrderListComponent },
   { path: 'order-list/detail', component: OrderListDetailComponent },
-  { path: 'order-list/detail/:orderNo', component: OrderListDetailComponent },
+  { path: 'order-list/detail/:showFlag_orderNo', component: OrderListDetailComponent },
   { path: 'order-list/bom', component: InnerOrderComponent },
   { path: 'order-list/bom/:bumpInfo', component: InnerOrderComponent },
   { path: 'other-component-model', component: OtherComponentModelComponent },

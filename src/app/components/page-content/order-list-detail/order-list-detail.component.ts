@@ -20,21 +20,31 @@ export class OrderListDetailComponent implements OnInit {
   constructor(private orderListDetailService: OrderListDetailService, private message: NzMessageService, public router: Router, private location: Location, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const showFlag_orderNo = this.route.snapshot.paramMap.get('showFlag_orderNo') == undefined ? null : this.route.snapshot.paramMap.get('showFlag_orderNo').replace("|SLASH|", "/");
+    if (showFlag_orderNo !== undefined && showFlag_orderNo !== null) {
+      if (showFlag_orderNo.length > 3) {
+        this.showFlag = showFlag_orderNo.substring(0, 2);
+        this.orderNo = showFlag_orderNo.substring(3);
+      }
+    }
     this.getMdictInfo();
     this.getOrderListDetailForm();
     this.getOrderListDetailTable();
     this.getOrderListAttachment();
     this.getAccessoriesTemplate();
-/*     this.message.success(this.orderListDetailTableData.length.toString());
-    for (var i = 0; i < this.orderListDetailTableData.length; i++) {
-      this.message.success("1");
-      this.OrderListDetail_AMT = this.OrderListDetail_AMT + this.orderListDetailTableData[i].AMOUNT;
-    }
-    this.message.success(this.OrderListDetail_AMT.toString()); */
+    /*     this.message.success(this.orderListDetailTableData.length.toString());
+        for (var i = 0; i < this.orderListDetailTableData.length; i++) {
+          this.message.success("1");
+          this.OrderListDetail_AMT = this.OrderListDetail_AMT + this.orderListDetailTableData[i].AMOUNT;
+        }
+        this.message.success(this.OrderListDetail_AMT.toString()); */
   }
 
-/*   OrderListDetail_AMT = 0;
-  AccessoriesTemp_AMT = 0; */
+  /*   OrderListDetail_AMT = 0;
+    AccessoriesTemp_AMT = 0; */
+
+  showFlag = "";
+  orderNo = "";
   // MODEL
   isVisible = false;
   isOkLoading = false;
@@ -47,8 +57,7 @@ export class OrderListDetailComponent implements OnInit {
     if (currentData == null) {
       // INSERT
       currentData = new OrderListDetailTableModel();
-      var orderNo = this.route.snapshot.paramMap.get('orderNo');
-      if (orderNo == null || orderNo == undefined) {
+      if (this.orderNo == null || this.orderNo == undefined) {
         // NEW ORDER, GET ORDER FROM FORM
         if (this.orderListDetailFormModel.ORDER_NO == null || this.orderListDetailFormModel.ORDER_NO == undefined) {
           // ERROR MSG HERE TODO..
@@ -57,7 +66,7 @@ export class OrderListDetailComponent implements OnInit {
           currentData.ORDER_NO = this.orderListDetailFormModel.ORDER_NO;
         }
       } else {
-        currentData.ORDER_NO = orderNo;
+        currentData.ORDER_NO = this.orderNo;
       }
     }
     // EDIT
@@ -76,8 +85,7 @@ export class OrderListDetailComponent implements OnInit {
     if (currentData == null) {
       // INSERT
       currentData = new AccessoriesTemplateModel();
-      var orderNo = this.route.snapshot.paramMap.get('orderNo');
-      if (orderNo == null || orderNo == undefined) {
+      if (this.orderNo == null || this.orderNo == undefined) {
         // NEW ORDER, GET ORDER FROM FORM
         if (this.accessoriesTemplateFormModel.ORDER_NO == null || this.accessoriesTemplateFormModel.ORDER_NO == undefined) {
           // ERROR MSG HERE TODO..
@@ -86,7 +94,7 @@ export class OrderListDetailComponent implements OnInit {
           currentData.ORDER_NO = this.accessoriesTemplateFormModel.ORDER_NO;
         }
       } else {
-        currentData.ORDER_NO = orderNo;
+        currentData.ORDER_NO = this.orderNo;
       }
     }
     // EDIT
@@ -188,27 +196,24 @@ export class OrderListDetailComponent implements OnInit {
   }
 
   getOrderListDetailForm(): any {
-    const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
-    if (orderNo !== undefined && orderNo !== null) {
-      this.orderListDetailService.getOrderListDetailForm(orderNo).subscribe((data) => (this.orderListDetailFormModel = data), error => this.error = error);
+
+    if (this.orderNo !== undefined && this.orderNo !== null) {
+      this.orderListDetailService.getOrderListDetailForm(this.orderNo).subscribe((data) => (this.orderListDetailFormModel = data), error => this.error = error);
       this.isUpdate = true;
     }
   }
 
   getOrderListDetailTable(): any {
 
-    const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
-
-    if (orderNo !== undefined && orderNo !== null) {
-      this.orderListDetailService.getOrderListDetailTable(orderNo).subscribe((data) => (this.orderListDetailTableData = data), error => this.error = error);
+    if (this.orderNo !== undefined && this.orderNo !== null) {
+      this.orderListDetailService.getOrderListDetailTable(this.orderNo).subscribe((data) => (this.orderListDetailTableData = data), error => this.error = error);
       this.isUpdate = true;
     }
   }
 
   getAccessoriesTemplate(): any {
-    const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
-    if (orderNo !== undefined && orderNo !== null) {
-      this.orderListDetailService.getAccessoriesTemplate(orderNo).subscribe((data) => (this.accessoriesTemplateTableData = data), error => this.error = error);
+    if (this.orderNo !== undefined && this.orderNo !== null) {
+      this.orderListDetailService.getAccessoriesTemplate(this.orderNo).subscribe((data) => (this.accessoriesTemplateTableData = data), error => this.error = error);
       this.isUpdateAcc = true;
     }
   }
@@ -217,24 +222,20 @@ export class OrderListDetailComponent implements OnInit {
 
     var submitList = [];
 
-    const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
-
     if (bumpItem == undefined) {
       if (this.orderListDetailTableCheckedData.length > 0) {
         for (var i = 0; i < this.orderListDetailTableCheckedData.length; i++) {
           submitList.push(this.orderListDetailTableCheckedData[i].BUMP_ID.replace("/", "|SLASH|"));
         }
-        this.orderListDetailService.delOrderListDetailTableData(orderNo, submitList).subscribe(delRes => { this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderListDetailTable() }, error => this.error = error);
+        this.orderListDetailService.delOrderListDetailTableData(this.orderNo, submitList).subscribe(delRes => { this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderListDetailTable() }, error => this.error = error);
       }
     } else {
       submitList.push(bumpItem.BUMP_ID.replace("/", "|SLASH|"));
-      this.orderListDetailService.delOrderListDetailTableData(orderNo, submitList).subscribe(delRes => { this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderListDetailTable() }, error => this.error = error);
+      this.orderListDetailService.delOrderListDetailTableData(this.orderNo, submitList).subscribe(delRes => { this.message.success('删除成功！', { nzDuration: 1000 }); this.getOrderListDetailTable() }, error => this.error = error);
     }
   }
 
   deleteAccessoriesTemplateTableData(AccItem: any) {
-    const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
-
     if (AccItem == undefined) {
       if (this.accessoriesTemplateTableCheckedData.length > 0) {
 
@@ -314,9 +315,8 @@ export class OrderListDetailComponent implements OnInit {
 
   orderListAttachment = new OrderListAttachmentTableModel();
   getOrderListAttachment(): any {
-    const orderNo = this.route.snapshot.paramMap.get('orderNo') == undefined ? null : this.route.snapshot.paramMap.get('orderNo').replace("|SLASH|", "/");
-    if (orderNo !== undefined && orderNo !== null) {
-      this.orderListDetailService.getOrderListAttachment(orderNo).subscribe((data) => (this.orderListAttachment = data), error => this.error = error);
+    if (this.orderNo !== undefined && this.orderNo !== null) {
+      this.orderListDetailService.getOrderListAttachment(this.orderNo).subscribe((data) => (this.orderListAttachment = data), error => this.error = error);
     }
   }
 
@@ -332,5 +332,15 @@ export class OrderListDetailComponent implements OnInit {
         }
       });
     }
+  }
+
+  jumpToBOMRow(data: any) {
+    this.router.navigate(['/order-list/bom'], {
+      queryParams: {
+        // 进入泵信息
+        orderNo: data.ORDER_NO,
+        bumpId: data.BUMP_ID
+      }
+    });
   }
 }

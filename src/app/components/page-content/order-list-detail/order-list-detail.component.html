@@ -83,7 +83,7 @@
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
     </div>
     <div nz-col class="gutter-row" nzSpan="8">
-        <label for="DISCOUNT">折扣</label>
+        <label for="DISCOUNT">折扣(%)</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.DISCOUNT" name="DISCOUNT" #DISCOUNT="ngModel">
     </div>
 </div>
@@ -155,16 +155,15 @@
         <input nz-input maxlength="50" [(ngModel)]="orderListAttachment.OTHER" name="OTHER" #OTHER="ngModel">
     </div>
 </div>
-
-<br>
-<nz-divider nzType="horizontal"></nz-divider>
-<h2>订单明细</h2>
-<button *ngIf="isUpdate == true" nz-button nzType="primary" (click)="showModal()">新建</button>
-<nz-divider *ngIf="isUpdate == true" nzType="vertical"></nz-divider>
-<button *ngIf="isUpdate == true" nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">删除</button>
-<br>
-<br>
-<div class="grid_area">
+<div *ngIf="showFlag == 'BO' || showFlag == 'BA'">
+    <br>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <h2>泵信息</h2>
+    <button *ngIf="isUpdate == true" nz-button nzType="primary" (click)="showModal()">新建</button>
+    <nz-divider *ngIf="isUpdate == true" nzType="vertical"></nz-divider>
+    <button *ngIf="isUpdate == true" nz-button nzType="primary" type="button" (click)="deleteOrderListDetailTableData()">删除</button>
+    <br>
+    <br>
     <nz-table #orderDetailListSelectionTable [nzData]="orderListDetailTableData" [nzPageSize]="5" [nzHideOnSinglePage]="false"
         (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)" (nzPageIndexChange)="refreshOrderDetailListStatus()"
         (nzPageSizeChange)="refreshOrderDetailListStatus()" [nzScroll]="{ x: '6000px' }" nzSize="small">
@@ -174,6 +173,7 @@
                     (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
                 <th nzWidth="100px">序号</th>
                 <th nzWidth="500px">泵名称</th>
+                <th nzWidth="200px"></th>
                 <th nzWidth="500px">型号</th>
                 <th nzWidth="500px">数量</th>
 
@@ -228,6 +228,11 @@
                 <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshOrderDetailListStatus($event)"></td>
                 <td (click)="showModal(data)">{{i+1}}</td>
                 <td (click)="showModal(data)">{{data.BUMP_NM}}</td>
+                <td>
+                    <a (click)="jumpToBOMRow(data)">
+                        BOM
+                    </a>
+                </td>
                 <td (click)="showModal(data)">{{data.BUMP_TYPE}}</td>
                 <td (click)="showModal(data)">{{data.NUMBER}}</td>
 
@@ -285,12 +290,15 @@
     </div>
     <br>
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom"></div>
+</div>
+<div *ngIf="showFlag == 'AC' || showFlag == 'BA'">
     <nz-divider nzType="horizontal"></nz-divider>
-    <h2>配件模板</h2>
+    <h2>配件信息</h2>
     <button *ngIf="isUpdateAcc == true" nz-button nzType="primary" (click)="showModalAcc()">新建</button>
     <nz-divider *ngIf="isUpdateAcc == true" nzType="vertical"></nz-divider>
     <button *ngIf="isUpdateAcc == true" nz-button nzType="primary" type="button" (click)="deleteAccessoriesTemplateTableData()">删除</button>
-    <br><br>
+    <br>
+    <br>
     <nz-table #accessoriesTemplateSelectionTable [nzData]="accessoriesTemplateTableData" [nzPageSize]="5" [nzHideOnSinglePage]="false"
         (nzCurrentPageDataChange)="accessoriesTemplateCurrentPageDataChange($event)" (nzPageIndexChange)="refreshaccessoriesTemplateStatus()"
         (nzPageSizeChange)="refreshaccessoriesTemplateStatus()" [nzScroll]="{ x: '2000px' }" nzSize="small">
@@ -328,30 +336,30 @@
     </nz-table>
     <br>
     <nz-divider nzType="horizontal"></nz-divider>
-    <br>
-    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-        <div nz-col class="gutter-row" nzSpan="24">
-            <label for="REMARK">备注</label>
-            <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.REMARK" name="REMARK" #REMARK="ngModel">
-        </div>
+</div>
+<br>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="24">
+        <label for="REMARK">备注</label>
+        <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.REMARK" name="REMARK" #REMARK="ngModel">
     </div>
-    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-        <div nz-col class="gutter-row" nzSpan="24">
-            <label for="CHANGE_HIS1">变更1</label>
-            <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.CHANGE_HIS1" name="CHANGE_HIS1" #CHANGE_HIS1="ngModel">
-        </div>
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="24">
+        <label for="CHANGE_HIS1">变更1</label>
+        <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.CHANGE_HIS1" name="CHANGE_HIS1" #CHANGE_HIS1="ngModel">
     </div>
-    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-        <div nz-col class="gutter-row" nzSpan="24">
-            <label for="CHANGE_HIS2">变更2</label>
-            <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.CHANGE_HIS2" name="CHANGE_HIS2" #CHANGE_HIS2="ngModel">
-        </div>
+</div>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="24">
+        <label for="CHANGE_HIS2">变更2</label>
+        <input nz-input maxlength="200" [(ngModel)]="orderListDetailFormModel.CHANGE_HIS2" name="CHANGE_HIS2" #CHANGE_HIS2="ngModel">
     </div>
-    <br>
-    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
-        <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
-            <button nz-button nzType="primary" type="button" (click)="saveOrderListDetailForm(orderListDetailFormModel,orderListAttachment)">保存</button>
-        </div>
+</div>
+<br>
+<div nz-row [nzGutter]="16" nzType="flex" nzJustify="end" nzAlign="bottom">
+    <div nz-col class="gutter-row" nzSpan="24" class="btn_area">
+        <button nz-button nzType="primary" type="button" (click)="saveOrderListDetailForm(orderListDetailFormModel,orderListAttachment)">保存</button>
     </div>
 </div>
 <br>
@@ -620,5 +628,5 @@
             <label for="REMARK">备注</label>
             <input nz-input maxlength="50" [(ngModel)]="currentAccInfo.REMARK" name="REMARK" #REMARK="ngModel">
         </div>
-    </div> 
+    </div>
 </nz-modal>

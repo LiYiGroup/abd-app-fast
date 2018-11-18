@@ -53,7 +53,7 @@
     <div class="grid_area">
         <nz-table #orderQueryResultSelectionTable [nzData]="orderQueryResultTableData" [nzPageSize]="10" [nzHideOnSinglePage]="false"
             (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)" (nzPageIndexChange)="refreshOrderListStatus()"
-            (nzPageSizeChange)="refreshOrderListStatus()" [nzScroll]="{ x: '2000px' }" nzSize="small">
+            (nzPageSizeChange)="refreshOrderListStatus()" [nzScroll]="{ x: '2500px' }" nzSize="small">
             <thead>
                 <tr>
                     <th nzWidth="50px">序号</th>
@@ -62,7 +62,8 @@
                     <th nzWidth="100px">项目名称</th>
                     <th nzWidth="100px">下发日期</th>
                     <th nzWidth="100px">交货日期</th>
-                    <th nzWidth="100px">内部单号</th>
+                    <th nzWidth="200px">内部单号</th>
+                    <th nzWidth="200px"></th>
                     <th nzWidth="100px">数量</th>
                     <th nzWidth="100px">合同总价</th>
                     <th nzWidth="100px">折扣</th>
@@ -80,10 +81,19 @@
                     <td>{{data.PROJECT_NM}}</td>
                     <td>{{data.DEPARTURE_DATE | date:'yyyy/MM/dd'}}</td>
                     <td>{{data.DELIVERY_DATE | date:'yyyy/MM/dd'}}</td>
+                    <td>{{data.ORDER_NO}} </td>
                     <td style="color: blue; text-decoration:underline; cursor: pointer">
-                        <tr routerLink='/order-list/detail/{{data.ORDER_NO.replace("/","|SLASH|")}}'>
-                            {{data.ORDER_NO}}
-                        </tr>
+                        <a routerLink='/order-list/detail/BO_{{data.ORDER_NO.replace("/","|SLASH|")}}'>
+                            泵下单
+                        </a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a routerLink='/order-list/detail/AC_{{data.ORDER_NO.replace("/","|SLASH|")}}'>
+                            配件下单
+                        </a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a routerLink='/order-list/detail/BA_{{data.ORDER_NO.replace("/","|SLASH|")}}'>
+                            综合下单
+                        </a>
                     </td>
                     <td>{{data.QTY}}</td>
                     <td>{{data.TOTAL_AMT}}</td>
