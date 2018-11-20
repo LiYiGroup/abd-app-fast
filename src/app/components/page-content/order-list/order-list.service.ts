@@ -6,15 +6,15 @@ import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { OrderListTableModel, OrderDetailListTableModel, OrderListSearchModel } from '../../../models/order-list.model';
 import { OrderListAttachmentTableModel } from '../../../models/order-list-attachment.model';
-
+import { hostAPI } from '../../../ip.config';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
 };
 
 @Injectable()
 export class OrderListService {
-  orderList = 'http://localhost:53366/api/orderList/';
-  orderListDetailTable = 'http://localhost:53366/api/orderListDetailTable/';
+  orderList = `${hostAPI}orderList/`;
+  orderListDetailTable =`${hostAPI}orderListDetailTable/`;
 
   constructor(private http: HttpClient) { }
 

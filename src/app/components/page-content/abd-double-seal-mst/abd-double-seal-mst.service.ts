@@ -6,6 +6,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { AbdDoubleSealMstSearchModel } from '../../../models/abd-double-seal-mst.model';
+import { hostAPI } from '../../../ip.config';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
@@ -16,8 +17,7 @@ const httpOptions = {
 })
 export class AbdDoubleSealMstService {
 
-  abdDoubleSealMst = 'http://localhost:53366/api/abdDoubleSealMst/';
-
+  abdDoubleSealMst = `${hostAPI}abdDoubleSealMst/`;
   constructor(private http: HttpClient) { }
 
   //查询所有的数据

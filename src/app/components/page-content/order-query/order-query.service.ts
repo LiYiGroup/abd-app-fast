@@ -7,7 +7,7 @@ import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { OrderQueryResultSearchModel } from '../../../models/order-query.model';
 import { OrderQueryResultTableModel } from '../../../models/order-query.model';
-
+import { hostAPI } from '../../../ip.config';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
 };
@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class OrderQueryService {
 
-  orderquerymodel = 'http://localhost:53366/api/orderqueryresult/';
+  orderquerymodel = `${hostAPI}orderqueryresult/`;
 
   constructor(private http: HttpClient) { }
 

@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { OrderListDetailTableModel } from '../../../models/order-list-detail.model';
 import { BasicAndSealModel,ComponentListTableModel, BasicPartListTableModel, OtherComponentModel } from '../../../models/inner-order.model';
+import { hostAPI } from '../../../ip.config';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
@@ -13,13 +14,14 @@ const httpOptions = {
 
 @Injectable()
 export class InnerOrderService {
-  bomInfo = 'http://localhost:53366/api/innerOrder/';
-  modelLibrary = 'http://localhost:53366/api/innerOrder/modelLibrary/';
-  existBumpInfo = 'http://localhost:53366/api/innerOrder/existBumpInfo/';
-  basicSealInfo = 'http://localhost:53366/api/innerOrder/basicSealInfo/';
-  otherComponentInfo = 'http://localhost:53366/api/innerOrder/otherComponentInfo/';
-  bomGridDataByUpload = 'http://localhost:53366/api/innerOrder/BOMGridData/';
-  bomGridDataForDisplay = 'http://localhost:53366/api/innerOrder/BOMGridData/';
+  bomInfo = `${hostAPI}innerOrder/`;
+  modelLibrary = `${hostAPI}innerOrder/modelLibrary/`;
+  existBumpInfo = `${hostAPI}innerOrder/existBumpInfo/`;
+  basicSealInfo = `${hostAPI}innerOrder/basicSealInfo/`;
+  otherComponentInfo = `${hostAPI}innerOrder/otherComponentInfo/`;
+  bomGridDataByUpload = `${hostAPI}innerOrder/BOMGridData/`;
+  bomGridDataForDisplay = `${hostAPI}innerOrder/BOMGridData/`;
+
   constructor(private http: HttpClient) { }
 
   getExistedBumpInfo(orderNo:string, bumpId: string) {

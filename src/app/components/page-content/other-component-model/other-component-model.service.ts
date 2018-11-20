@@ -6,7 +6,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { OtherComponentModelSearchModel } from '../../../models/other-component-model.model';
-
+import { hostAPI } from '../../../ip.config';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
 };
@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class OtherComponentModelService {
 
-  othercomponentmodel = 'http://localhost:53366/api/othercomponentmodel/';
+  othercomponentmodel = `${hostAPI}othercomponentmodel/`;
 
   constructor(private http: HttpClient) { }
 

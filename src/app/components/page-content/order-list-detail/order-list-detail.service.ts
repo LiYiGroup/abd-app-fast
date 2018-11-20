@@ -8,17 +8,17 @@ import { OrderListDetailFormModel, OrderListDetailTableModel } from '../../../mo
 import { mDict } from '../../../models/m-dict';
 import { OrderListAttachmentTableModel } from '../../../models/order-list-attachment.model';
 import { AccessoriesTemplateModel} from '../../../models/accessories-template.model'; 
-
+import { hostAPI } from '../../../ip.config';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
 };
 
 @Injectable()
 export class OrderListDetailService {
-  orderListDetailForm = 'http://localhost:53366/api/orderListDetailForm/';
-  orderListAttachment = 'http://localhost:53366/api/OrderListAttachment/';
-  orderListDetailTable = 'http://localhost:53366/api/orderListDetailTable/';
-  accessoriesTemplate = 'http://localhost:53366/api/accessoriestemplate/';
+  orderListDetailForm =`${hostAPI}orderListDetailForm/`;
+  orderListAttachment = `${hostAPI}OrderListAttachment/`;
+  orderListDetailTable = `${hostAPI}orderListDetailTable/`;
+  accessoriesTemplate = `${hostAPI}accessoriestemplate/`;
   constructor(private http: HttpClient) { }
 
   getOrderListDetailForm(orderNo: String) {

@@ -84,9 +84,11 @@ export class InnerOrderComponent implements OnInit {
       this.orderListDetailTableModel.BUMP_ID = params.bumpId;
       this.orderNo = params.orderNo;
       this.bumpId = params.bumpId; 
+      
       // GET BUMP DATA THROUGH BUMPID AND ORDERNO
       this.getExistedBumpInfo();
       this.getBasicSealInfo();
+
     });
   }
 
@@ -94,7 +96,7 @@ export class InnerOrderComponent implements OnInit {
     this.innerOrderService
         .getExistedBumpInfo(this.orderNo, this.bumpId)
         .subscribe((data) => {if(data){this.orderListDetailTableModel = data ; this.getAbdStdInfo()}}, error => this.error = error);
-  }
+      }
 
   getBasicSealInfo () {
     this.innerOrderService
@@ -325,16 +327,31 @@ export class InnerOrderComponent implements OnInit {
 
 
   TestPressureShowSelect():any{
+
+    if(this.orderListDetailTableModel.SEAL_FORM==null)
+    {
+      this.orderListDetailTableModel.SEAL_FORM="";
+    }
     if( this.orderListDetailTableModel.SEAL_FORM.includes("双端面"))
+{
       return false;
+}
     else
+    {
        return true;
+    }
     }
  
    DoublePressureShowSelect():any{
+    if(this.orderListDetailTableModel.SEAL_FORM==null)
+    {
+      this.orderListDetailTableModel.SEAL_FORM="";
+    }
 
     if(this.orderListDetailTableModel.SEAL_FORM.includes("双端面"))
-    return true
+    {return true}
+    else
+    {return false}
    }
 
 
@@ -343,9 +360,16 @@ export class InnerOrderComponent implements OnInit {
      if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPV") ||   this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPE") ||  this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPH"))
      return true;
     }
+    MpvMpeMphReverse():any{
+      if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPV") ||   this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPE") ||  this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPH"))
+      {return false;}
+      else
+      {return true;}
+     }
    //BUMP_ID包含Vp Svp Bc Sbc,主轴形式显示
    VpSvpBcSbc():any{
     if(this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("VP") ||   this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("SVP") ||  this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BC"))
+    
     return true;
    }
    //BUMP_ID包含Hds，泵转向显示
@@ -354,8 +378,8 @@ export class InnerOrderComponent implements OnInit {
     return true;
    }
    //BUMP_ID包含Mvp,装配出口图显示
-   Mvp():any{
-   if( this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MVP"))
+   Mpv():any{
+   if( this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("MPV"))
    return true;
    }
    //BUMP_ID包含Mpe Mph,装配出口方向显示
