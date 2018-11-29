@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   isCollapsed = false;
+  showFlag = true;
+
+  HideAndShow(): void {
+    this.showFlag = this.showFlag ? false : true;
+  }
 }

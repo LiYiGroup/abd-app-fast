@@ -1,14 +1,18 @@
 <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'" [nzWidth]="260">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'" [nzWidth]="260"
+    *ngIf="showFlag">
     <app-sider></app-sider>
+  </nz-sider>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'" [nzWidth]="10"
+    style="background: brown;cursor: pointer" (click)="HideAndShow()">
   </nz-sider>
   <nz-layout>
     <nz-header class="abd-header">
-        <app-header></app-header>
+      <app-header></app-header>
     </nz-header>
     <nz-content class="abd-content">
       <div class="abd-content-inner">
-          <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
     <nz-footer class="abd-footer">艾比德泵业 ©2018 Implemented By leeyard.com</nz-footer>
