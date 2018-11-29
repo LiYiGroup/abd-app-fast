@@ -10,6 +10,7 @@ import { AbdSingleSealMstSearchModel } from '../../../models/abd-single-seal-mst
 import { AbdDoubleSealMstSearchModel } from '../../../models/abd-double-seal-mst.model';
 import { AbdIntegrateSealMstSearchModel } from '../../../models/abd-integrate-seal-mst.model';
 import { NzMessageService } from 'ng-zorro-antd';
+import { elementAt } from '../../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-inner-order',
@@ -392,7 +393,12 @@ export class InnerOrderComponent implements OnInit {
    if( this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BY")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("SBY"))
    return true;
    }
-
+   BySbyreverse(){
+    if( this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("BY")||this.orderListDetailTableModel.BUMP_ID.substring(0,4).includes("SBY"))
+   { return false;}
+    else
+   {return true}
+   }
 
   //BUMP_ID包含BS SBS HDS MPE MPH,显示底座,联轴器罩，联轴器
    BsSbsHdsMpeMph():any{
