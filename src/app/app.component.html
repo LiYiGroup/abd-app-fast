@@ -4,7 +4,12 @@
     <app-sider></app-sider>
   </nz-sider>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'" [nzWidth]="10"
-    style="background: brown;cursor: pointer" (click)="HideAndShow()">
+    class="abd-mouseenter" style="cursor: pointer" (click)="HideAndShow()" (mouseenter)="OnMouseEnter()" (mouseleave)="OnMouseLeave()"
+    *ngIf="MouseEnterFlag">
+  </nz-sider>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'" [nzWidth]="10"
+    class="abd-mouseleave" style="cursor: pointer" (click)="HideAndShow()" (mouseenter)="OnMouseEnter()" (mouseleave)="OnMouseLeave()"
+    *ngIf="!MouseEnterFlag">
   </nz-sider>
   <nz-layout>
     <nz-header class="abd-header">

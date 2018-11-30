@@ -1,84 +1,80 @@
 <h1>订单详情</h1>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="ORDER_NO">订单编号</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="TOTAL_QTY">总数量</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TOTAL_QTY" name="TOTAL_QTY" #TOTAL_QTY="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="APPLICATION_ENGINEER">应用工程师</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.APPLICATION_ENGINEER" name="APPLICATION_ENGINEER" #APPLICATION_ENGINEER="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="TEX_RATE">税率</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.TEX_RATE" name="TEX_RATE" #TEX_RATE="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictTexRate" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-</div>
-<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="CONTRACT_NO">合同编号</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.CONTRACT_NO" name="CONTRACT_NO" #CONTRACT_NO="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="DEPARTURE_DATE">下发日期</label>
         <br>
         <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DEPARTURE_DATE" name="DEPARTURE_DATE"
             #DEPARTURE_DATE="ngModel"></nz-date-picker>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="DEBUG ">调试</label>
         <select nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.DEBUG" name="DEBUG" #DEBUG="ngModel">
             <option [ngValue]=""></option>
             <option *ngFor="let data of mDictDebug" [value]="data.DICT_ID">{{data.DICT_NAME}}</option>
         </select>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="TOTAL_AMT">合同总额</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TOTAL_AMT" name="TOTAL_AMT" #TOTAL_AMT="ngModel">
     </div>
 </div>
 <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="PROJECT_NM">项目名称</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="DELIVERY_DATE">交货日期</label>
         <br>
         <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.DELIVERY_DATE" name="DELIVERY_DATE"
             #DELIVERY_DATE="ngModel"></nz-date-picker>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="PAYMENT">付款方式</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.PAYMENT" name="PAYMENT" #PAYMENT="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="TARGET_PRICE">目标价</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.TARGET_PRICE" name="TARGET_PRICE" #TARGET_PRICE="ngModel">
     </div>
-</div>
-<div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="SALES_PERSON">销售员</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="GUARANTEE_DATE">质保期</label>
         <br>
         <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderListDetailFormModel.GUARANTEE_DATE" name="GUARANTEE_DATE"
             #GUARANTEE_DATE="ngModel"></nz-date-picker>
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="ORDER_UNIT">订货单位</label>
         <input nz-input maxlength="50" [(ngModel)]="orderListDetailFormModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
     </div>
-    <div nz-col class="gutter-row" nzSpan="6">
+    <div nz-col class="gutter-row" nzSpan="3">
         <label for="DISCOUNT">折扣(%)</label>
         <input nz-input type="number" [(ngModel)]="orderListDetailFormModel.DISCOUNT" name="DISCOUNT" #DISCOUNT="ngModel">
     </div>
@@ -162,12 +158,12 @@
     <br>
     <nz-table #orderDetailListSelectionTable [nzData]="orderListDetailTableData" [nzPageSize]="5" [nzHideOnSinglePage]="false"
         (nzCurrentPageDataChange)="orderDetailListCurrentPageDataChange($event)" (nzPageIndexChange)="refreshOrderDetailListStatus()"
-        (nzPageSizeChange)="refreshOrderDetailListStatus()" [nzScroll]="{ x: '6000px' }" nzSize="small">
+        (nzPageSizeChange)="refreshOrderDetailListStatus()" [nzScroll]="{ x: '4500px' }" nzSize="small">
         <thead>
             <tr>
                 <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="orderListDetailTableAllChecked" [nzIndeterminate]="orderListDetailTableIndeterminate"
                     (nzCheckedChange)="orderDetailListCheckAll($event)"></th>
-                <th nzWidth="100px">序号</th>
+                <th nzWidth="200px">序号</th>
                 <th nzWidth="500px">泵名称</th>
                 <th nzWidth="200px"></th>
                 <th nzWidth="500px">型号</th>
@@ -176,7 +172,7 @@
                 <th nzWidth="500px">单位</th>
                 <th nzWidth="500px">单价</th>
                 <th nzWidth="500px">金额</th>
-                <th nzWidth="800px">序列号</th>
+                <th nzWidth="500px">序列号</th>
 
                 <th nzWidth="500px">流量</th>
                 <th nzWidth="500px">扬程</th>
@@ -188,8 +184,8 @@
                 <th nzWidth="500px">电机-品牌</th>
                 <th nzWidth="500px">电机-要求</th>
 
-                <th nzWidth="1000px">密封/液下深度-形式</th>
-                <th nzWidth="1000px">密封/液下深度-品牌/其他</th>
+                <th nzWidth="800px">密封/液下深度-形式</th>
+                <th nzWidth="800px">密封/液下深度-品牌/其他</th>
 
                 <th nzWidth="500px">轴承品牌</th>
                 <th nzWidth="500px">联轴器</th>
@@ -297,12 +293,12 @@
     <br>
     <nz-table #accessoriesTemplateSelectionTable [nzData]="accessoriesTemplateTableData" [nzPageSize]="5" [nzHideOnSinglePage]="false"
         (nzCurrentPageDataChange)="accessoriesTemplateCurrentPageDataChange($event)" (nzPageIndexChange)="refreshaccessoriesTemplateStatus()"
-        (nzPageSizeChange)="refreshaccessoriesTemplateStatus()" [nzScroll]="{ x: '2000px' }" nzSize="small">
+        (nzPageSizeChange)="refreshaccessoriesTemplateStatus()" [nzScroll]="{ x: '1000px' }" nzSize="small">
         <thead>
             <tr>
                 <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="accessoriesTemplateTableAllChecked" [nzIndeterminate]="accessoriesTemplateTableIndeterminate"
                     (nzCheckedChange)="accessoriesTemplateCheckAll($event)"></th>
-                <th nzWidth="100px">序号</th>
+                <th nzWidth="200px">序号</th>
                 <th nzWidth="500px">配件名称</th>
                 <th nzWidth="500px">规格型号</th>
                 <th nzWidth="500px">数量</th>
@@ -311,7 +307,7 @@
                 <th nzWidth="500px">单价</th>
                 <th nzWidth="500px">金额</th>
                 <th nzWidth="500px">配泵型号</th>
-                <th nzWidth="800px">备注</th>
+                <th nzWidth="500px">备注</th>
             </tr>
         </thead>
         <tbody>

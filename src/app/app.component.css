@@ -7,6 +7,16 @@
     padding-left: 24px;
 }
 
+.abd-mouseenter
+{
+    background: brown;
+}
+
+.abd-mouseleave
+{
+    background:white;
+}
+
 .abd-content {
     margin: 24px 16px 0;
     height: 100%;
@@ -21,6 +31,7 @@
 .abd-footer {
     text-align: center;
 }
+
 
 /* Rewrite the global style of disabled */
 :host >>> .ant-input-disabled {

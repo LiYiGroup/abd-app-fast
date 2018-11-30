@@ -1,48 +1,49 @@
 <h1>订单查询</h1>
 <form nz-form #CouplingTypeDataSearchForm="ngForm">
     <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom" class="test">
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="SALES_PERSON">销售员</label>
-            <input nz-input maxlength="50" [(ngModel)]="orderQueryResultSearchModel.SALES_PERSON" name="SALES_PERSON" #SALES_PERSON="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="orderQueryResultSearchModel.SALES_PERSON" name="SALES_PERSON"
+                #SALES_PERSON="ngModel">
         </div>
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="ORDER_UNIT">订货单位</label>
-            <input nz-input maxlength="50" [(ngModel)]="orderQueryResultSearchModel.ORDER_UNIT" name="ORDER_UNIT" #ORDER_UNIT="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="orderQueryResultSearchModel.ORDER_UNIT" name="ORDER_UNIT"
+                #ORDER_UNIT="ngModel">
         </div>
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="PROJECT_NM">项目名称</label>
-            <input nz-input maxlength="50" [(ngModel)]="orderQueryResultSearchModel.PROJECT_NM" name="PROJECT_NM" #PROJECT_NM="ngModel">
+            <input nz-input maxlength="50" [(ngModel)]="orderQueryResultSearchModel.PROJECT_NM" name="PROJECT_NM"
+                #PROJECT_NM="ngModel">
         </div>
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="ORDER_NO">内部单号</label>
             <input nz-input maxlength="50" [(ngModel)]="orderQueryResultSearchModel.ORDER_NO" name="ORDER_NO" #ORDER_NO="ngModel">
         </div>
-    </div>
-    <div nz-row [nzGutter]="16" nzType="flex" nzJustify="space-between" nzAlign="bottom">
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="DEPARTURE_DATE_ST">下发日期</label>
             <br>
             <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderQueryResultSearchModel.DEPARTURE_DATE_ST"
                 name="DEPARTURE_DATE_ST" #DEPARTURE_DATE_ST="ngModel"></nz-date-picker>
         </div>
 
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="DEPARTURE_DATE_ED"></label>
             <br>
             <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderQueryResultSearchModel.DEPARTURE_DATE_ED"
                 name="DEPARTURE_DATE_ED" #DEPARTURE_DATE_ED="ngModel"></nz-date-picker>
         </div>
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="DELIVERY_DATE_ST">交货日期</label>
             <br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderQueryResultSearchModel.DELIVERY_DATE_ST" name="DELIVERY_DATE_ST"
-                #DELIVERY_DATE_ST="ngModel"></nz-date-picker>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderQueryResultSearchModel.DELIVERY_DATE_ST"
+                name="DELIVERY_DATE_ST" #DELIVERY_DATE_ST="ngModel"></nz-date-picker>
         </div>
-        <div nz-col class="gutter-row" nzSpan="6">
+        <div nz-col class="gutter-row" nzSpan="3">
             <label for="DELIVERY_DATE_ED"></label>
             <br>
-            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderQueryResultSearchModel.DELIVERY_DATE_ED" name="DELIVERY_DATE_ED"
-                #DELIVERY_DATE_ED="ngModel"></nz-date-picker>
+            <nz-date-picker style='width: 100%;' [nzFormat]="yyyy/MM/dd" [(ngModel)]="orderQueryResultSearchModel.DELIVERY_DATE_ED"
+                name="DELIVERY_DATE_ED" #DELIVERY_DATE_ED="ngModel"></nz-date-picker>
         </div>
     </div>
     <br>
@@ -51,26 +52,27 @@
     <br>
 
     <div class="grid_area">
-        <nz-table #orderQueryResultSelectionTable [nzData]="orderQueryResultTableData" [nzPageSize]="10" [nzHideOnSinglePage]="false"
-            (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)" (nzPageIndexChange)="refreshOrderListStatus()"
-            (nzPageSizeChange)="refreshOrderListStatus()" [nzScroll]="{ x: '2500px' }" nzSize="small">
+        <nz-table #orderQueryResultSelectionTable [nzData]="orderQueryResultTableData" [nzPageSize]="10"
+            [nzHideOnSinglePage]="false" (nzCurrentPageDataChange)="orderListCurrentPageDataChange($event)"
+            (nzPageIndexChange)="refreshOrderListStatus()" (nzPageSizeChange)="refreshOrderListStatus()" [nzScroll]="{ x: '1500px' }"
+            nzSize="small">
             <thead>
                 <tr>
                     <th nzWidth="50px">序号</th>
-                    <th nzWidth="100px">销售员</th>
-                    <th nzWidth="100px">订货单位</th>
-                    <th nzWidth="100px">项目名称</th>
-                    <th nzWidth="100px">下发日期</th>
-                    <th nzWidth="100px">交货日期</th>
-                    <th nzWidth="200px">内部单号</th>
+                    <th nzWidth="80px">销售员</th>
+                    <th nzWidth="80px">订货单位</th>
+                    <th nzWidth="80px">项目名称</th>
+                    <th nzWidth="80px">下发日期</th>
+                    <th nzWidth="80px">交货日期</th>
+                    <th nzWidth="100px">内部单号</th>
                     <th nzWidth="200px"></th>
-                    <th nzWidth="100px">数量</th>
-                    <th nzWidth="100px">合同总价</th>
-                    <th nzWidth="100px">折扣</th>
-                    <th nzWidth="100px">发货数量</th>
-                    <th nzWidth="100px">开票金额</th>
-                    <th nzWidth="100px">到货金额</th>
-                    <th nzWidth="100px">余款金额</th>
+                    <th nzWidth="80px">数量</th>
+                    <th nzWidth="80px">合同总价</th>
+                    <th nzWidth="80px">折扣</th>
+                    <th nzWidth="80px">发货数量</th>
+                    <th nzWidth="80px">开票金额</th>
+                    <th nzWidth="80px">到货金额</th>
+                    <th nzWidth="80px">余款金额</th>
                 </tr>
             </thead>
             <tbody>
